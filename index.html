@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Biodata Anak</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #00bcd4;
+            --accent-color: #ff4081;
+            --teal-color: #2c7a7b;
+            --teal-light: #38b2ac;
+            --red-accent: #e53e3e;
+            --dark-bg: #0a0e2a;
+            --light-bg: #f5f7ff;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #333;
+            --text-light: #777;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --glow: 0 0 15px rgba(0, 188, 212, 0.5);
+            --modal-bg: rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 188, 212, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(26, 35, 126, 0.05) 0%, transparent 20%);
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Floating Shapes */
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(56, 178, 172, 0.08);
+            animation: float 20s infinite linear;
+        }
+
+        .shape:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 15%;
+            left: 10%;
+            animation-delay: 0s;
+            background: rgba(44, 122, 123, 0.1);
+        }
+
+        .shape:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            top: 70%;
+            left: 80%;
+            animation-delay: -5s;
+            background: rgba(56, 178, 172, 0.08);
+        }
+
+        .shape:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            top: 40%;
+            left: 85%;
+            animation-delay: -10s;
+            background: rgba(229, 62, 62, 0.1);
+        }
+
+        .shape:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            top: 20%;
+            left: 80%;
+            animation-delay: -7s;
+            background: rgba(44, 122, 123, 0.08);
+        }
+
+        .shape:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            top: 60%;
+            left: 15%;
+            animation-delay: -12s;
+            background: rgba(229, 62, 62, 0.05);
+        }
+
+        /* Header dengan Foto */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-bg));
+            color: white;
+            padding: 30px 0 20px 0;
+            border-radius: 0 0 20px 20px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none"/><path d="M0,50 Q50,0 100,50 T200,50" stroke="rgba(255,255,255,0.05)" stroke-width="2" fill="none"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid var(--secondary-color);
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 188, 212, 0.5);
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .profile-photo::before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--secondary-color), var(--teal-color));
+            z-index: -1;
+            opacity: 0.3;
+            animation: pulse-ring 2s infinite;
+        }
+
+        .profile-photo i {
+            font-size: 70px;
+            color: var(--primary-color);
+        }
+
+        .name-title h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(0, 188, 212, 0.7);
+        }
+
+        .name-title .degree {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .name-title .expert {
+            font-size: 1.1rem;
+            color: #ffeb3b;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px rgba(255, 235, 59, 0.5);
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s;
+        }
+
+        .contact-info p:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-info i {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        /* MUSIC BAR STYLING - Diposisikan di bawah email dan di atas navbar */
+        .music-bar-container {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto 25px auto;
+            width: 100%;
+        }
+
+        #music-bar {
+            width: fit-content;
+            min-width: 400px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 188, 212, 0.3);
+            font-size: 14px;
+            border: 2px solid var(--secondary-color);
+            backdrop-filter: blur(5px);
+            margin: 0 auto;
+        }
+
+        #music-bar button {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            width: 36px;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #music-bar button:hover {
+            background: var(--secondary-color);
+            transform: scale(1.05);
+            border-color: white;
+        }
+
+        #music-bar #playBtn {
+            background: var(--secondary-color);
+            border-color: white;
+        }
+
+        #music-bar #playBtn:hover {
+            background: var(--teal-light);
+        }
+
+        #progress-container {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            min-width: 150px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--teal-light));
+            border-radius: 10px;
+            transition: width 0.1s linear;
+        }
+
+        #volume {
+            width: 80px;
+            height: 6px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        #volume::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        #volume::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            background: var(--teal-light);
+        }
+
+        /* Navbar Scrollable */
+        .navbar-container {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 30px;
+            padding: 5px 0 15px;
+        }
+
+        .navbar-container::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .navbar-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 10px;
+        }
+
+        .navbar-container::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 10px;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 10px;
+            padding: 0 10px;
+            min-width: min-content;
+        }
+
+        .nav-item {
+            flex-shrink: 0;
+            background: linear-gradient(to right, var(--primary-color), #2a3a9e);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .nav-item::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .nav-item:hover {
+            background: linear-gradient(to right, var(--secondary-color), #00acc1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-item:hover::before {
+            left: 100%;
+        }
+
+        .nav-item i {
+            font-size: 1.1rem;
+        }
+
+        /* ACTION BUTTONS - VERTIKAL LAYOUT */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 0 auto 40px auto;
+            width: 100%;
+            max-width: 380px;
+            padding: 0 15px;
+        }
+
+        .action-btn {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-bg));
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 10px;           /* Border radius 10px */
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .action-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow), var(--shadow);
+            background: linear-gradient(135deg, var(--secondary-color), #0097a7);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn i {
+            font-size: 2rem;                /* Ikon 2rem di sisi kiri */
+            margin-right: 18px;
+            width: 40px;
+            text-align: center;
+            color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .action-btn:hover i {
+            transform: scale(1.1);
+        }
+
+        .action-btn-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            text-align: left;
+        }
+
+        .action-btn-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 2px;
+        }
+
+        .action-btn-desc {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* Tombol Koperasi dengan warna khusus */
+        .action-btn-koperasi {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
+        }
+
+        .action-btn-koperasi i {
+            color: #ffd700;
+        }
+
+        .action-btn-koperasi:hover {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32) !important;
+        }
+
+        /* Social Media Section */
+        .social-section {
+            text-align: center;
+            margin: 60px 0;
+            padding: 40px 15px;
+            background: linear-gradient(135deg, rgba(26, 35, 126, 0.03), rgba(0, 188, 212, 0.03));
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 188, 212, 0.05) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        .social-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .social-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .social-icon:hover::before {
+            left: 100%;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Social Media Colors */
+        .tiktok { background: linear-gradient(135deg, #000000, #69C9D0, #EE1D52); }
+        .facebook { background: linear-gradient(135deg, #1877F2, #0D5B9E); }
+        .youtube { background: linear-gradient(135deg, #FF0000, #CC0000); }
+        .instagram { background: linear-gradient(135deg, #E4405F, #405DE6, #833AB4); }
+        .twitter { background: linear-gradient(135deg, #000000, #1DA1F2); }
+
+        /* WhatsApp Button Baru - Persegi Panjang di Tengah */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-decoration: none;
+            opacity: 0;
+            animation: fadeUpWhatsapp 0.8s ease-out 0.5s forwards;
+            min-width: 180px;
+            height: auto;
+        }
+
+        .whatsapp-btn i {
+            font-size: 1.3rem;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateX(-50%) translateY(-5px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.6);
+            background: linear-gradient(135deg, #128C7E, #25D366);
+        }
+
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 16px;
+            background: rgba(37, 211, 102, 0.2);
+            z-index: -1;
+            animation: pulse-ring 2s infinite;
+        }
+
+        @keyframes fadeUpWhatsapp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            background-color: rgba(10, 14, 42, 0.05);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--modal-bg);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .modal-header {
+            background: linear-gradient(to right, var(--primary-color), var(--dark-bg));
+            color: white;
+            padding: 20px 25px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--secondary-color);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        /* Tabel Data Pribadi - DIPERBAIKI untuk Mobile */
+        .personal-data-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .personal-data-table tr {
+            border-bottom: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            padding: 12px 0;
+        }
+
+        .personal-data-table td {
+            padding: 8px 0;
+            vertical-align: top;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            width: 100% !important;
+        }
+
+        .personal-data-table td:first-child {
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .personal-data-table td:last-child {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* List Styles */
+        .skills-list, .experience-list, .organization-list {
+            list-style-type: none;
+        }
+
+        .skills-list li, .experience-list li, .organization-list li {
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .skills-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .experience-list li:before, .organization-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+
+        .education-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .education-table tr {
+            border-bottom: 1px solid #eee;
+        }
+
+        .education-table td {
+            padding: 12px 5px;
+        }
+
+        .education-table tr:last-child {
+            border-bottom: none;
+        }
+
+        /* Hobbies */
+        .hobbies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .hobby-tag {
+            background-color: rgba(0, 188, 212, 0.1);
+            color: var(--primary-color);
+            padding: 10px 18px;
+            border-radius: 20px;
+            font-weight: 500;
+            border: 1px solid rgba(0, 188, 212, 0.3);
+        }
+
+        /* Prestasi */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .achievement-item {
+            background-color: rgba(26, 35, 126, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* Keterampilan Teknis */
+        .programming-skills {
+            margin-top: 15px;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            background-color: rgba(0, 188, 212, 0.1);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 5px;
+            border: 1px solid rgba(0, 188, 212, 0.2);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-8px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(-4px) rotate(240deg);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.7;
+            }
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            header {
+                padding: 25px 15px 15px 15px;
+                border-radius: 0 0 15px 15px;
+                margin-bottom: 15px;
+            }
+            
+            .name-title h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                margin-bottom: 15px;
+            }
+            
+            #music-bar {
+                min-width: 350px;
+                padding: 6px 15px;
+            }
+            
+            .navbar-container {
+                margin-bottom: 25px;
+            }
+            
+            .nav-item {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .action-buttons {
+                max-width: 350px;
+                gap: 14px;
+            }
+            
+            .action-btn {
+                padding: 12px 20px;
+            }
+            
+            .action-btn i {
+                font-size: 1.8rem;
+                margin-right: 15px;
+                width: 35px;
+            }
+            
+            .action-btn-title {
+                font-size: 1rem;
+            }
+            
+            .action-btn-desc {
+                font-size: 0.75rem;
+            }
+            
+            /* Modal Data Pribadi Mobile */
+            .modal-content {
+                max-height: 90vh;
+                margin: 10px;
+                width: calc(100% - 20px);
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+            
+            .personal-data-table td:first-child {
+                font-size: 0.9rem;
+            }
+            
+            .personal-data-table td:last-child {
+                font-size: 0.85rem;
+            }
+            
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+            
+            .whatsapp-btn {
+                padding: 10px 20px;
+                min-width: 160px;
+                font-size: 0.9rem;
+                bottom: 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .profile-photo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .profile-photo i {
+                font-size: 50px;
+            }
+            
+            .name-title h1 {
+                font-size: 1.8rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+                margin-bottom: 15px;
+            }
+            
+            #music-bar {
+                min-width: 300px;
+                padding: 6px 12px;
+                gap: 8px;
+            }
+            
+            #music-bar button {
+                width: 32px;
+                height: 28px;
+                font-size: 16px;
+            }
+            
+            #progress-container {
+                min-width: 100px;
+            }
+            
+            #volume {
+                width: 60px;
+            }
+            
+            .navbar-container {
+                margin-bottom: 20px;
+            }
+            
+            .action-buttons {
+                max-width: 100%;
+                padding: 0 10px;
+                gap: 12px;
+            }
+            
+            .action-btn {
+                padding: 10px 18px;
+            }
+            
+            .action-btn i {
+                font-size: 1.6rem;
+                margin-right: 12px;
+                width: 30px;
+            }
+            
+            .action-btn-title {
+                font-size: 0.95rem;
+            }
+            
+            .action-btn-desc {
+                font-size: 0.7rem;
+            }
+            
+            /* Modal Data Pribadi Extra Small */
+            .modal-header {
+                padding: 18px 20px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .modal-body {
+                padding: 18px;
+            }
+            
+            .personal-data-table tr {
+                padding: 10px 0;
+            }
+            
+            .personal-data-table td:first-child {
+                font-size: 0.85rem;
+            }
+            
+            .personal-data-table td:last-child {
+                font-size: 0.8rem;
+            }
+            
+            .social-title {
+                font-size: 1.6rem;
+            }
+            
+            .social-icons {
+                gap: 10px;
+            }
+            
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .whatsapp-btn {
+                padding: 8px 16px;
+                min-width: 150px;
+                font-size: 0.85rem;
+                bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <!-- Header dengan Foto Profil -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="profile-photo">                   
+                  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjP2xBlljARlWqrD56UzhOeff-oTTrBGBIxMwhkfJF3QKNKOx8Gp5trumf5wiJqPaagHOQYsXUw4rVk_KAMGMdHth_DNmfLNpEcMX3esppVrlyaakrafLiHNiBuJKDE6BzS3p7DZGyffLcL9d4_2zgZrH-8P43UHYp27fyyd2oA2R6X-6l7kbCwMmDjACY/s320/1000576798.png" alt="Deskripsi foto" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+                <div class="name-title">
+                    <h1>Queendzi Humairah Asmaul Husna</h1>
+                    <div class="expert">Anak Pertama</div>
+                    <p>Kp. Sawah. Rt. 02 Rw. 06, Desa. Gunung Menyan, Kecamatan Pamijahan, Kabupaten Bogor</p>
+                </div>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone"></i> +62 852-1848-3129</p>
+                    <p><i class="fas fa-envelope"></i> *****</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- MUSIC BAR - Diposisikan di bawah email dan di atas navbar (TENGAH) -->
+    <div class="music-bar-container">
+        <div id="music-bar">
+            <button id="playBtn">⏸️</button> <!-- Dimulai dengan pause karena autoplay -->
+            <button id="nextBtn">⏩</button>
+            
+            <div id="progress-container">
+                <div id="progress"></div>
+            </div>
+            
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
+        </div>
+    </div>
+    
+    <audio id="audioPlayer"></audio>
+    
+    <!-- Navbar Scrollable -->
+    <div class="navbar-container">
+        <div class="container">
+            <div class="navbar">
+                <button class="nav-item" data-modal="modal-personal">
+                    <i class="fas fa-user-circle"></i> Data Pribadi
+                </button>
+                <button class="nav-item" data-modal="modal-education">
+                    <i class="fas fa-graduation-cap"></i> Pendidikan
+                </button>
+                <button class="nav-item" data-modal="modal-hobby">
+                    <i class="fas fa-heart"></i> Hobi
+                </button>
+                <button class="nav-item" data-modal="modal-experience">
+                    <i class="fas fa-briefcase"></i> Pengalaman Kerja
+                </button>
+                <button class="nav-item" data-modal="modal-achievement">
+                    <i class="fas fa-star"></i> Prestasi
+                </button>
+                <button class="nav-item" data-modal="modal-skills">
+                    <i class="fas fa-code"></i> Keterampilan
+                </button>
+                <button class="nav-item" data-modal="modal-organization">
+                    <i class="fas fa-users"></i> Pengalaman Organisasi
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ACTION BUTTONS - VERTIKAL LAYOUT (UPDATED) -->
+    <div class="container">
+        <div class="action-buttons">
+            <!-- Tombol 1: Data Kedua Orang Tua (Biodata Ayah & Ibu) -->
+            <a href="#" class="action-btn" target="_blank">
+                <i class="fas fa-users"></i> <!-- Ikon keluarga -->
+                <div class="action-btn-content">
+                    <span class="action-btn-title">Data Kedua Orang Tua</span>
+                    <span class="action-btn-desc">Biodata Ayah & Ibu</span>
+                </div>
+            </a>
+            
+            <!-- Tombol 2: Biodata Ayah (Profil Lengkap) -->
+            <a href="data-ayah.html" class="action-btn" target="_blank">
+                <i class="fas fa-male"></i> <!-- Ikon laki-laki/pria -->
+                <div class="action-btn-content">
+                    <span class="action-btn-title">Biodata Ayah</span>
+                    <span class="action-btn-desc">Profil Lengkap</span>
+                </div>
+            </a>
+            
+            <!-- Tombol 3: Alamat Sekolah (Asal Sekolah) -->
+            <a href="https://maps.app.goo.gl/your-school-map-link" class="action-btn action-btn-koperasi" target="_blank">
+                <i class="fas fa-school"></i> <!-- Ikon sekolah -->
+                <div class="action-btn-content">
+                    <span class="action-btn-title">Alamat Sekolah</span>
+                    <span class="action-btn-desc">Asal Sekolah</span>
+                </div>
+            </a>
+            
+            <!-- Tombol 4: WhatsApp Orang Tua (Kontak Darurat) -->
+            <a href="https://wa.me/6285218483129" class="action-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> <!-- Ikon WhatsApp -->
+                <div class="action-btn-content">
+                    <span class="action-btn-title">WhatsApp Orang Tua</span>
+                    <span class="action-btn-desc">Kontak Darurat</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <!-- ===== HAPUS SERVICES SECTION (LAYANAN JASA KAMI) ===== -->
+    
+    <!-- ===== HAPUS GALLERY SECTION (GALERI FOTO) ===== -->
+    
+    <!-- ===== HAPUS LIGHTBOX SECTION (TIDAK DIPERLUKAN LAGI) ===== -->
+    
+    <!-- ===== HAPUS VIDEO SECTION ===== -->
+    
+    <!-- Social Media Section -->
+    <div class="social-section">
+        <div class="container">
+            <h2 class="social-title">Follow Me</h2>
+            <div class="social-icons">
+                <a href="#" class="social-icon tiktok" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="#" class="social-icon facebook" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon youtube" title="YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="#" class="social-icon instagram" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon twitter" title="Twitter / X">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer (UPDATED) -->
+    <footer>
+        <div class="container">
+            <p>Biodata Anak | © 2026</p>
+        </div>
+    </footer>
+    
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/6285218483129" class="whatsapp-btn" target="_blank" title="Chat via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        WhatsApp
+    </a>
+    
+    <!-- Modal Windows -->
+    
+    <!-- Modal Data Pribadi -->
+    <div id="modal-personal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-user-circle"></i> DATA PRIBADI</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="personal-data-table">
+                    <tr>
+                        <td>Nama</td>
+                        <td>: Eldi Sugianto, S.Kom</td>
+                    </tr>
+                    <tr>
+                        <td>Tempat, Tgl Lahir</td>
+                        <td>: Bogor, 23 Desember 1981</td>
+                    </tr>
+                    <tr>
+                        <td>Alamat</td>
+                        <td>: Kp. Sawah Rt. 02 Rw. 06, Ds. Gunung Menyan, Kecamatan Pamijahan, Kabupaten Bogor</td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kelamin</td>
+                        <td>: Laki-laki</td>
+                    </tr>
+                    <tr>
+                        <td>Telepon Saudara</td>
+                        <td>: 0857-1546-6347</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>: siliwangi4212@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>Kewarganegaraan</td>
+                        <td>: Indonesia</td>
+                    </tr>
+                    <tr>
+                        <td>Agama</td>
+                        <td>: Islam</td>
+                    </tr>
+                    <tr>
+                        <td>Golongan Darah</td>
+                        <td>: 0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Pendidikan -->
+    <div id="modal-education" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-graduation-cap"></i> PENDIDIKAN</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="education-table">
+                    <tr>
+                        <td><strong>SDN Ciasmara</strong></td>
+                        <td>: 1990 - 1995</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SMP PGRI Ciasmara</strong></td>
+                        <td>: 1996 - 1998</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SMA Mandala</strong></td>
+                        <td>: 1999 - 2001</td>
+                    </tr>
+                    <tr>
+                        <td><strong>STMIK Triguna Utama</strong></td>
+                        <td>: 2014 - 2018 (S1 Teknik Informatika)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Hobi -->
+    <div id="modal-hobby" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-heart"></i> HOBI</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="hobbies">
+                    <div class="hobby-tag">Membaca</div>
+                    <div class="hobby-tag">Hiking</div>
+                    <div class="hobby-tag">Camping</div>
+                </div>
+                <p style="margin-top: 20px; font-style: italic; color: var(--text-light);">
+                    Hobi-hobi ini membantu dalam pengembangan pribadi dan menjaga keseimbangan antara pekerjaan dan kehidupan pribadi.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Pengalaman Kerja -->
+    <div id="modal-experience" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-briefcase"></i> PENGALAMAN KERJA</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="experience-list">
+                    <li>PT. CHEVRON GEOTERMAL Salak, Ltd</li>
+                    <li>PT. REKAYASA INDUSTRI (PT. REKIND)</li>
+                    <li>PT. TORISHIMA GUNA ENGINEERING (PT. TGE)</li>
+                    <li>PT. TRIGUNA INTERNUSA PRATAMA (PT. TIP)</li>
+                    <li>BKAD KECAMATAN PAMIJAHAN</li>
+                    <li>PROJECT PISEW KECAMATAN PAMIJAHAN</li>
+                    <li>PT. TRIMITRA CIPTA MANDIRI (PT. TCM)</li>
+                </ul>
+                <p style="margin-top: 20px; font-style: italic; color: var(--text-light);">
+                    Pengalaman kerja yang luas di berbagai perusahaan dan proyek menunjukkan kemampuan adaptasi dan keahlian yang beragam.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Prestasi -->
+    <div id="modal-achievement" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-star"></i> PRESTASI</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="achievement-grid">
+                    <div class="achievement-item">
+                        <h3>Karyawan Teladan</h3>
+                        <p>Periode Tahun 2011 - 2012</p>
+                    </div>
+                    <div class="achievement-item">
+                        <h3>Ketua Terbaik Reuni Akbar</h3>
+                        <p>Angkatan Tahun 1987 - 2019</p>
+                    </div>
+                    <div class="achievement-item">
+                        <h3>Flow Test Steam Line</h3>
+                        <p>Geothermal (Panas Bumi)</p>
+                    </div>
+                    <div class="achievement-item">
+                        <h3>Self Contained Breathing Apparatus</h3>
+                        <p>Sertifikasi SCBA</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Keterampilan -->
+    <div id="modal-skills" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-code"></i> KETERAMPILAN</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3 style="color: var(--primary-color); margin-bottom: 15px;">Keterampilan Teknis</h3>
+                <ul class="skills-list">
+                    <li>Microsoft Office</li>
+                    <li>AutoCad</li>
+                    <li>3D Piping Design Engineering at PT. IKPT</li>
+                    <li>Corel draw</li>
+                    <li>Photoshop</li>
+                    <li>Pemahaman Bahasa Pemrograman</li>
+                </ul>
+                
+                <h3 style="color: var(--primary-color); margin: 20px 0 15px;">Keterampilan Pemrograman</h3>
+                <div class="programming-skills">
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">PHP</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">Website Developer</span>
+                    <span class="tech-badge">Mobile Application</span>
+                </div>
+                
+                <h3 style="color: var(--primary-color); margin: 20px 0 15px;">Keterampilan Khusus</h3>
+                <ul class="skills-list">
+                    <li>Paham & Menguasai System Operation Geothermal (Panas Bumi)</li>
+                    <li>Memahami & Tau Cara Pemakaian SCBA</li>
+                    <li>Menguasai & Menjalankan WDS Pump Distribution</li>
+                    <li>Konten Kreator</li>
+                    <li>Design Grafis</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal Pengalaman Organisasi -->
+    <div id="modal-organization" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-users"></i> PENGALAMAN ORGANISASI</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <ul class="organization-list">
+                    <li>GEKRAFS Kabupaten Bogor</li>
+                    <li>Badan Kerja Sama Antar Desa (BKAD) Kecamatan Pamijahan Kabupaten Bogor</li>
+                    <li>Ketua Koperasi KUD "Asmara Tani" Kecamatan Pamijahan Periode 2025-2029</li>
+                    <li>Karang Taruna</li>
+                </ul>
+                <p style="margin-top: 20px; font-style: italic; color: var(--text-light);">
+                    Pengalaman organisasi menunjukkan kemampuan kepemimpinan, kerja sama tim, dan kontribusi terhadap masyarakat.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // MUSIC PLAYER FUNCTIONALITY - DIPERBAIKI
+        const playlist = [
+            "https://cdn.jsdelivr.net/gh/Kangeldzi/Bio-Data@main/Music/TESLASMART%20%E2%80%93%20Berkah%20di%20Bulan%20Ramadhan%20(1).mp3",
+            "https://cdn.jsdelivr.net/gh/Kangeldzi/Bio-Data@main/Music/TESLASMART%20%E2%80%93%20Berkah%20di%20Bulan%20Ramadhan.mp3",
+            "https://cdn.jsdelivr.net/gh/Kangeldzi/Bio-Data@main/Music/TeslaSmart%20(Promosi%20%26%20Iklan)%20Produk%20Digital%20(1).mp3"
+        ];
+
+        let currentTrack = 0;
+
+        const audio = document.getElementById("audioPlayer");
+        const playBtn = document.getElementById("playBtn");
+        const nextBtn = document.getElementById("nextBtn");
+        const progress = document.getElementById("progress");
+        const progressContainer = document.getElementById("progress-container");
+        const volume = document.getElementById("volume");
+
+        // Set sumber audio pertama
+        audio.src = playlist[currentTrack];
+        audio.volume = volume.value;
+
+        // AUTOPLAY SAAT HALAMAN DIBUKA
+        window.addEventListener("load", () => {
+            audio.play().then(() => {
+                playBtn.innerHTML = "⏸️";
+            }).catch((error) => {
+                console.log("Autoplay prevented:", error);
+                playBtn.innerHTML = "▶️";
+                // Beberapa browser memblokir autoplay, jadi kita tampilkan pesan
+                alert("Klik tombol play untuk memulai musik");
+            });
+        });
+
+        // PLAY / PAUSE
+        playBtn.onclick = () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerHTML = "⏸️";
+            } else {
+                audio.pause();
+                playBtn.innerHTML = "▶️";
+            }
+        };
+
+        // NEXT SONG
+        nextBtn.onclick = () => {
+            currentTrack++;
+            if (currentTrack >= playlist.length) {
+                currentTrack = 0;
+            }
+            audio.src = playlist[currentTrack];
+            audio.play();
+            playBtn.innerHTML = "⏸️";
+        };
+
+        // AUTO NEXT SAAT LAGU SELESAI
+        audio.addEventListener("ended", () => {
+            currentTrack++;
+            if (currentTrack >= playlist.length) {
+                currentTrack = 0;
+            }
+            audio.src = playlist[currentTrack];
+            audio.play();
+        });
+
+        // PROGRESS BAR
+        audio.addEventListener("timeupdate", () => {
+            if (audio.duration) {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                progress.style.width = percent + "%";
+            }
+        });
+
+        // SEEK PROGRESS
+        progressContainer.addEventListener("click", (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audio.duration;
+            if (duration) {
+                audio.currentTime = (clickX / width) * duration;
+            }
+        });
+
+        // VOLUME CONTROL
+        volume.addEventListener("input", () => {
+            audio.volume = volume.value;
+        });
+
+        // Efek parallax pada shapes
+        document.addEventListener('mousemove', (e) => {
+            const shapes = document.querySelectorAll('.shape');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            shapes.forEach((shape, index) => {
+                const speed = (index + 1) * 0.3;
+                const x = (mouseX * speed * 20) - 10;
+                const y = (mouseY * speed * 20) - 10;
+                shape.style.transform = `translate(${x}px, ${y}px) rotate(${x}deg)`;
+            });
+        });
+
+        // Efek untuk action buttons
+        const actionButtons = document.querySelectorAll('.action-btn');
+        actionButtons.forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 188, 212, 0.4)';
+            });
+
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'var(--shadow)';
+            });
+        });
+
+        // Efek untuk nav items
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+            });
+
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Efek untuk WhatsApp button
+        const whatsappBtn = document.querySelector('.whatsapp-btn');
+        if (whatsappBtn) {
+            whatsappBtn.addEventListener('mouseenter', function() {
+                this.style.boxShadow = '0 10px 30px rgba(37, 211, 102, 0.6)';
+            });
+
+            whatsappBtn.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 5px 20px rgba(37, 211, 102, 0.4)';
+            });
+        }
+
+        // Modal functions
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Event listeners untuk tombol navbar
+        document.querySelectorAll('.nav-item').forEach(button => {
+            button.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal');
+                openModal(modalId);
+            });
+        });
+
+        // Event listeners untuk tombol close modal
+        document.querySelectorAll('.close-modal').forEach(button => {
+            button.addEventListener('click', function() {
+                const modal = this.closest('.modal');
+                if (modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+
+        // Tutup modal ketika klik di luar konten modal
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
+
+        // Tutup modal dengan tombol Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                // Close modals if open
+                document.querySelectorAll('.modal').forEach(modal => {
+                    if (modal.style.display === 'flex') {
+                        closeModal(modal.id);
+                    }
+                });
+            }
+        });
+
+        // Animasi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animasi untuk elemen utama
+            const elements = [
+                ...document.querySelectorAll('.social-icon'),
+                ...document.querySelectorAll('.action-btn'),
+                ...document.querySelectorAll('.nav-item')
+            ];
+            
+            elements.forEach((el, index) => {
+                if (!el) return;
+                
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 200 + (index * 100));
+            });
+        });
+    </script>
+</body>
+</html>
