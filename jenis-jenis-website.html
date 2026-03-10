@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESLASMART - Jenis-jenis Website yang Kami Buat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --maroon-gradient: linear-gradient(135deg, #800000, #a52a2a, #8b0000);
+            --maroon-light: #a52a2a;
+            --maroon-medium: #800000;
+            --maroon-dark: #5a0000;
+            --gold-gradient: linear-gradient(135deg, #FFD700, #DAA520, #B8860B);
+            --gold-light: #FFD700;
+            --gold-medium: #DAA520;
+            --gold-dark: #B8860B;
+            --silver-gradient: linear-gradient(135deg, #C0C0C0, #A9A9A9, #808080);
+            --bronze-gradient: linear-gradient(135deg, #CD7F32, #A0522D, #8B4513);
+            --gray-light: #f8f9fa;
+            --gray-medium: #e9ecef;
+            --gray-dark: #343a40;
+            --white: #ffffff;
+            --black: #212529;
+            --pink-light: #fff5f5;
+            --pink-medium: #ffeaea;
+            --shadow: 0 3px 10px rgba(128, 0, 0, 0.08);
+            --shadow-hover: 0 5px 15px rgba(128, 0, 0, 0.12);
+            --gold-shadow: 0 3px 10px rgba(218, 165, 32, 0.15);
+            --gold-shadow-hover: 0 5px 15px rgba(218, 165, 32, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fffafa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--maroon-gradient);
+            color: white;
+            padding: 12px 0;
+            box-shadow: 0 3px 10px rgba(128, 0, 0, 0.25);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            animation: pulse 2s infinite, rotate 10s linear infinite, glow 3s ease-in-out infinite;
+        }
+        
+        .logo-img::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, var(--maroon-medium), var(--gold-medium), var(--maroon-dark), var(--gold-dark));
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+        
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .logo-text {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+        
+        /* Sidebar Menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.3s ease;
+            z-index: 1002;
+        }
+        
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .sidebar-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+        
+        .nav-menu li {
+            position: relative;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Link External Indicator */
+        .external-link-indicator {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-left: 4px;
+        }
+        
+        /* Hero Banner untuk Jenis Website */
+        .hero-banner {
+            background: var(--maroon-gradient);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .hero-banner h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-banner p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            opacity: 0.9;
+        }
+        
+        /* Jenis Website Section */
+        .jenis-website-section {
+            padding: 20px 0 60px;
+        }
+        
+        .website-type-container {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+        
+        .website-type {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            min-height: 400px;
+        }
+        
+        .website-type:nth-child(even) {
+            background: var(--pink-medium);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 10px 0;
+        }
+        
+        .website-type:nth-child(odd) {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 10px 0;
+            border: 1px solid #eee;
+            box-shadow: var(--shadow);
+        }
+        
+        .website-image {
+            text-align: center;
+            position: relative;
+        }
+        
+        .website-img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-hover);
+            transform: perspective(800px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .website-img:hover {
+            transform: perspective(800px) rotateY(0deg);
+        }
+        
+        .website-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .website-title {
+            font-size: 1.8rem;
+            color: var(--maroon-dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--gold-light);
+            position: relative;
+        }
+        
+        .website-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--maroon-gradient);
+            border-radius: 2px;
+        }
+        
+        .website-description {
+            font-size: 1.05rem;
+            color: #444;
+            line-height: 1.7;
+            text-align: justify;
+        }
+        
+        .website-features {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .feature-tag {
+            background: var(--gold-gradient);
+            color: var(--maroon-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        /* Tombol Hubungi Kami */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--maroon-gradient);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            min-width: 140px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, #a52a2a, #8b0000, #5a0000);
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        /* Services Highlight Section */
+        .services-highlight {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #fff, #fef2f2);
+        }
+        
+        .highlight-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .highlight-text h2 {
+            font-size: 2rem;
+            color: var(--maroon-dark);
+            margin-bottom: 15px;
+        }
+        
+        .highlight-text p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        /* Hubungi Kami Section */
+        .contact-invitation {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #fff, #fef2f2);
+            text-align: center;
+        }
+        
+        .contact-invitation h2 {
+            font-size: 2rem;
+            color: var(--maroon-dark);
+            margin-bottom: 20px;
+        }
+        
+        .contact-invitation p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .website-link {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--maroon-medium);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(128, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .website-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(128, 0, 0, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .website-link:hover {
+            color: var(--maroon-dark);
+            background: rgba(128, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .website-link:hover::before {
+            left: 100%;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #fff, #fef2f2);
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .contact-image {
+            text-align: center;
+        }
+        
+        .contact-img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-hover);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.6rem;
+            color: var(--maroon-dark);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--maroon-light);
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--maroon-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--maroon-dark);
+            color: white;
+            padding: 50px 0 15px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--gold-light);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold-light);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.7); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); box-shadow: 0 0 0 10px rgba(218, 165, 32, 0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) perspective(800px) rotateY(-5deg); }
+            50% { transform: translateY(-10px) perspective(800px) rotateY(0deg); }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(218, 165, 32, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(218, 165, 32, 0.8); }
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+            100% { text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
+        }
+        
+        @keyframes slideInRightMenu {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .animate-slide-left {
+            animation: slideInLeft 0.8s ease forwards;
+        }
+        
+        .animate-slide-right {
+            animation: slideInRight 0.8s ease forwards;
+        }
+        
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .delay-3 { animation-delay: 0.6s; opacity: 0; }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-banner h1 {
+                font-size: 2.5rem;
+            }
+            
+            .website-type {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .website-type:nth-child(even) .website-image {
+                order: 2;
+            }
+            
+            .website-type:nth-child(even) .website-content {
+                order: 1;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: relative;
+            }
+            
+            .sidebar-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--maroon-dark);
+                flex-direction: column;
+                padding: 80px 20px 30px;
+                transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+                z-index: 1001;
+                overflow-y: auto;
+            }
+            
+            .sidebar-menu.active {
+                right: 0;
+                animation: slideInRightMenu 0.4s ease-out;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+            }
+            
+            .nav-menu li {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .nav-menu a {
+                padding: 15px 20px;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 1rem;
+                justify-content: space-between;
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-banner h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-banner p {
+                font-size: 1rem;
+            }
+            
+            .website-title {
+                font-size: 1.5rem;
+            }
+            
+            .website-description {
+                font-size: 1rem;
+            }
+            
+            .highlight-text h2 {
+                font-size: 1.7rem;
+            }
+            
+            .contact-invitation h2 {
+                font-size: 1.7rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.4rem;
+            }
+            
+            .logo-img {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .hero-banner h1 {
+                font-size: 1.7rem;
+            }
+            
+            .website-type {
+                padding: 20px;
+            }
+            
+            .website-title {
+                font-size: 1.3rem;
+            }
+            
+            .cta-button {
+                padding: 8px 18px;
+                font-size: 0.9rem;
+                min-width: 130px;
+            }
+            
+            .menu-toggle {
+                font-size: 1.5rem;
+            }
+            
+            .sidebar-menu {
+                width: 85%;
+                max-width: 300px;
+            }
+        }
+        
+        /* Overlay for mobile menu */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+        
+        .menu-overlay.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        /* Close button for mobile menu */
+        .menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+        
+        @media (max-width: 992px) {
+            .menu-close {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dengan Logo dan Menu Sidebar -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container animate-slide-left">
+                <div class="logo-img">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJL_W5mGANt472MBbTq69qA4BNtDQLTnjRiPcggKLuKa9dQ-nrPWxqghiQ2UbA5U66-sekSkF7HTXRCp8V8Ab-w4iHO6EVyrLT_61LJXlWZ_pBh_B3tnonQM00POIOq6LwOrICrdENtHjhe3zxvCEyb7FgR9eNYLUZaHzYoa_frzWcOthlr8lNjPTQUcI/s320/1000104366.png" 
+                         alt="Logo TESLASMART">
+                </div>
+                <div class="logo-text">TESLASMART</div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="menu-overlay" id="menuOverlay"></div>
+            
+            <nav class="sidebar-menu" id="sidebarMenu">
+                <button class="menu-close" id="menuClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    
+                    <!-- Profil - Membuka halaman baru/tab baru -->
+                    <li>
+                        <a href="profil.html" class="nav-link" target="_blank">
+                            <i class="fas fa-user"></i> Profil 
+                            <i class="fas fa-external-link-alt external-link-indicator"></i>
+                        </a>
+                    </li>
+                    
+                    <!-- Jenis Website - Membuka halaman baru/tab baru -->
+                    <li>
+                        <a href="#" class="nav-link" target="_blank">
+                            <i class="fas fa-globe"></i> Jenis Website
+                            <i class="fas fa-external-link-alt external-link-indicator"></i>
+                        </a>
+                    </li>
+                    
+                    <!-- Syarat dan Ketentuan - Membuka halaman baru/tab baru -->
+                    <li>
+                        <a href="syarat-dan-ketentuan.html" class="nav-link" target="_blank">
+                            <i class="fas fa-file-contract"></i> Syarat dan Ketentuan
+                            <i class="fas fa-external-link-alt external-link-indicator"></i>
+                        </a>
+                    </li>
+                    
+                    <li><a href="jasa-website.html" class="nav-link"><i class="fas fa-phone-alt"></i> Hubungi Kami</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner untuk Jenis Website -->
+    <section class="hero-banner" id="home">
+        <div class="container">
+            <h1 class="animate-fade-up">Jenis-jenis Website yang Kami Buat</h1>
+            <p class="animate-fade-up delay-1">Kami menyediakan berbagai jenis website profesional dengan desain modern dan responsif sesuai kebutuhan Anda</p>
+        </div>
+    </section>
+
+    <!-- Jenis-jenis Website Section -->
+    <section class="jenis-website-section">
+        <div class="container">
+            <div class="website-type-container">
+                
+                <!-- Website Pribadi atau Blog -->
+                <div class="website-type animate-fade-up">
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgzy9fXcWn2jRvNlccVkP1v-HDcqhDZykOAr4HlpSuEBn-0VEKJ7PTk-VfKu-4chMvtwlUKV0Hw9mGP_fuK84ezQX9z2quailF2z9cbOc5KrnOzjLS6HvR1mWxvIfhj9uh4TwPUVjAUi0W9N9L3q-INeA7Y0dyQ-eS2Yi4-ANC78LzPnpn7BfASZRrxavU/s2000/1000601729.png" 
+                             alt="Website Pribadi atau Blog" class="website-img">
+                    </div>
+                    <div class="website-content">
+                        <h2 class="website-title">Pembuatan Website Murah untuk Pribadi atau Blog</h2>
+                        <p class="website-description">Website pribadi digunakan secara individu dan biasanya berisi opini pribadi. Blog dapat dibuat dalam website ini, dengan topik tertentu seperti keuangan, teknologi, kuliner, kecantikan, dan lain-lain. Kami menyediakan jasa bikin blog profesional yang dapat Anda pilih.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Blog Pribadi</span>
+                            <span class="feature-tag">Opini & Artikel</span>
+                            <span class="feature-tag">Harga Terjangkau</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Pribadi%20atau%20Blog" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Toko Online atau Ecommerce -->
+                <div class="website-type animate-fade-up delay-1">
+                    <div class="website-content">
+                        <h2 class="website-title">Pembuatan Website Murah untuk Toko Online atau Ecommerce</h2>
+                        <p class="website-description">Website ini dirancang untuk berjualan secara online, dan semakin banyak orang yang menggunakan jasa buat situs online. Karena pasar jualan online sangat luas, kami menyediakan jasa pembuatan website toko online dengan harga terjangkau.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">E-commerce</span>
+                            <span class="feature-tag">Toko Online</span>
+                            <span class="feature-tag">Payment Gateway</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Toko%20Online" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqjUIq_NMCyft7KuVLh-2D6lnH2zZNINzAFlC4BU_cp4tk1yb_ME73Jcp_THYeIyYCRt-mVg7nK3eVYYKmWrMXWJr9abQm3imiw0pwPOV7wmJ-PKzoQoXEcve9eCzGZ__ZghEl4ZFCFjkA9pkfYXH62H3PNomKGZf63UMPIGlGFmhz5nMEDwoPqT0W26I/s2000/1000601730.png" 
+                             alt="Toko Online atau Ecommerce" class="website-img">
+                    </div>
+                </div>
+                
+                <!-- Website Perusahaan -->
+                <div class="website-type animate-fade-up delay-2">
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgmyW0paTuEqEPG-O8xxRPHflDCPJDRE-ROvRJmZ1F7PIHOYBbZUSHlLBeu5FjAkl1-5zLSy6HpvjShTp51j8UG8YiMSgXxDSql88KAUXaVQgufFWmNIwjsizRONKHdm_-rd2enhilucSYrjrhZWCxndEbzspJfWcrNA1hGVcshhpVnv7zOH73fcHJh4wM/s320/1000601731.png" 
+                             alt="Website Perusahaan" class="website-img">
+                    </div>
+                    <div class="website-content">
+                        <h2 class="website-title">Pembuatan Website Perusahaan</h2>
+                        <p class="website-description">Website perusahaan digunakan untuk meningkatkan eksistensi dan memberikan informasi tentang suatu tempat usaha. Jika seseorang mencari informasi tentang suatu perusahaan, website perusahaan tersebut menjadi sumber utama informasi tersebut. Kami menawarkan layanan pembuatan website perusahaan dengan harga yang terjangkau. Kisah masa depan membuat orang merenungkan gaya hidup saat ini.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Perusahaan</span>
+                            <span class="feature-tag">Professional</span>
+                            <span class="feature-tag">Corporate</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Perusahaan" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Website Komunitas atau Organisasi -->
+                <div class="website-type animate-fade-up delay-3">
+                    <div class="website-content">
+                        <h2 class="website-title">Pembuatan Website Komunitas atau Organisasi</h2>
+                        <p class="website-description">Website komunitas atau organisasi digunakan oleh anggota komunitas untuk berinteraksi dan berbagi informasi. Kami menyediakan jasa pembuatan desain website yang trendi dan modern untuk komunitas atau organisasi Anda.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Komunitas</span>
+                            <span class="feature-tag">Organisasi</span>
+                            <span class="feature-tag">Interaktif</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Komunitas" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiE72VLXTuBLjwj1bixqj-MtKq8q3uEeIM57iaTbha2ljF3e_B41R5oDwtnoncX5ZO2TOcl0aIX2FQ_p35zIHKmdZJQ5fmlEHflUggb4XFztBuK-INhK4McQJ9XJ2H5zEwaR2K4EtrhXW_KbYD4YCR9zt_EFlWWAPpHf45kihsfTp979GIxFfwUPiTXTuI/s2000/1000601732.png" 
+                             alt="Website Komunitas atau Organisasi" class="website-img">
+                    </div>
+                </div>
+                
+                <!-- Website Portal Berita -->
+                <div class="website-type animate-fade-up">
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0KOUOD-gNHSt23SBwv8fYGrTE-OX8Pavp09ytNlFhLh4KA-nV0T4hXTdG4ZFfFhgdzlfmASZzgFeZuB6kYVf95szyvr7xAwLQqL2ZV5tCGLoBWjHDyfDC6IHdzfVjO3_AOzePGOgI9WPjtBkVFoAlps8RLVSILUbFLh41eD-LV2dIbXv5wRQDvIdGZvA/s2000/1000601733.png" 
+                             alt="Website Portal Berita" class="website-img">
+                    </div>
+                    <div class="website-content">
+                        <h2 class="website-title">Pembuatan Website Portal Berita</h2>
+                        <p class="website-description">Website berita ini menyajikan berita-berita terbaru. Portal berita memiliki potensi besar karena banyak orang beralih ke berita online. Kami juga menawarkan layanan pembuatan script website sesuai dengan keinginan Anda.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Portal Berita</span>
+                            <span class="feature-tag">Update Terkini</span>
+                            <span class="feature-tag">Multi Kategori</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Portal%20Berita" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Website Pendidikan -->
+                <div class="website-type animate-fade-up delay-1">
+                    <div class="website-content">
+                        <h2 class="website-title">Pembuatan Website Pendidikan</h2>
+                        <p class="website-description">Kami juga menyediakan jasa pembuatan aplikasi web untuk institusi dan lembaga pendidikan.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Sekolah</span>
+                            <span class="feature-tag">Universitas</span>
+                            <span class="feature-tag">Lembaga Pendidikan</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Pendidikan" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSobZ5CJCKBsKUnxZm_cdFW-ukg_I0O4rnyp0StZbRJ6-nhLT0g5WERb-BdbEyhEoRcOkrGgiJALFsqjNEgtwJ6hZdnvN2wYxpOXrSZ9AaxNQtI_jktNF5f6ojAXfTMLmq5niIpnHItYlvVwuMlYPf1P5POzqOvzg4u_9yttd5C15eW2U4c_SmS9aU5LA/s2000/1000601734.png" 
+                             alt="Website Pendidikan" class="website-img">
+                    </div>
+                </div>
+                
+                <!-- Website Portofolio -->
+                <div class="website-type animate-fade-up delay-2">
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjP1RHv0UIufj4FCSGMX1mN3M396tuPnbV5C42X0pRFKNV1d6vfigha3SBQFNXjIlKkCiUI03rt9LkK6JD4atAnXbuxP0_QBhT7L88X8-M6pMiL1DqwSiS_YWKToJzLo5yC5EybeYZNkyBCCIcPsI53Cd-5NFhGQMPfDOWfc0fWubVbcB1q3UzVve09wPU/s2000/1000601735.png" 
+                             alt="Website Portofolio" class="website-img">
+                    </div>
+                    <div class="website-content">
+                        <h2 class="website-title">Pembuatan Website Portofolio</h2>
+                        <p class="website-description">Kami menawarkan jasa pembuatan website kilat portofolio pribadi yang murah dan profesional, untuk memperlihatkan karya-karya Anda.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Portofolio</span>
+                            <span class="feature-tag">Karya & Projek</span>
+                            <span class="feature-tag">Personal Branding</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Portofolio" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Website UMKM -->
+                <div class="website-type animate-fade-up delay-3">
+                    <div class="website-content">
+                        <h2 class="website-title">Pembuatan Website UMKM</h2>
+                        <p class="website-description">Jasa pembuatan web aplikasi UMKM kami membantu usaha Anda menjangkau lebih banyak pelanggan dengan biaya yang terjangkau.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">UMKM</span>
+                            <span class="feature-tag">Usaha Kecil</span>
+                            <span class="feature-tag">Bisnis Lokal</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20UMKM" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjirKk0MBBpFpKejFNPuF0_oeGM11ZRXX-9JsHtScXQRng7Z2AhvrcRbicpgwWbhJqTEmFx7V8KxFUZCs_wRrkBc5Xu3_W6uIeERaba-v0XmFpf8w9nnYVH2GF5OslY11G84ZwXMZxNtZKGQhbV76mgt8HwY9iuAW2jc5NddFYaFRZLd4jUHlV6q4tJzZ8/s2000/1000601736.png" 
+                             alt="Website UMKM" class="website-img">
+                    </div>
+                </div>
+                
+                <!-- Website Desa -->
+                <div class="website-type animate-fade-up">
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjDamc3YwJ3070V4IfqOO1GDuzfKgkNlcGNTv_qwRrAoX6eRWGduyqyDwMK940xF28zPU7Alrw2uwynwCHNQQPnOlc4wQdq1peKagFVyC44szuH-A0Q5597ruMxDL6gbf3A-qUYQj4g8sKTErvHGxB4xMtlpnvci1zsuIzaCDUtvB0wEMkgWAULmfSDwbE/s2000/1000601746.png" 
+                             alt="Website Desa" class="website-img">
+                    </div>
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa Design Web Profesional untuk Desa</h2>
+                        <p class="website-description">Website desa ini berisi informasi dan layanan yang diberikan kepada masyarakat desa. Pilihlah vendor pembuat website terkenal untuk membantu membangun desa Anda.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Website Desa</span>
+                            <span class="feature-tag">Informasi Publik</span>
+                            <span class="feature-tag">Layanan Masyarakat</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Desa" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Website Properti -->
+                <div class="website-type animate-fade-up delay-1">
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa Website Responsive Properti</h2>
+                        <p class="website-description">Website ini berisi informasi tentang properti seperti rumah, tanah, dan lain-lain.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Properti</span>
+                            <span class="feature-tag">Real Estate</span>
+                            <span class="feature-tag">Listing Property</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Properti" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj8wRwNfm01hO8lGw-WJBwK6Px1ge-8dsuPhTRffqLqbYjsTZ-5AHPpJIxlXg-iPO9bvpJ_WUn6hIkYExXmGD8rtYX96kgBLMEKuYDQ9TJWA9pHt8m7ykWH1ekeMeYlC4dU_-4h9OdkoIz_LQt18M_-_NmDz8ckbo3rQydYUc_OAtFgFx5owg4BctT5A3M/s2000/1000601738.png" 
+                             alt="Website Properti" class="website-img">
+                    </div>
+                </div>
+                
+                <!-- Website Wisata -->
+                <div class="website-type animate-fade-up delay-2">
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0r4cX9s5ODSKS8zE6pSWH0DMKs1ZhYXzDfpy2jq687qFeIvyblNa3GyKrpYiUZ5MnKkt4itS1HsrM2fJmZVF92fcSAjlSg5gdztXLKlfUhLDtrSCeXDmWGJdUNiWsFblk4aEl58fH7htgSQzDgD9pyvbQE19mdOrugZeW2SNw5IlK_kqEF15crQyZ7fY/s2000/1000601739.png" 
+                             alt="Website Wisata" class="website-img">
+                    </div>
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa Pembuatan Web Design Wisata</h2>
+                        <p class="website-description">Website ini berisi informasi tentang tour dan travel serta rekomendasi tempat wisata pilihan.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Tour & Travel</span>
+                            <span class="feature-tag">Wisata</span>
+                            <span class="feature-tag">Destinasi</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Wisata" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Website Rental Mobil -->
+                <div class="website-type animate-fade-up delay-3">
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa Pengembangan Website Rental Mobil</h2>
+                        <p class="website-description">Website ini menyediakan layanan rental mobil untuk berbagai kegiatan.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Rental Mobil</span>
+                            <span class="feature-tag">Transportasi</span>
+                            <span class="feature-tag">Booking Online</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Rental%20Mobil" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEipFY2otphfHQYdFEFkq-kNF58VSe6bV9sn_9a8tNOTpHNlNY_tX5H801wfYULX3IFOHNgIW_dqtOxZAe52Dggnzrp3icsdlKkBZDddn3EV9TQtOxvjaJi7mbOVEygkZArnLzv7-_WHu-f0179ytxKxyLSs6Brrx-dXSfTpEs1ZZQwoEtgdx_1QOylYaiU/s2000/1000601740.png" 
+                             alt="Website Rental Mobil" class="website-img">
+                    </div>
+                </div>
+                
+                <!-- Website Rumah Sakit -->
+                <div class="website-type animate-fade-up">
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhai4KaqLkvd5HCOKMAmSkkKnfRbtuJi5a-4XZ9hw472niv-Ucyn89wm-Js0A8MPE7MqtKxf92a5JB4KCfDUy-fSsSjqxVfA7nlzA38CcFUn_iBreQmZptw8GNt0LdXiEpFd2MlXgYX87pXpXFjqIJ7ZVpSAWJMrbS2OQ-rIjsJuXY8Jf92v55Xih_979g/s2000/1000601741.png" 
+                             alt="Website Rumah Sakit" class="website-img">
+                    </div>
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa Pembuatan Website Database Rumah Sakit</h2>
+                        <p class="website-description">Website ini menyajikan layanan dan informasi kesehatan yang tersedia di rumah sakit. Artikel ini menyebutkan favorit Anda hats dengan harga super murah. Pilih dari pengiriman di hari yang sama, pengiriman drive-up, atau pengambilan pesanan.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Rumah Sakit</span>
+                            <span class="feature-tag">Kesehatan</span>
+                            <span class="feature-tag">Medical</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Rumah%20Sakit" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Website Pemerintah -->
+                <div class="website-type animate-fade-up delay-1">
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa Pembuatan Template Website Pemerintah</h2>
+                        <p class="website-description">Website ini menyajikan informasi tentang pemerintahan.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Pemerintah</span>
+                            <span class="feature-tag">Instansi</span>
+                            <span class="feature-tag">Informasi Publik</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Pemerintah" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg4yM4P-MDGdL223rvaNkkLYU02hLaKV_PiZ_hDKOznNEQ0iJNukhNmMPp9n4n94L9Mx9GfWSwZ3IgEO9mZHZFSAQh6UIeMby5U1Wry_pH1tCq036VKZc3aGSyL4n45x4JYVE3YkvyV7T6mACpgsxAKPP2XC7ZPh0ajMZmqk8vYyF0uJ2jwrsZy9oVDQpc/s2000/1000601742.png" 
+                             alt="Website Pemerintah" class="website-img">
+                    </div>
+                </div>
+                
+                <!-- Website Entertainment -->
+                <div class="website-type animate-fade-up delay-2">
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiM10ddMx0AHhcJA3NLAqPATVhdLKE3WOwMHe_iH-9C32MlgZ7YnnUZo9hJ-gINoVFob1NXuFMyd0Mtee6rfk1HSt7bZch-FwTnDH9WGx2DZOEfYOr_lsWvxIGl77ytZyF7CiGXTJkDcaOgWIkirKJzuRnYjRY-4nukPrh6c1e_4Oh38Gt2RVnSLo-c4cU/s2000/1000601743.png" 
+                             alt="Website Entertainment" class="website-img">
+                    </div>
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa Pembuatan Website Membership Entertainment</h2>
+                        <p class="website-description">Website artis ini menyediakan berbagai jenis talenta dan pengembangan</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Entertainment</span>
+                            <span class="feature-tag">Membership</span>
+                            <span class="feature-tag">Artis & Talenta</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Entertainment" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Website Landing Page -->
+                <div class="website-type animate-fade-up delay-3">
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa Pembuatan Website dan SEO Landing Page</h2>
+                        <p class="website-description">Website landing page memiliki tujuan tertentu dan umumnya hanya memiliki satu atau dua tombol.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Landing Page</span>
+                            <span class="feature-tag">SEO Friendly</span>
+                            <span class="feature-tag">Konversi Tinggi</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Landing%20Page" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEim4bLP_UGZGca2y_b7YwSsb1GWTbs83vLDoW0CXuwn8nsSmCOvPAP-qtMGAjAAOxuRKWPDH4y0HvaQVMcESXUnsBzNcjb61MlA0wEau7ADpZzg4UeNG7oaxqTBFJ9OCPm8DpilLFkXxzBdzYLK3MNy-xvJLSqm0efwDwC95KAx9N0HBUAK49euxo4RFsE/s2000/1000601744.png" 
+                             alt="Website Landing Page" class="website-img">
+                    </div>
+                </div>
+                
+                <!-- Website Nirlaba -->
+                <div class="website-type animate-fade-up">
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgI-jSGUJVcSyq3DMf0POcnegZw97LR6f9CNr5_nQaEuiSQSJYDdB9fVMSszeeyTTybKW4EK_BPTteghf6Kg1HWT6lc9k83oT31hwdBNl5E4MnNl2RVne3N7SF9FJopga_BMR5j6PR7cbFr4IU4b2BKH-J-3pAWv1XNdTSv30FQLPWOZuGheHfNHoe7Uj0/s320/1000601745.png" 
+                             alt="Website Nirlaba" class="website-img">
+                    </div>
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa Developer Website Nirlaba</h2>
+                        <p class="website-description">Website ini tidak digunakan untuk menjual produk atau memberikan layanan kepada pengunjung.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Nirlaba</span>
+                            <span class="feature-tag">Non-Profit</span>
+                            <span class="feature-tag">Social</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Nirlaba" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Website Bisnis -->
+                <div class="website-type animate-fade-up delay-1">
+                    <div class="website-content">
+                        <h2 class="website-title">Jasa membuat Website Murah untuk Bisnis</h2>
+                        <p class="website-description">Website bisnis ini biasanya mewakili usaha tertentu.</p>
+                        <div class="website-features">
+                            <span class="feature-tag">Bisnis</span>
+                            <span class="feature-tag">Usaha</span>
+                            <span class="feature-tag">Professional</span>
+                        </div>
+                        <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20tertarik%20dengan%20Website%20Bisnis" 
+                           class="cta-button" style="margin-top: 20px;" target="_blank">
+                            <i class="fab fa-whatsapp"></i> Konsultasi Sekarang
+                        </a>
+                    </div>
+                    <div class="website-image">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiM10ddMx0AHhcJA3NLAqPATVhdLKE3WOwMHe_iH-9C32MlgZ7YnnUZo9hJ-gINoVFob1NXuFMyd0Mtee6rfk1HSt7bZch-FwTnDH9WGx2DZOEfYOr_lsWvxIGl77ytZyF7CiGXTJkDcaOgWIkirKJzuRnYjRY-4nukPrh6c1e_4Oh38Gt2RVnSLo-c4cU/s2000/1000601743.png" 
+                             alt="Website Bisnis" class="website-img">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Highlight Section -->
+    <section class="services-highlight">
+        <div class="container">
+            <div class="highlight-content animate-fade-up">
+                <div class="highlight-text">
+                    <h2>Butuh Jasa Pembuatan Website Profesional?</h2>
+                    <p><strong>TESLASMART Pilihannya!</strong></p>
+                    <p>Kami siap membantu Anda memiliki website profesional sesuai dengan kebutuhan bisnis Anda. Dengan pengalaman lebih dari 5 tahun, kami telah melayani berbagai jenis website untuk berbagai sektor.</p>
+                    
+                    <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20ingin%20konsultasi%20tentang%20pembuatan%20website" 
+                       class="cta-button" style="margin-top: 15px;" target="_blank">
+                        <i class="fas fa-comments"></i> Konsultasi Gratis
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hubungi Kami Section -->
+    <section class="contact-invitation">
+        <div class="container animate-fade-up">
+            <h2>Hubungi Kami</h2>
+            <p>Jika Anda mencari jasa pembuatan website online yang profesional, inovatif, dan andal, TESLASMART adalah pilihan yang tepat. Hubungi kami hari ini untuk memulai perjalanan Anda menuju kehadiran online yang sukses.</p>
+            <p>Anda bisa mengunjungi laman web TESLASMART di</p>
+            <a href="https://www.teslasmart.my.id" class="website-link" target="_blank">
+                <i class="fas fa-external-link-alt"></i> www.teslasmart.my.id
+            </a>
+            
+            <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20ingin%20konsultasi%20tentang%20pembuatan%20website" 
+               class="cta-button" style="margin-top: 30px;" target="_blank">
+                <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-image animate-slide-left delay-1">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfWIhY2URQXytDqbOpULRHV2YpVZHuLeCo8SjCq5m7vpxAwGIx9q8k5KJBLXncTX-G753cXYSpr_jX6H-W9WN9zCbdnCVrM-_zPRKQ0KB7g1FDD7Cvwd2HKQdP09U7HxdOyRW_0FgJsX2fkKW2v2xjJkmzjK4sBuSXEFh_4jEUj_NbSNHiWbkUCjyRKLc/s2000/1000104357.png" 
+                         alt="Contact Us" class="contact-img">
+                </div>
+                
+                <div class="contact-info animate-fade-up delay-2">
+                    <h3>Hubungi Kami</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Alamat</h4>
+                                <p>Kp. Sawah Rt. 002 Rw. 006<br>
+                                Desa Gunung Menyan<br>
+                                Kecamatan Pamijahan<br>
+                                Kabupaten Bogor<br>
+                                Kode POS 16810</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Telepon</h4>
+                                <p>085218483129</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <p>085218483129</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20ingin%20konsultasi%20tentang%20pembuatan%20website" 
+                       class="cta-button" style="margin-top: 20px; width: 100%;" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">TESLASMART</div>
+                    <p>Perusahaan jasa pembuatan website profesional dengan pengalaman lebih dari 5 tahun. Kami berkomitmen memberikan layanan terbaik dengan harga terjangkau untuk membantu bisnis Anda berkembang di dunia digital.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Menu Cepat</h3>
+                    <ul>
+                        <li><a href="#home" class="footer-nav-link">Home</a></li>
+                        <li><a href="profil.html" class="footer-nav-link" target="_blank">Profil</a></li>
+                        <li><a href="jenis-jenis-website.html" class="footer-nav-link" target="_blank">Jenis Website</a></li>
+                        <li><a href="syarat-dan-ketentuan.html" class="footer-nav-link" target="_blank">Syarat & Ketentuan</a></li>
+                        <li><a href="jasa-website.html" class="footer-nav-link">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Layanan</h3>
+                    <ul>
+                        <li><a href="#web-design">Desain Website</a></li>
+                        <li><a href="#ecommerce">Toko Online</a></li>
+                        <li><a href="#seo">Optimasi SEO</a></li>
+                        <li><a href="#maintenance">Maintenance</a></li>
+                        <li><a href="#hosting">Web Hosting</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 TESLASMART. Semua hak dilindungi undang-undang.</p>
+                <p style="margin-top: 10px;">Jasa Pembuatan Website Profesional & Terpercaya</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const menuClose = document.getElementById('menuClose');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        
+        // Function to open menu
+        function openMenu() {
+            sidebarMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Function to close menu
+        function closeMenu() {
+            sidebarMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Toggle mobile menu
+        menuToggle.addEventListener('click', openMenu);
+        menuClose.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+        
+        // Close menu when clicking on a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Only close menu on mobile
+                if (window.innerWidth <= 992) {
+                    closeMenu();
+                }
+                
+                // Check if link is external (opens in new tab)
+                if (link.getAttribute('target') === '_blank') {
+                    // Don't prevent default for external links
+                    return;
+                }
+                
+                // Handle internal links
+                const targetId = link.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Add active class to nav link
+                        document.querySelectorAll('.nav-link').forEach(navLink => {
+                            navLink.classList.remove('active');
+                        });
+                        link.classList.add('active');
+                    }
+                }
+            });
+        });
+        
+        // Close menu when pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
+        
+        // Smooth scrolling for internal anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') {
+                    e.preventDefault();
+                    return;
+                }
+                
+                if (targetId.startsWith('#') && !this.getAttribute('target')) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    closeMenu();
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Add active class to nav link
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add animation classes based on existing classes
+                    if (entry.target.classList.contains('animate-fade-up')) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                    if (entry.target.classList.contains('animate-slide-left')) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                    if (entry.target.classList.contains('animate-slide-right')) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                    
+                    // Trigger delay animations
+                    setTimeout(() => {
+                        if (entry.target.classList.contains('delay-1')) {
+                            entry.target.style.animationPlayState = 'running';
+                        }
+                    }, 200);
+                    
+                    setTimeout(() => {
+                        if (entry.target.classList.contains('delay-2')) {
+                            entry.target.style.animationPlayState = 'running';
+                        }
+                    }, 400);
+                    
+                    setTimeout(() => {
+                        if (entry.target.classList.contains('delay-3')) {
+                            entry.target.style.animationPlayState = 'running';
+                        }
+                    }, 600);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all animated elements
+        document.querySelectorAll('.animate-fade-up, .animate-slide-left, .animate-slide-right').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Animate elements with delay classes
+            setTimeout(() => {
+                document.querySelectorAll('.delay-1').forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }, 200);
+            
+            setTimeout(() => {
+                document.querySelectorAll('.delay-2').forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }, 400);
+            
+            setTimeout(() => {
+                document.querySelectorAll('.delay-3').forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }, 600);
+            
+            // Set home link as active by default
+            const homeLink = document.querySelector('a[href="#home"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Close menu if window is resized to desktop size
+            if (window.innerWidth > 992) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>
