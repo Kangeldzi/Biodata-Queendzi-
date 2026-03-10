@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Demo Tampilan Website Profesional · TeslaSmart</title>
+    <!-- Font Awesome 6 (untuk ikon dekoratif) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            background: #0a0f1e;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* efek partikel latar */
+        .light-particles {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255, 220, 100, 0.6) 0%, rgba(120, 180, 255, 0.3) 50%, transparent 80%);
+            border-radius: 50%;
+            filter: blur(8px) brightness(1.3);
+            animation: floatParticle linear infinite;
+            opacity: 0.5;
+        }
+
+        .particle:nth-child(1) { width: 300px; height: 300px; background: radial-gradient(circle, #ffb86c80, #ff6ec470, transparent); left: -100px; top: 10%; animation-duration: 18s; opacity: 0.3; }
+        .particle:nth-child(2) { width: 450px; height: 450px; background: radial-gradient(circle, #5f9eff80, #9f7aff60, transparent); right: -200px; bottom: 0%; animation-duration: 25s; opacity: 0.25; }
+        .particle:nth-child(3) { width: 200px; height: 200px; background: radial-gradient(circle, #6dd5ff, #3b9eff, transparent); left: 20%; top: 70%; animation-duration: 14s; opacity: 0.35; }
+        .particle:nth-child(4) { width: 350px; height: 350px; background: radial-gradient(circle, #c084fc, #ff98e9, transparent); right: 15%; top: 30%; animation-duration: 22s; opacity: 0.2; }
+        .particle:nth-child(5) { width: 280px; height: 280px; background: radial-gradient(circle, #ffd966, #ff956b, transparent); left: 5%; bottom: 10%; animation-duration: 19s; opacity: 0.3; }
+        .particle:nth-child(6) { width: 400px; height: 400px; background: radial-gradient(circle, #a0e9ff, #6d77ff, transparent); left: 70%; top: 60%; animation-duration: 28s; opacity: 0.2; }
+
+        @keyframes floatParticle {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -40px) scale(1.1); }
+            66% { transform: translate(-20px, 30px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            position: relative;
+            z-index: 20;
+        }
+
+        /* Header / Judul Halaman */
+        .page-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .page-header h1 {
+            font-size: clamp(1.6rem, 5vw, 2.8rem);
+            font-weight: 800;
+            background: linear-gradient(145deg, #ffe68f, #ffb07c, #aac9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(255,215,100,0.3);
+            line-height: 1.3;
+        }
+
+        .page-header h1 i {
+            color: #ffcf8a;
+            margin: 0 0.3rem;
+            font-size: 2.2rem;
+            filter: drop-shadow(0 0 8px #ffb347);
+        }
+
+        .page-header .subhead {
+            color: #b0d5ff;
+            background: rgba(15, 30, 55, 0.6);
+            backdrop-filter: blur(4px);
+            display: inline-block;
+            padding: 0.5rem 2rem;
+            border-radius: 40px;
+            border: 1px solid #6b8cff60;
+            font-weight: 400;
+            font-size: 1.1rem;
+        }
+
+        /* GRID WEBSITE 2x4 */
+        .website-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem 1rem;
+            margin: 2rem 0 3rem;
+            width: 100%;
+        }
+
+        /* Kartu Website */
+        .website-card {
+            background: rgba(18, 30, 50, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(120, 180, 255, 0.3);
+            border-radius: 20px;
+            padding: 0.9rem 0.7rem 1rem;
+            box-shadow: 0 25px 40px -18px #000000dd, 0 0 0 1px rgba(255,210,100,0.2) inset;
+            transition: all 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Efek hover pada kartu */
+        .website-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            border-color: #ffcf7a;
+            box-shadow: 0 40px 50px -8px #3f8cff, 0 0 0 2px #ffdb8e inset;
+            background: rgba(25, 40, 68, 0.85);
+        }
+
+        /* Animasi masuk */
+        .website-card {
+            animation: cardAppear 0.5s ease backwards;
+        }
+        .website-card:nth-child(1) { animation-delay: 0.05s; }
+        .website-card:nth-child(2) { animation-delay: 0.1s; }
+        .website-card:nth-child(3) { animation-delay: 0.15s; }
+        .website-card:nth-child(4) { animation-delay: 0.2s; }
+        .website-card:nth-child(5) { animation-delay: 0.25s; }
+        .website-card:nth-child(6) { animation-delay: 0.3s; }
+        .website-card:nth-child(7) { animation-delay: 0.35s; }
+        .website-card:nth-child(8) { animation-delay: 0.4s; }
+
+        @keyframes cardAppear {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Bingkai screenshot website - 4:3 untuk tampilan web */
+        .website-frame {
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 2px solid rgba(255, 215, 120, 0.4);
+            box-shadow: 0 18px 25px -12px #000;
+            transition: all 0.3s ease;
+            margin-bottom: 0.8rem;
+            background: #0f1a2b;
+        }
+
+        .website-card:hover .website-frame {
+            border-color: #ffdb8e;
+            box-shadow: 0 25px 35px -8px #1e4c9e;
+        }
+
+        .website-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .website-card:hover .website-frame img {
+            transform: scale(1.05);
+        }
+
+        /* Judul website */
+        .website-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0 0 0.4rem 0;
+            padding: 0 0.2rem;
+            background: linear-gradient(135deg, #fcee9f, #ffc7a0);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            line-height: 1.3;
+        }
+        .website-title i {
+            font-size: 1.1rem;
+            color: #ffbb6e;
+            filter: drop-shadow(0 0 5px #ff9f4b);
+            flex-shrink: 0;
+        }
+
+        /* Deskripsi website */
+        .website-description {
+            color: #c9ddff;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            padding: 0.3rem 0.5rem 0.3rem 0.8rem;
+            border-left: 3px solid #ffc773;
+            margin-left: 0.2rem;
+            background: rgba(0, 15, 40, 0.3);
+            border-radius: 0 8px 8px 0;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Footer / navigasi */
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            margin: 3rem 0 1rem;
+        }
+        .back-link {
+            background: rgba(20, 35, 65, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            color: #ffde9e;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid #ffbc6e;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1rem;
+            box-shadow: 0 8px 18px #00000050;
+        }
+        .back-link:hover {
+            background: #263f6e;
+            border-color: #ffd58c;
+            box-shadow: 0 12px 28px #274caa;
+            transform: scale(1.05);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.2rem;
+            color: #b0d0ff;
+            border-top: 1px dashed #3f6790;
+            background: rgba(0, 10, 25, 0.5);
+            backdrop-filter: blur(6px);
+            border-radius: 60px;
+            margin-top: 2rem;
+        }
+
+        /* Media query khusus untuk layar kecil (mobile) */
+        @media (max-width: 600px) {
+            body {
+                padding: 1.5rem 0.5rem;
+            }
+            .website-gallery {
+                gap: 1rem 0.6rem;
+            }
+            .website-card {
+                padding: 0.7rem 0.5rem 0.8rem;
+            }
+            .website-frame {
+                border-radius: 12px;
+                margin-bottom: 0.6rem;
+            }
+            .website-title {
+                font-size: 1rem;
+                margin-bottom: 0.3rem;
+            }
+            .website-description {
+                font-size: 0.75rem;
+                padding: 0.2rem 0.4rem 0.2rem 0.6rem;
+            }
+            .back-link {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Untuk layar sangat kecil (di bawah 380px) */
+        @media (max-width: 380px) {
+            .website-gallery {
+                gap: 0.8rem 0.4rem;
+            }
+            .website-title {
+                font-size: 0.9rem;
+            }
+            .website-description {
+                font-size: 0.7rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="light-particles">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
+
+    <div class="container">
+        <!-- Judul Halaman "Demo Contoh Tampilan Website Profesional" dengan ikon -->
+        <div class="page-header">
+            <h1>
+                <i class="fas fa-laptop-code"></i> 
+                Demo Contoh Tampilan Website Profesional
+                <i class="fas fa-globe"></i>
+            </h1>
+            <div class="subhead">Contoh Desain Website Profesional Untuk Berbagai Industri</div>
+        </div>
+
+        <!-- Grid website 2x4 (8 contoh tampilan website) -->
+        <div class="website-gallery">
+            <!-- 1. Website Company Profile -->
+            <div class="website-card">
+                <div class="website-frame">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=300&fit=crop" 
+                         alt="Company Profile">
+                </div>
+                <div class="website-title"><i class="fas fa-building"></i> Company Profile</div>
+                <div class="website-description">Website perusahaan dengan desain profesional, menampilkan layanan, portofolio, dan tim.</div>
+            </div>
+
+            <!-- 2. Website E-commerce -->
+            <div class="website-card">
+                <div class="website-frame">
+                    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=400&h=300&fit=crop" 
+                         alt="E-commerce">
+                </div>
+                <div class="website-title"><i class="fas fa-shopping-cart"></i> E-commerce Modern</div>
+                <div class="website-description">Toko online dengan fitur keranjang belanja, filter produk, dan sistem pembayaran.</div>
+            </div>
+
+            <!-- 3. Website Portfolio Kreatif -->
+            <div class="website-card">
+                <div class="website-frame">
+                    <img src="https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400&h=300&fit=crop" 
+                         alt="Portfolio Kreatif">
+                </div>
+                <div class="website-title"><i class="fas fa-paint-brush"></i> Portfolio Kreatif</div>
+                <div class="website-description">Website portofolio untuk desainer, fotografer, dan seniman dengan grid visual menarik.</div>
+            </div>
+
+            <!-- 4. Website Startup Landing Page -->
+            <div class="website-card">
+                <div class="website-frame">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=400&h=300&fit=crop" 
+                         alt="Startup Landing">
+                </div>
+                <div class="website-title"><i class="fas fa-rocket"></i> Startup Landing Page</div>
+                <div class="website-description">Landing page untuk startup dengan CTA kuat, testimonial, dan fitur produk.</div>
+            </div>
+
+            <!-- 5. Website Blog & Magazine -->
+            <div class="website-card">
+                <div class="website-frame">
+                    <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&h=300&fit=crop" 
+                         alt="Blog Magazine">
+                </div>
+                <div class="website-title"><i class="fas fa-newspaper"></i> Blog & Magazine</div>
+                <div class="website-description">Website berita dan artikel dengan tata letak modern, kategori, dan fitur pencarian.</div>
+            </div>
+
+            <!-- 6. Website Pendidikan -->
+            <div class="website-card">
+                <div class="website-frame">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=300&fit=crop" 
+                         alt="Website Pendidikan">
+                </div>
+                <div class="website-title"><i class="fas fa-graduation-cap"></i> Pendidikan</div>
+                <div class="website-description">Website sekolah atau kursus online dengan manajemen kelas dan materi belajar.</div>
+            </div>
+
+            <!-- 7. Website Restoran -->
+            <div class="website-card">
+                <div class="website-frame">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop" 
+                         alt="Website Restoran">
+                </div>
+                <div class="website-title"><i class="fas fa-utensils"></i> Restoran & Cafe</div>
+                <div class="website-description">Website restoran dengan menu digital, reservasi online, dan galeri makanan.</div>
+            </div>
+
+            <!-- 8. Website Teknologi -->
+            <div class="website-card">
+                <div class="website-frame">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop" 
+                         alt="Website Teknologi">
+                </div>
+                <div class="website-title"><i class="fas fa-microchip"></i> Teknologi & SaaS</div>
+                <div class="website-description">Website perusahaan teknologi dengan tampilan futuristik dan fitur demo produk.</div>
+            </div>
+        </div>
+
+        <!-- Tombol kembali ke halaman awal "selamat-datang.html" -->
+        <div class="footer-nav">
+            <a href="selamat-datang.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">© 2026 TeslaSmart · Demo Contoh Tampilan Website Profesional</div>
+    </div>
+</body>
+</html>
