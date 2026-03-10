@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maintenance Service - Permintaan Maaf</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a1a, #1a1a2e, #16213e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        /* Background efek partikel */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(59, 130, 246, 0.5);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        /* Container utama */
+        .main-container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5),
+                        0 0 100px rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        
+        .main-container:hover {
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6),
+                        0 0 120px rgba(59, 130, 246, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        /* Efek garis berjalan di border */
+        .border-glow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 25px;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .border-glow::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                #3b82f6,
+                #8b5cf6,
+                #10b981,
+                #f59e0b,
+                #ef4444,
+                transparent
+            );
+            animation: rotate-border 4s linear infinite;
+            top: -25%;
+            left: -25%;
+        }
+        
+        .border-glow::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 22px;
+        }
+        
+        /* Header dengan icon */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .icon-container {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite alternate;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+        
+        .icon-container i {
+            font-size: 48px;
+            color: white;
+        }
+        
+        /* Pesan utama */
+        .message-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .main-message {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            position: relative;
+            padding: 0 20px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #10b981, #f59e0b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 300% 300%;
+            animation: gradient-shift 4s ease infinite;
+        }
+        
+        .highlight {
+            color: #f59e0b;
+            text-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+            position: relative;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #f59e0b, transparent);
+            animation: underline 2s infinite;
+        }
+        
+        /* Progress section */
+        .progress-container {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .progress-container:hover {
+            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .progress-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: #10b981;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .progress-title i {
+            margin-right: 10px;
+            color: #10b981;
+            font-size: 1.8rem;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 75%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 10px;
+            position: relative;
+            animation: progress-glow 2s infinite alternate;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.4);
+            animation: progress-slide 2s infinite linear;
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: #cbd5e1;
+            font-size: 0.9rem;
+        }
+        
+        /* Countdown timer */
+        .countdown-container {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .countdown-container:hover {
+            background: rgba(30, 41, 59, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(245, 158, 11, 0.2);
+        }
+        
+        .countdown-title {
+            color: #f59e0b;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .countdown-title i {
+            margin-right: 10px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .countdown-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #f59e0b;
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+            min-width: 70px;
+            padding: 10px;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 10px;
+            margin-bottom: 5px;
+            animation: countdown-pulse 1s infinite alternate;
+        }
+        
+        .countdown-label {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            padding-top: 20px;
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+        }
+        
+        /* Tombol WhatsApp Styling */
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .whatsapp-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .whatsapp-button:hover::before {
+            left: 100%;
+        }
+        
+        .whatsapp-button:hover {
+            background: linear-gradient(135deg, #1da851, #0d7c5a);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+        }
+        
+        .whatsapp-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        .whatsapp-button i {
+            font-size: 1.5rem;
+            margin-right: 12px;
+            transition: transform 0.3s ease;
+        }
+        
+        .whatsapp-button:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .whatsapp-button span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* WhatsApp Floating Animation */
+        @keyframes whatsapp-float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        .whatsapp-button {
+            animation: whatsapp-float 3s ease-in-out infinite;
+        }
+        
+        /* Nomor WhatsApp info */
+        .whatsapp-info {
+            margin-top: 10px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 8px 15px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+        
+        .whatsapp-info i {
+            color: #25D366;
+            margin-right: 5px;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+            }
+            100% {
+                transform: scale(1.05);
+                box-shadow: 0 0 40px rgba(59, 130, 246, 0.7);
+            }
+        }
+        
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes underline {
+            0% {
+                transform: scaleX(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: scaleX(1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes rotate-border {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @keyframes progress-glow {
+            0% {
+                box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
+            }
+        }
+        
+        @keyframes progress-slide {
+            0% {
+                transform: translateX(-30px);
+            }
+            100% {
+                transform: translateX(calc(100vw + 30px));
+            }
+        }
+        
+        @keyframes countdown-pulse {
+            0% {
+                box-shadow: 0 0 5px rgba(245, 158, 11, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(245, 158, 11, 0.8);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 30px 20px;
+            }
+            
+            .main-message {
+                font-size: 2.2rem;
+            }
+            
+            .countdown {
+                gap: 10px;
+            }
+            
+            .countdown-value {
+                font-size: 2rem;
+                min-width: 60px;
+            }
+            
+            .whatsapp-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-message {
+                font-size: 1.8rem;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+            
+            .countdown-value {
+                font-size: 1.8rem;
+                min-width: 50px;
+            }
+            
+            .icon-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .icon-container i {
+                font-size: 36px;
+            }
+            
+            .whatsapp-button {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .whatsapp-button i {
+                margin-right: 0;
+                margin-bottom: 5px;
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background particles -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Container utama -->
+    <div class="main-container">
+        <div class="border-glow"></div>
+        
+        <!-- Header dengan icon -->
+        <div class="header">
+            <div class="icon-container">
+                <i class="fas fa-tools"></i>
+            </div>
+            <h2 style="color: #cbd5e1; font-weight: 300; letter-spacing: 2px;">SERVICE NOTIFICATION</h2>
+        </div>
+        
+        <!-- Pesan utama -->
+        <div class="message-container">
+            <h1 class="main-message">
+                <span class="gradient-text">PERMINTAAN MAAF</span><br>
+                <span>LAYANAN SERVICE SAAT INI</span><br>
+                <span class="highlight">BELUM TERSEDIA</span><br>
+                <span style="font-size: 2.2rem;">PROGRESS BUILD UP</span>
+            </h1>
+            
+            <p style="color: #94a3b8; font-size: 1.2rem; max-width: 700px; margin: 0 auto; line-height: 1.6;">
+                Kami sedang melakukan pembaruan dan peningkatan sistem untuk memberikan pengalaman layanan yang lebih baik kepada Anda.
+            </p>
+        </div>
+        
+        <!-- Progress bar -->
+        <div class="progress-container">
+            <div class="progress-title">
+                <i class="fas fa-chart-line"></i>
+                STATUS PEMBANGUNAN
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+            <div class="progress-text">
+                <span>PROGRESS</span>
+                <span>75%</span>
+            </div>
+            <p style="color: #cbd5e1; text-align: center; margin-top: 15px; font-size: 0.95rem;">
+                Proses optimasi dan pengujian sistem sedang berlangsung
+            </p>
+        </div>
+        
+        <!-- Countdown timer -->
+        <div class="countdown-container">
+            <div class="countdown-title">
+                <i class="fas fa-clock"></i>
+                PERKIRAAN WAKTU TERSEDIA KEMBALI
+            </div>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <div class="countdown-value" id="days">07</div>
+                    <div class="countdown-label">Hari</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="hours">12</div>
+                    <div class="countdown-label">Jam</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="minutes">45</div>
+                    <div class="countdown-label">Menit</div>
+                </div>
+                <div class="countdown-item">
+                    <div class="countdown-value" id="seconds">30</div>
+                    <div class="countdown-label">Detik</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer dengan Tombol WhatsApp -->
+        <div class="footer">
+            <p>Terima kasih atas pengertian dan kesabaran Anda. Kami berusaha untuk memberikan layanan terbaik.</p>
+            
+            <div style="margin: 20px 0;">
+                <a href="https://wa.me/6285218483129?text=Halo%20Kang%20L%2C%20saya%20ingin%20bertanya%20tentang%20status%20layanan%20service" 
+                   target="_blank" 
+                   class="whatsapp-button">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>HUBUNGI KANG L VIA WHATSAPP</span>
+                </a>
+                
+                <div class="whatsapp-info">
+                    <i class="fas fa-phone-alt"></i> No. Admin: +62 852-1848-3129
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px; font-size: 0.8rem;">
+                &copy; 2026 Digital Services. All Rights Reserved.
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Membuat partikel background
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Ukuran acak
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posisi acak
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // Warna acak
+                const colors = [
+                    'rgba(59, 130, 246, 0.5)',
+                    'rgba(139, 92, 246, 0.5)',
+                    'rgba(16, 185, 129, 0.5)',
+                    'rgba(245, 158, 11, 0.5)',
+                    'rgba(239, 68, 68, 0.5)'
+                ];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Animasi dengan durasi acak
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Countdown timer
+        function updateCountdown() {
+            // Set target date (7 days from now)
+            const targetDate = new Date();
+            targetDate.setDate(targetDate.getDate() + 7);
+            targetDate.setHours(12, 45, 30, 0);
+            
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            
+            // Hitung hari, jam, menit, detik
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Update elemen
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            // Jika countdown selesai
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('.countdown').innerHTML = '<div style="color: #10b981; font-size: 1.5rem; font-weight: bold;">LAYANAN TELAH TERSEDIA!</div>';
+            }
+        }
+        
+        // Efek hover pada progress bar
+        const progressBar = document.querySelector('.progress-bar');
+        const progressContainer = document.querySelector('.progress-container');
+        
+        progressContainer.addEventListener('mouseenter', () => {
+            progressBar.style.width = '85%';
+            document.querySelector('.progress-text span:last-child').textContent = '85%';
+        });
+        
+        progressContainer.addEventListener('mouseleave', () => {
+            progressBar.style.width = '75%';
+            document.querySelector('.progress-text span:last-child').textContent = '75%';
+        });
+        
+        // Efek ketik untuk pesan
+        function typeWriterEffect() {
+            const message = "Kami sedang melakukan pembaruan dan peningkatan sistem untuk memberikan pengalaman layanan yang lebih baik kepada Anda.";
+            const messageElement = document.querySelector('.message-container p');
+            let i = 0;
+            
+            // Reset teks
+            messageElement.textContent = '';
+            
+            function typeWriter() {
+                if (i < message.length) {
+                    messageElement.textContent += message.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 30);
+                }
+            }
+            
+            // Mulai efek ketik setelah delay
+            setTimeout(typeWriter, 1000);
+        }
+        
+        // WhatsApp button interaction
+        const whatsappButton = document.querySelector('.whatsapp-button');
+        
+        whatsappButton.addEventListener('click', function(e) {
+            // Tambahkan efek klik
+            this.style.animation = 'none';
+            this.style.transform = 'scale(0.95)';
+            
+            // Log ke console
+            console.log('Mengarahkan ke WhatsApp Kang L: +6285218483129');
+            
+            // Pesan konfirmasi
+            setTimeout(() => {
+                alert('Anda akan diarahkan ke WhatsApp Kang L. Pastikan Anda telah menginstal aplikasi WhatsApp.');
+            }, 300);
+            
+            // Kembalikan animasi setelah 1 detik
+            setTimeout(() => {
+                this.style.animation = 'whatsapp-float 3s ease-in-out infinite';
+                this.style.transform = '';
+            }, 1000);
+        });
+        
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            updateCountdown();
+            typeWriterEffect();
+            
+            // Update countdown setiap detik
+            const countdownInterval = setInterval(updateCountdown, 1000);
+            
+            // Tambahkan efek hover pada container utama
+            const mainContainer = document.querySelector('.main-container');
+            mainContainer.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            mainContainer.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+            
+            // Efek hover tambahan untuk WhatsApp button
+            whatsappButton.addEventListener('mouseenter', function() {
+                this.style.animation = 'none';
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            
+            whatsappButton.addEventListener('mouseleave', function() {
+                this.style.animation = 'whatsapp-float 3s ease-in-out infinite';
+                this.style.transform = '';
+            });
+        });
+    </script>
+</body>
+</html>
