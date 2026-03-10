@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paket Belajar AI - Formulir Pemesanan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        /* Tampilan Struk */
+        .receipt-container {
+            max-width: 480px;
+            width: 100%;
+            background: #fff;
+            border-radius: 30px 30px 15px 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Efek Lubang Struk */
+        .receipt-container::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            width: 8px;
+            height: 8px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            box-shadow: 0 110px 0 #f5f5f5, 0 220px 0 #f5f5f5, 0 330px 0 #f5f5f5, 0 440px 0 #f5f5f5, 0 550px 0 #f5f5f5, 0 660px 0 #f5f5f5, 0 770px 0 #f5f5f5, 0 880px 0 #f5f5f5;
+        }
+
+        .receipt-container::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            width: 8px;
+            height: 8px;
+            background: #f5f5f5;
+            border-radius: 50%;
+            box-shadow: 0 110px 0 #f5f5f5, 0 220px 0 #f5f5f5, 0 330px 0 #f5f5f5, 0 440px 0 #f5f5f5, 0 550px 0 #f5f5f5, 0 660px 0 #f5f5f5, 0 770px 0 #f5f5f5, 0 880px 0 #f5f5f5;
+        }
+
+        /* Header dengan Gambar */
+        .receipt-header {
+            padding: 30px 20px 15px;
+            text-align: center;
+            border-bottom: 2px dashed #333;
+            margin: 0 15px;
+        }
+
+        .receipt-header img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .receipt-header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #2c3e50;
+            margin: 10px 0 5px;
+            border-top: 2px dashed #333;
+            border-bottom: 2px dashed #333;
+            padding: 10px 0;
+        }
+
+        /* Konten Struk */
+        .receipt-content {
+            padding: 20px;
+        }
+
+        /* Detail Pesanan */
+        .order-details {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .order-details h2 {
+            font-size: 18px;
+            text-align: center;
+            text-transform: uppercase;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dotted #999;
+        }
+
+        .order-row:last-child {
+            border-bottom: none;
+        }
+
+        .order-row .label {
+            font-weight: bold;
+        }
+
+        .order-row .value {
+            font-weight: normal;
+        }
+
+        .total-row {
+            font-size: 20px;
+            font-weight: bold;
+            color: #27ae60;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid #333;
+        }
+
+        /* Form Login - Toggle */
+        .login-section {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .login-section h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .login-toggle {
+            display: block;
+            text-align: center;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+
+        .login-toggle:hover {
+            text-decoration: underline;
+        }
+
+        .login-form {
+            margin-top: 15px;
+            display: none; /* Tersembunyi secara default */
+        }
+
+        .login-form.visible {
+            display: block; /* Muncul saat kelas 'visible' ditambahkan */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #999;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            background: #fff;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn-login:hover {
+            background: #555;
+        }
+
+        /* Informasi Pemesanan */
+        .info-section {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .info-section h2 {
+            font-size: 18px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+        }
+
+        /* Metode Pembayaran */
+        .payment-section {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+
+        .payment-section h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            border-bottom: 1px dotted #333;
+            padding-bottom: 5px;
+        }
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 8px;
+            border: 1px solid #999;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .payment-option:hover {
+            background: #e0e0e0;
+        }
+
+        .payment-option input[type="radio"] {
+            margin: 0;
+        }
+
+        .payment-option label {
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        /* Ringkasan Pembayaran */
+        .payment-summary {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #27ae60;
+            text-align: center;
+        }
+
+        .payment-summary h3 {
+            font-size: 18px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .total-bayar {
+            font-size: 28px;
+            font-weight: bold;
+            color: #27ae60;
+            margin-top: 5px;
+        }
+
+        /* Tombol Pesan */
+        .btn-order {
+            width: 100%;
+            padding: 15px;
+            background: #27ae60;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-bottom: 15px; /* Dikurangi untuk memberi ruang info keamanan di bawah */
+            transition: background 0.3s;
+        }
+
+        .btn-order:hover {
+            background: #2ecc71;
+        }
+
+        /* Informasi Keamanan - Pindah di bawah tombol */
+        .security-info {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        .receipt-footer {
+            text-align: center;
+            padding: 15px;
+            border-top: 2px dashed #333;
+            margin: 0 15px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Nomor Unik */
+        .unique-number {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #e67e22;
+        }
+    </style>
+</head>
+<body>
+    <div class="receipt-container">
+        <!-- Header dengan Gambar -->
+        <div class="receipt-header">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGtw2V1ax7yHV_0viUDFj_uQbBKt0imUzUEc18qKWm-sPfYVyC5RgJdMzcj9G-fS834HaU0Fo5MHvkkT-0djfNtUHfNiDW8A1hvKgUmG1xT2n1jK6P58I-90E97K0JSFLJR7tJuqwIHLPqFkyPY1woOZlAnoQoth-Wor5f8iG4GRL1kYWnSnFge7ObbvY/s320/1000662215.png" 
+                 alt="Paket Belajar AI Banner"
+                 onerror="this.onerror=null; this.src='https://via.placeholder.com/320x100?text=Paket+Belajar+AI'">
+            <h1>Paket Belajar AI</h1>
+            <!-- Teks periode 1 Tahun telah dihapus -->
+        </div>
+
+        <div class="receipt-content">
+            <!-- Detail Pesanan -->
+            <div class="order-details" id="orderDetails">
+                <h2>════ DETAIL PESANAN ════</h2>
+                <div class="order-row">
+                    <span class="label">Paket Belajar AI</span>
+                    <span class="value" id="hargaPaket">Rp 155.000</span>
+                </div>
+                <div class="order-row">
+                    <span class="label">Biaya Transaksi</span>
+                    <span class="value unique-number" id="biayaTransaksi">Loading...</span>
+                </div>
+                <div class="order-row total-row">
+                    <span class="label">TOTAL</span>
+                    <span class="value" id="totalHarga">Rp 155.000</span>
+                </div>
+            </div>
+
+            <!-- Login Section dengan Toggle -->
+            <div class="login-section">
+                <h3>SUDAH PUNYA AKUN?</h3>
+                <span class="login-toggle" id="loginToggle">[ LOGIN ]</span>
+                <div class="login-form" id="loginForm">
+                    <h4 style="text-align: center; margin-bottom: 10px;">LOGIN</h4>
+                    <div class="form-group">
+                        <label>Alamat Email</label>
+                        <input type="email" placeholder="contoh@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" placeholder="******">
+                    </div>
+                    <button class="btn-login">LOGIN</button>
+                </div>
+            </div>
+
+            <!-- Informasi Pemesanan -->
+            <div class="info-section">
+                <h2>INFORMASI PEMESANAN</h2>
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="namaLengkap" placeholder="Masukkan nama lengkap">
+                </div>
+                <div class="form-group">
+                    <label>Alamat Email</label>
+                    <input type="email" id="email" placeholder="Masukkan alamat email">
+                </div>
+                <div class="form-group">
+                    <label>Password Baru</label>
+                    <input type="password" id="password" placeholder="Buat password baru">
+                </div>
+                <div class="form-group">
+                    <label>Nomor Handphone</label>
+                    <input type="tel" id="nomorHP" placeholder="08xxxxxxxxxx">
+                </div>
+                <div class="form-group">
+                    <label>Alamat</label>
+                    <input type="text" id="alamat" placeholder="Masukkan alamat lengkap">
+                </div>
+            </div>
+
+            <!-- Metode Pembayaran -->
+            <div class="payment-section">
+                <h3>PILIH METODE PEMBAYARAN</h3>
+                <div class="payment-options">
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="bca" value="Transfer Bank BCA" checked>
+                        <label for="bca">BCA</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="mandiri" value="Transfer Bank Mandiri">
+                        <label for="mandiri">Mandiri</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="bri" value="Bank BRI - 4098 01 019526 53 3 A/n Eldi Sugianto">
+                        <label for="bri">BRI</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="gopay" value="Gopay">
+                        <label for="gopay">GoPay</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="ovo" value="OVO">
+                        <label for="ovo">OVO</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" name="payment" id="dana" value="DANA">
+                        <label for="dana">DANA</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ringkasan Pembayaran -->
+            <div class="payment-summary">
+                <h3>RINGKASAN PEMBAYARAN</h3>
+                <div class="total-bayar" id="ringkasanTotal">Rp 155.000</div>
+            </div>
+
+            <!-- Tombol Pesan (sekarang "BUAT PESANAN") -->
+            <button class="btn-order" id="orderButton">BUAT PESANAN</button>
+
+            <!-- Informasi Keamanan - Dipindah di bawah tombol -->
+            <div class="security-info">
+                🛡️ Informasi Pribadi Anda Aman
+            </div>
+        </div>
+
+        <div class="receipt-footer">
+            <div>Terima Kasih atas Kepercayaan Anda</div>
+            <div style="margin-top: 5px;">~ Semoga Ilmunya Bermanfaat ~</div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk menghasilkan nomor unik antara 100 - 999
+        function generateUniqueFee() {
+            return Math.floor(Math.random() * (999 - 100 + 1)) + 100;
+        }
+
+        // Fungsi untuk memformat angka ke Rupiah
+        function formatRupiah(angka) {
+            return 'Rp ' + angka.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Harga paket tetap
+        const HARGA_PAKET = 155000;
+
+        // Generate biaya transaksi unik
+        let biayaTransaksi = generateUniqueFee();
+        
+        // Update tampilan biaya transaksi
+        document.getElementById('biayaTransaksi').textContent = formatRupiah(biayaTransaksi);
+        
+        // Update total harga
+        let totalHarga = HARGA_PAKET + biayaTransaksi;
+        document.getElementById('totalHarga').textContent = formatRupiah(totalHarga);
+        
+        // Update ringkasan pembayaran
+        document.getElementById('ringkasanTotal').textContent = formatRupiah(totalHarga);
+
+        // Fungsi untuk toggle form login
+        const loginToggle = document.getElementById('loginToggle');
+        const loginForm = document.getElementById('loginForm');
+
+        loginToggle.addEventListener('click', function() {
+            loginForm.classList.toggle('visible');
+            
+            // Ubah teks toggle sesuai status
+            if (loginForm.classList.contains('visible')) {
+                loginToggle.textContent = '[ SEMBUNYIKAN LOGIN ]';
+            } else {
+                loginToggle.textContent = '[ LOGIN ]';
+            }
+        });
+
+        // Fungsi untuk mendapatkan metode pembayaran yang dipilih
+        function getSelectedPayment() {
+            const paymentRadios = document.getElementsByName('payment');
+            for (let radio of paymentRadios) {
+                if (radio.checked) {
+                    return radio.value;
+                }
+            }
+            return 'Transfer Bank BCA'; // Default
+        }
+
+        // Fungsi untuk membuat pesan WhatsApp
+        function createWhatsAppMessage() {
+            const nama = document.getElementById('namaLengkap').value || '(Belum diisi)';
+            const nomorHP = document.getElementById('nomorHP').value || '(Belum diisi)';
+            const alamat = document.getElementById('alamat').value || '(Belum diisi)';
+            const metodeBayar = getSelectedPayment();
+            
+            // Gunakan total harga terkini dari elemen yang sudah diupdate
+            const totalBayar = totalHarga; // Menggunakan variabel global yang sudah dihitung
+
+            // Template pesan sesuai permintaan
+‎
+‎*┅═•❃✽༊°°🍀🌻🍀°°༊✽❃•═┅*
+‎*════ ◎•❀•◎﷽◎•❀•◎ ════*
+‎
+‎*_Assalamualaikum Warahmatullahi Wabarakatuh_*
+‎
+‎
+‎==========================
+‎*Halo Admin Saya Mau Ikut Paket Belajar AI*
+‎==========================
+‎*DATA ANGGOTA*
+‎
+‎*Nama :* ${nama}
+‎*Nomor HP :* ${nomorHP}
+‎*Alamat :* ${alamat}
+‎
+‎==========================
+‎*Belajar Paket AI*
+‎
+‎*Nama Paket Belajar :* 
+‎*Total Pembayaran :* ${formatRupiah(totalBayar)}
+‎________________________________
+‎*Transfer Via :* ${metodeBayar}
+‎*Transfer Bank BCA :*
+‎*Transfer Bank Mandiri :*
+‎*Bank BRI - 4098 01 019526 53 3 A/n Eldi Sugianto*
+‎*Gopay : 085218483129*
+‎*OVO :*
+‎*DANA : 085218483129*
+‎===========================
+‎*Mohon Segera Di Respon dan Di Follow Up Admin*
+‎
+‎===========================
+‎*Catatan :* Silahkan Kirim Bukti Transfer/Pembayaran Anda.!
+‎===========================
+‎
+‎*┅═•❃✽༊°°🍀🌻🍀°°༊✽❃•═┅*`;
+        }
+
+        // Event listener untuk tombol pesan
+        document.getElementById('orderButton').addEventListener('click', function() {
+            const message = createWhatsAppMessage();
+            const encodedMessage = encodeURIComponent(message);
+            const phoneNumber = '6285218483129';
+            const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            
+            window.open(whatsappURL, '_blank');
+        });
+
+        // Biaya transaksi berganti setiap 30 detik (simulasi real-time)
+        setInterval(function() {
+            // Generate biaya baru
+            biayaTransaksi = generateUniqueFee();
+            
+            // Update tampilan
+            document.getElementById('biayaTransaksi').textContent = formatRupiah(biayaTransaksi);
+            
+            // Update total
+            totalHarga = HARGA_PAKET + biayaTransaksi;
+            document.getElementById('totalHarga').textContent = formatRupiah(totalHarga);
+            
+            // Update ringkasan pembayaran
+            document.getElementById('ringkasanTotal').textContent = formatRupiah(totalHarga);
+            
+            // Efek visual kecil sebagai notifikasi perubahan
+            document.getElementById('biayaTransaksi').style.backgroundColor = '#fff3cd';
+            setTimeout(() => {
+                document.getElementById('biayaTransaksi').style.backgroundColor = 'transparent';
+            }, 500);
+        }, 30000); // Ganti setiap 30 detik
+    </script>
+</body>
+</html>
