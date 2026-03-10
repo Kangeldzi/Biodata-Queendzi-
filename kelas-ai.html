@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelas AI - Menu Video</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3a 50%, #0a0a1a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #e0e0ff;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background efek partikel */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(120, 119, 198, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(76, 201, 240, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 40% 80%, rgba(247, 37, 133, 0.1) 0%, transparent 20%);
+            z-index: -1;
+            animation: floatBackground 20s ease-in-out infinite;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header utama dengan animasi */
+        .header-container {
+            background: rgba(20, 20, 40, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 2px solid rgba(76, 201, 240, 0.3);
+            box-shadow: 
+                0 20px 50px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(76, 201, 240, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInDown 1s ease;
+        }
+
+        .header-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(76, 201, 240, 0.1), 
+                transparent);
+            animation: shimmer 5s infinite;
+        }
+
+        /* Gambar header */
+        .header-image {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 25px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(247, 37, 133, 0.4);
+            border: 3px solid rgba(247, 37, 133, 0.5);
+            animation: floatLogo 8s ease-in-out infinite;
+        }
+
+        .header-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .header-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Teks header */
+        .header-title {
+            font-size: 36px;
+            font-weight: 800;
+            color: #4cc9f0;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(76, 201, 240, 0.7);
+            letter-spacing: 1px;
+        }
+
+        .header-subtitle {
+            font-size: 18px;
+            color: #b0b0ff;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+
+        .header-highlight {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f72585;
+            text-shadow: 0 0 15px rgba(247, 37, 133, 0.5);
+            margin-bottom: 30px;
+            animation: pulseText 2s infinite alternate;
+        }
+
+        /* Tombol hamburger futuristik */
+        .menu-trigger {
+            width: 120px;
+            height: 120px;
+            margin: 20px auto;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .menu-trigger:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, 
+                rgba(76, 201, 240, 0.2), 
+                rgba(247, 37, 133, 0.2));
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 3px solid rgba(76, 201, 240, 0.5);
+            box-shadow: 
+                0 10px 30px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(76, 201, 240, 0.3);
+            animation: pulseCircle 3s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-icon {
+            font-size: 48px;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(76, 201, 240, 0.8);
+            transition: all 0.5s ease;
+        }
+
+        .menu-trigger:hover .menu-icon {
+            transform: rotate(180deg);
+            color: #f72585;
+        }
+
+        /* Sidebar menu futuristik */
+        .sidebar-container {
+            background: rgba(20, 20, 40, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            margin-top: 30px;
+            border: 2px solid rgba(76, 201, 240, 0.3);
+            box-shadow: 
+                0 25px 60px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(76, 201, 240, 0.2);
+            display: none;
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.8s ease;
+        }
+
+        .sidebar-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(76, 201, 240, 0.05) 50%, 
+                transparent 100%);
+            z-index: -1;
+        }
+
+        /* Kategori menu */
+        .menu-category {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .category-title {
+            background: linear-gradient(90deg, 
+                rgba(76, 201, 240, 0.2), 
+                rgba(247, 37, 133, 0.2));
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4cc9f0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .category-title:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 20px rgba(76, 201, 240, 0.3);
+        }
+
+        .category-title i {
+            font-size: 18px;
+            color: #4cc9f0;
+        }
+
+        /* Item menu */
+        .menu-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-left: 20px;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 20px;
+            background: rgba(30, 30, 60, 0.6);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(76, 201, 240, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            transform: translateX(10px);
+            background: rgba(76, 201, 240, 0.15);
+            border-color: #4cc9f0;
+            box-shadow: 0 5px 20px rgba(76, 201, 240, 0.3);
+        }
+
+        .menu-item.active {
+            background: rgba(76, 201, 240, 0.2);
+            border-color: #4cc9f0;
+            box-shadow: 0 5px 20px rgba(76, 201, 240, 0.4);
+        }
+
+        .menu-item.active::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            animation: shimmerItem 2s infinite;
+        }
+
+        /* Tombol pilihan */
+        .option-button {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f72585, #b5179e);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(247, 37, 133, 0.3);
+        }
+
+        .option-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(247, 37, 133, 0.5);
+        }
+
+        .option-button.active {
+            background: linear-gradient(135deg, #4cc9f0, #4361ee);
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(76, 201, 240, 0.5);
+        }
+
+        .option-button i {
+            font-size: 12px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .option-button.active i {
+            opacity: 1;
+        }
+
+        /* Teks item */
+        .item-text {
+            flex-grow: 1;
+            color: #b0b0ff;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover .item-text {
+            color: #fff;
+            text-shadow: 0 0 10px rgba(76, 201, 240, 0.5);
+        }
+
+        .menu-item.active .item-text {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Indikator video aktif */
+        .video-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #f72585;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 0 10px #f72585;
+        }
+
+        .menu-item.active .video-indicator {
+            opacity: 1;
+            animation: pulseIndicator 1.5s infinite;
+        }
+
+        /* Progress bar untuk modul */
+        .module-progress {
+            height: 4px;
+            background: rgba(76, 201, 240, 0.2);
+            border-radius: 2px;
+            margin-top: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4cc9f0, #4361ee);
+            border-radius: 2px;
+            width: 0%;
+            transition: width 1s ease;
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            animation: progressShimmer 2s infinite;
+        }
+
+        /* Animations */
+        @keyframes floatBackground {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(-10px, 10px) scale(1.05); }
+            50% { transform: translate(10px, -10px) scale(1.1); }
+            75% { transform: translate(-10px, -10px) scale(1.05); }
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(2deg); }
+            50% { transform: translateY(0) rotate(0deg); }
+            75% { transform: translateY(10px) rotate(-2deg); }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        @keyframes shimmerItem {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes pulseCircle {
+            0%, 100% { 
+                box-shadow: 
+                    0 10px 30px rgba(0, 0, 0, 0.3),
+                    0 0 40px rgba(76, 201, 240, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 10px 40px rgba(0, 0, 0, 0.4),
+                    0 0 60px rgba(76, 201, 240, 0.5);
+            }
+        }
+
+        @keyframes pulseText {
+            0% { 
+                text-shadow: 0 0 15px rgba(247, 37, 133, 0.5);
+                transform: scale(1);
+            }
+            100% { 
+                text-shadow: 0 0 25px rgba(247, 37, 133, 0.8);
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes pulseIndicator {
+            0%, 100% { 
+                box-shadow: 0 0 5px #f72585;
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 15px #f72585;
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes progressShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Efek partikel */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(76, 201, 240, 0.3);
+            border-radius: 50%;
+            animation: floatParticle 20s infinite linear;
+        }
+
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) translateX(100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 10px;
+            }
+            
+            .header-container {
+                padding: 20px;
+            }
+            
+            .header-title {
+                font-size: 28px;
+            }
+            
+            .header-image {
+                width: 160px;
+                height: 160px;
+            }
+            
+            .menu-trigger {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .menu-icon {
+                font-size: 36px;
+            }
+            
+            .sidebar-container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-title {
+                font-size: 24px;
+            }
+            
+            .header-subtitle {
+                font-size: 16px;
+            }
+            
+            .header-highlight {
+                font-size: 20px;
+            }
+            
+            .category-title {
+                font-size: 14px;
+                padding: 12px 15px;
+            }
+            
+            .menu-item {
+                padding: 10px 15px;
+            }
+            
+            .item-text {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Efek partikel -->
+    <div class="particles" id="particles"></div>
+
+    <div class="main-container">
+        <!-- Header utama -->
+        <div class="header-container">
+            <div class="header-image">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj_9HFK8p8RpM9H8FOT85R4kMKoMADI6MuUrTDYSLagxptTVHzJ9qVzEI8pUaheYpZyOh8nOIKuoYzee_SyNRqFUzRz8TfGlFEr0qD-iKafMyts6gWd8ThsElYbhjzY_dE8O_DflGwnvl8kjpeUJlYh_YSVmiSSZk6xWF19x15nbu3L_gAvTbkmfMg-OtjU/s320/1000055945.jpg" 
+                     alt="Selamat Datang">
+            </div>
+            
+            <h1 class="header-title">Selamat Datang</h1>
+            
+            <p class="header-subtitle">
+                Pastikan Anda Menonton Video Tutorialnya Berurutan! Pertama Klik Pada Tombol "SELAMAT BERGABUNG".
+            </p>
+            
+            <div class="header-highlight">
+                Klik Disini!
+            </div>
+            
+            <!-- Tombol hamburger futuristik -->
+            <div class="menu-trigger" id="menuTrigger">
+                <div class="menu-circle">
+                    <i class="menu-icon fas fa-play"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar menu futuristik -->
+        <div class="sidebar-container" id="sidebar">
+            <!-- Modul SELAMAT DATANG -->
+            <div class="menu-category">
+                <div class="category-title">
+                    <i class="fas fa-door-open"></i> SELAMAT DATANG
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/video-gallery-styling-untuk-container.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Selamat Bergabung</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/ai-gratis.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">AI Gratisan</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modul 1 -->
+            <div class="menu-category">
+                <div class="category-title">
+                    <i class="fas fa-user-robot"></i> Modul 1 - Membuat Diri Kita Versi AI
+                </div>
+                <div class="module-progress">
+                    <div class="progress-fill" id="modul1Progress"></div>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/video-gallery-styling-untuk-container_19.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Intro</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/video-gallery-styling-untuk-container_29.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Tanpa Menulis Prompt 1</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/tanpa-promt-2.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Tanpa Menulis Prompt 2</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/menjadi-3d-cartoon.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Menjadi 3D Cartoon</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/couple-3d-cartoon-trial-error.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Couple 3D Cartoon + Trial Error</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/konsistensi-wajah.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Konsistensi Wajah</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modul 2 -->
+            <div class="menu-category">
+                <div class="category-title">
+                    <i class="fas fa-chess-queen"></i> Modul 2 - Menciptakan Karakter Sendiri
+                </div>
+                <div class="module-progress">
+                    <div class="progress-fill" id="modul2Progress"></div>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/menciptakan-karakter-sendiri.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Intro</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/membuat-karakter_20.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Membuat Karakter</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/memanipulasi-karakter.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Manipulasi Karakter</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/menjadikan-konten-video.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Menjadikan Konten Video</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modul 3 -->
+            <div class="menu-category">
+                <div class="category-title">
+                    <i class="fas fa-video"></i> Modul 3 - AI Video Gratisan
+                </div>
+                <div class="module-progress">
+                    <div class="progress-fill" id="modul3Progress"></div>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/membuat-gambar-imajinasi.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Intro</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/mengolah-imajinasi.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Mengolah Imajinasi</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/menjadi-kreatif.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Menjadi Kreatif</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/mengabaikan-prompt.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Mengabaikan Prompt</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/amati-tiru-modifikasi.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Amati Tiru Modifikasi</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modul 4 -->
+            <div class="menu-category">
+                <div class="category-title">
+                    <i class="fas fa-film"></i> Modul 4 - Membuat Video AI
+                </div>
+                <div class="module-progress">
+                    <div class="progress-fill" id="modul4Progress"></div>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/modul-4-intro_22.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Intro</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/membuat-video-ai-kling.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Kling AI</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/dreamina.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Dreamina AI</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/lumalabs.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Lumalabs AI</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/runwayml.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Runwayml AI</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/hailuo-ai.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Hailuo AI</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/fixverse.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Fixverse AI</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/perbandingan.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Perbandingan Setiap Video AI</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modul 5 -->
+            <div class="menu-category">
+                <div class="category-title">
+                    <i class="fas fa-balance-scale"></i> Modul 5 - AI Gratisan VS AI Berbayar
+                </div>
+                <div class="module-progress">
+                    <div class="progress-fill" id="modul5Progress"></div>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/modul-5-intro.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Intro</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/leonardo.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Leonardo</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modul 6 -->
+            <div class="menu-category">
+                <div class="category-title">
+                    <i class="fas fa-virus"></i> Modul 6 - Bedah Konten AI Viral (Update)
+                </div>
+                <div class="module-progress">
+                    <div class="progress-fill" id="modul6Progress"></div>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/modul-6-intro.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Intro</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/hybrid-animal.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Hybrid Animal</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/fushion.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Fushion</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/evolution.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Evolution</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/anotherverse.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Anotherverse V1</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modul 7 -->
+            <div class="menu-category">
+                <div class="category-title">
+                    <i class="fas fa-money-bill-wave"></i> Modul 7 - Monetisasi
+                </div>
+                <div class="module-progress">
+                    <div class="progress-fill" id="modul7Progress"></div>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/modul-7-intro.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Intro Monetisasi</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/strategi-monetisasi.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">Strategi Monetisasi</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                    <div class="menu-item" onclick="selectOption(this, 'https://www.teslasmart.my.id/p/sistem-affiliasi.html')">
+                        <div class="option-button">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <span class="item-text">System Affiliasi</span>
+                        <div class="video-indicator"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk membuat partikel
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // Random color
+                const colors = [
+                    'rgba(76, 201, 240, 0.5)',
+                    'rgba(247, 37, 133, 0.5)',
+                    'rgba(67, 97, 238, 0.5)',
+                    'rgba(255, 159, 0, 0.5)'
+                ];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Random animation
+                const delay = Math.random() * 20;
+                const duration = Math.random() * 20 + 10;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Data progress modul
+        const moduleProgress = {
+            'modul1': 0,
+            'modul2': 0,
+            'modul3': 0,
+            'modul4': 0,
+            'modul5': 0,
+            'modul6': 0,
+            'modul7': 0
+        };
+
+        // Fungsi untuk memilih video
+        let selectedItem = null;
+
+        function selectOption(itemElement, link) {
+            // Hapus status aktif dari semua item
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+                item.querySelector('.option-button').classList.remove('active');
+            });
+
+            // Set status aktif pada item yang dipilih
+            itemElement.classList.add('active');
+            itemElement.querySelector('.option-button').classList.add('active');
+            selectedItem = itemElement;
+
+            // Update progress modul
+            updateModuleProgress(itemElement);
+
+            // Tampilkan notifikasi
+            showNotification('Membuka video tutorial...');
+
+            // Buka link setelah delay
+            setTimeout(() => {
+                window.open(link, '_blank');
+            }, 500);
+        }
+
+        // Fungsi untuk update progress modul
+        function updateModuleProgress(selectedItem) {
+            // Cari modul parent dari item yang dipilih
+            const moduleCategory = selectedItem.closest('.menu-category');
+            if (!moduleCategory) return;
+
+            // Hitung progress
+            const allItems = moduleCategory.querySelectorAll('.menu-item');
+            const checkedItems = moduleCategory.querySelectorAll('.menu-item.active');
+            const progress = (checkedItems.length / allItems.length) * 100;
+
+            // Update progress bar
+            const progressId = moduleCategory.querySelector('.module-progress .progress-fill').id;
+            const progressBar = document.getElementById(progressId);
+            progressBar.style.width = `${progress}%`;
+
+            // Simpan progress di localStorage
+            const moduleName = progressId.replace('Progress', '');
+            moduleProgress[moduleName] = progress;
+            localStorage.setItem('kelasAIProgress', JSON.stringify(moduleProgress));
+        }
+
+        // Fungsi untuk menampilkan notifikasi
+        function showNotification(message) {
+            // Hapus notifikasi sebelumnya
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) existingNotification.remove();
+
+            // Buat notifikasi
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <i class="fas fa-play-circle"></i>
+                <span>${message}</span>
+            `;
+            
+            // Style notifikasi
+            notification.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                background: rgba(20, 20, 40, 0.95);
+                backdrop-filter: blur(10px);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 12px;
+                z-index: 1000;
+                animation: slideInRight 0.3s ease, slideOutRight 0.3s ease 2.7s;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+                font-weight: 600;
+                border-left: 4px solid #4cc9f0;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                max-width: 300px;
+            `;
+
+            document.body.appendChild(notification);
+
+            // Hapus notifikasi setelah 3 detik
+            setTimeout(() => {
+                if (notification.parentNode) notification.remove();
+            }, 3000);
+        }
+
+        // Fungsi untuk toggle sidebar
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const menuTrigger = document.getElementById('menuTrigger');
+            const menuIcon = menuTrigger.querySelector('.menu-icon');
+            
+            if (sidebar.style.display === 'block') {
+                sidebar.style.display = 'none';
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-play');
+                menuTrigger.style.transform = 'scale(1)';
+            } else {
+                sidebar.style.display = 'block';
+                menuIcon.classList.remove('fa-play');
+                menuIcon.classList.add('fa-times');
+                menuTrigger.style.transform = 'scale(1.1)';
+                
+                // Scroll ke sidebar
+                sidebar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Fungsi untuk load progress dari localStorage
+        function loadProgress() {
+            const savedProgress = localStorage.getItem('kelasAIProgress');
+            if (savedProgress) {
+                const progressData = JSON.parse(savedProgress);
+                
+                // Update setiap progress bar
+                Object.keys(progressData).forEach(moduleId => {
+                    const progressBar = document.getElementById(`${moduleId}Progress`);
+                    if (progressBar) {
+                        progressBar.style.width = `${progressData[moduleId]}%`;
+                        moduleProgress[moduleId] = progressData[moduleId];
+                    }
+                });
+            }
+        }
+
+        // Inisialisasi
+        document.addEventListener('DOMContentLoaded', function() {
+            // Buat partikel
+            createParticles();
+            
+            // Load progress dari localStorage
+            loadProgress();
+            
+            // Set event listener untuk menu trigger
+            document.getElementById('menuTrigger').addEventListener('click', toggleSidebar);
+            
+            // Tambahkan animasi untuk progress bars
+            setTimeout(() => {
+                Object.keys(moduleProgress).forEach(moduleId => {
+                    const progressBar = document.getElementById(`${moduleId}Progress`);
+                    if (progressBar) {
+                        progressBar.style.transition = 'width 1.5s ease';
+                    }
+                });
+            }, 1000);
+            
+            // Tambahkan style untuk animasi notifikasi
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+                
+                @keyframes slideOutRight {
+                    from { transform: translateX(0); opacity: 1; }
+                    to { transform: translateX(100%); opacity: 0; }
+                }
+                
+                /* Efek hover untuk kategori */
+                .category-title::after {
+                    content: '→';
+                    margin-left: auto;
+                    opacity: 0;
+                    transition: opacity 0.3s ease, transform 0.3s ease;
+                }
+                
+                .category-title:hover::after {
+                    opacity: 1;
+                    transform: translateX(5px);
+                }
+                
+                /* Efek untuk tombol option */
+                .option-button::before {
+                    content: '';
+                    position: absolute;
+                    top: -2px;
+                    left: -2px;
+                    right: -2px;
+                    bottom: -2px;
+                    border-radius: 50%;
+                    background: linear-gradient(45deg, #4cc9f0, #f72585);
+                    z-index: -1;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+                
+                .option-button:hover::before {
+                    opacity: 1;
+                }
+            `;
+            document.head.appendChild(style);
+            
+            // Auto-select item pertama di modul pertama jika belum ada progress
+            if (!selectedItem) {
+                const firstItem = document.querySelector('.menu-item');
+                if (firstItem) {
+                    selectOption(firstItem, 'https://www.teslasmart.my.id/p/video-gallery-styling-untuk-container.html');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
