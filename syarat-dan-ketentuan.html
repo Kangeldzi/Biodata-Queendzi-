@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TESLASMART - Syarat dan Ketentuan</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --maroon-gradient: linear-gradient(135deg, #800000, #a52a2a, #8b0000);
+            --maroon-light: #a52a2a;
+            --maroon-medium: #800000;
+            --maroon-dark: #5a0000;
+            --gold-gradient: linear-gradient(135deg, #FFD700, #DAA520, #B8860B);
+            --gold-light: #FFD700;
+            --gold-medium: #DAA520;
+            --gold-dark: #B8860B;
+            --silver-gradient: linear-gradient(135deg, #C0C0C0, #A9A9A9, #808080);
+            --bronze-gradient: linear-gradient(135deg, #CD7F32, #A0522D, #8B4513);
+            --gray-light: #f8f9fa;
+            --gray-medium: #e9ecef;
+            --gray-dark: #343a40;
+            --white: #ffffff;
+            --black: #212529;
+            --shadow: 0 3px 10px rgba(128, 0, 0, 0.08);
+            --shadow-hover: 0 5px 15px rgba(128, 0, 0, 0.12);
+            --gold-shadow: 0 3px 10px rgba(218, 165, 32, 0.15);
+            --gold-shadow-hover: 0 5px 15px rgba(218, 165, 32, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #fffafa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: var(--maroon-gradient);
+            color: white;
+            padding: 12px 0;
+            box-shadow: 0 3px 10px rgba(128, 0, 0, 0.25);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+        
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            animation: pulse 2s infinite, rotate 10s linear infinite, glow 3s ease-in-out infinite;
+        }
+        
+        .logo-img::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, var(--maroon-medium), var(--gold-medium), var(--maroon-dark), var(--gold-dark));
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+        }
+        
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .logo-text {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+        
+        /* Sidebar Menu - Tampil Default */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 5px;
+            transition: transform 0.3s ease;
+            z-index: 1002;
+        }
+        
+        .menu-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .sidebar-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+        }
+        
+        .nav-menu li {
+            position: relative;
+        }
+        
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-menu a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Link External Indicator */
+        .external-link-indicator {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-left: 4px;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            padding: 80px 0 40px;
+            background: linear-gradient(rgba(255, 250, 250, 0.95), rgba(255, 250, 250, 0.95)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .hero-text h1 {
+            font-size: 2.5rem;
+            color: var(--maroon-dark);
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+        
+        .hero-text h1 span {
+            background: var(--maroon-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: block;
+            margin-top: 8px;
+            font-size: 2rem;
+        }
+        
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        
+        /* Tombol Hubungi Kami */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--maroon-gradient);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            min-width: 140px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, #a52a2a, #8b0000, #5a0000);
+        }
+        
+        .cta-button:hover::before {
+            left: 100%;
+        }
+        
+        .hero-image {
+            position: relative;
+            text-align: center;
+        }
+        
+        .hero-img {
+            width: 100%;
+            max-width: 450px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-hover);
+            transform: perspective(800px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-img:hover {
+            transform: perspective(800px) rotateY(0deg);
+        }
+        
+        /* Syarat dan Ketentuan Section */
+        .terms-section {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #fff, #fef2f2);
+        }
+        
+        .terms-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .terms-title h2 {
+            font-size: 2.5rem;
+            color: var(--maroon-dark);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .terms-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 180px;
+            height: 4px;
+            background: var(--maroon-gradient);
+            border-radius: 2px;
+        }
+        
+        .terms-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+        
+        .terms-intro {
+            font-size: 1.1rem;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(128, 0, 0, 0.03);
+            border-radius: 8px;
+            border-left: 4px solid var(--maroon-medium);
+        }
+        
+        .terms-section-title {
+            font-size: 1.8rem;
+            color: var(--maroon-dark);
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold-light);
+        }
+        
+        .terms-list {
+            list-style-type: none;
+            margin-bottom: 30px;
+        }
+        
+        .terms-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.6;
+            color: #444;
+        }
+        
+        .terms-list li:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--maroon-medium);
+            border-radius: 50%;
+        }
+        
+        .terms-sublist {
+            list-style-type: lower-alpha;
+            margin: 10px 0 10px 20px;
+            padding-left: 20px;
+        }
+        
+        .terms-sublist li {
+            margin-bottom: 8px;
+            padding-left: 10px;
+            color: #555;
+        }
+        
+        .terms-sublist li:before {
+            display: none;
+        }
+        
+        .bold-text {
+            font-weight: 700;
+            color: var(--maroon-dark);
+        }
+        
+        /* Services Highlight Section */
+        .services-highlight {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #fff, #fef2f2);
+        }
+        
+        .highlight-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .highlight-text h2 {
+            font-size: 2rem;
+            color: var(--maroon-dark);
+            margin-bottom: 15px;
+        }
+        
+        .highlight-text p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        /* Keunggulan Fitur Section */
+        .features-section {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #fff, #f9f3f3);
+        }
+        
+        .features-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .features-title h2 {
+            font-size: 2rem;
+            color: var(--maroon-dark);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .features-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: var(--maroon-gradient);
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--maroon-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--gold-light);
+        }
+        
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .feature-icon-container {
+            position: relative;
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon-border {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, var(--maroon-medium), var(--gold-medium), var(--maroon-dark), var(--gold-dark)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: rotate 3s linear infinite, glow 2s ease-in-out infinite alternate;
+            opacity: 0.9;
+        }
+        
+        .feature-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 75px;
+            height: 75px;
+            background: var(--maroon-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            z-index: 2;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: pulseIcon 3s ease-in-out infinite;
+        }
+        
+        .feature-icon i {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-card:hover .feature-icon {
+            background: var(--gold-gradient);
+            color: var(--maroon-dark);
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 25px rgba(218, 165, 32, 0.5);
+            animation: pulseIconHover 1s ease-in-out infinite alternate;
+        }
+        
+        .feature-card:hover .feature-icon-border {
+            animation: rotate 1.5s linear infinite, glow 1s ease-in-out infinite alternate;
+        }
+        
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            text-align: center;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .feature-description {
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        
+        /* Paket Harga Section */
+        .pricing-section {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #f9f3f3, #fef2f2);
+        }
+        
+        .pricing-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .pricing-title h2 {
+            font-size: 2rem;
+            color: var(--maroon-dark);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .pricing-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: var(--maroon-gradient);
+            border-radius: 2px;
+        }
+        
+        .pricing-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 15px auto 30px;
+        }
+        
+        .pricing-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 1px solid #eee;
+            animation: floatCard 6s ease-in-out infinite;
+        }
+        
+        .pricing-card:nth-child(2) {
+            animation-delay: 1s;
+        }
+        
+        .pricing-card:nth-child(3) {
+            animation-delay: 2s;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            animation-play-state: paused;
+        }
+        
+        .pricing-header {
+            padding: 25px;
+            text-align: center;
+            color: white;
+        }
+        
+        .pricing-card.bronze .pricing-header {
+            background: var(--bronze-gradient);
+        }
+        
+        .pricing-card.silver .pricing-header {
+            background: var(--silver-gradient);
+        }
+        
+        .pricing-card.gold .pricing-header {
+            background: var(--gold-gradient);
+            color: var(--maroon-dark);
+        }
+        
+        .pricing-header h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-price {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .pricing-period {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .pricing-features {
+            padding: 25px;
+        }
+        
+        .pricing-features ul {
+            list-style: none;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .pricing-features i {
+            color: var(--maroon-medium);
+            font-size: 0.9rem;
+        }
+        
+        .pricing-button {
+            text-align: center;
+            padding: 0 25px 25px;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #fef2f2, #fff);
+        }
+        
+        .faq-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-title h2 {
+            font-size: 2rem;
+            color: var(--maroon-dark);
+            display: inline-block;
+            padding-bottom: 10px;
+            position: relative;
+        }
+        
+        .faq-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 3px;
+            background: var(--maroon-gradient);
+            border-radius: 2px;
+        }
+        
+        .faq-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 700px;
+            margin: 15px auto 30px;
+        }
+        
+        .faq-category {
+            margin-bottom: 40px;
+        }
+        
+        .faq-category-title {
+            font-size: 1.5rem;
+            color: var(--maroon-dark);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--gold-light);
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+        
+        .faq-question {
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--maroon-dark);
+            transition: all 0.3s ease;
+        }
+        
+        .faq-question:hover {
+            background-color: rgba(128, 0, 0, 0.03);
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: #555;
+            line-height: 1.7;
+            border-top: 1px solid transparent;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Hubungi Kami Section */
+        .contact-invitation {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #fff, #fef2f2);
+            text-align: center;
+        }
+        
+        .contact-invitation h2 {
+            font-size: 2rem;
+            color: var(--maroon-dark);
+            margin-bottom: 20px;
+        }
+        
+        .contact-invitation p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.7;
+            max-width: 800px;
+            margin: 0 auto 20px;
+        }
+        
+        .website-link {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--maroon-medium);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background: rgba(128, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .website-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(128, 0, 0, 0.1), transparent);
+            transition: 0.5s;
+        }
+        
+        .website-link:hover {
+            color: var(--maroon-dark);
+            background: rgba(128, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .website-link:hover::before {
+            left: 100%;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 60px 0;
+            background: linear-gradient(to bottom, #fff, #fef2f2);
+        }
+        
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .contact-image {
+            text-align: center;
+        }
+        
+        .contact-img {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-hover);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-info h3 {
+            font-size: 1.6rem;
+            color: var(--maroon-dark);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--maroon-light);
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .contact-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--maroon-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--maroon-dark);
+            color: white;
+            padding: 50px 0 15px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: textGlow 2s ease-in-out infinite alternate;
+        }
+        
+        .footer-links h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--gold-light);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold-light);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.7); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); box-shadow: 0 0 0 10px rgba(218, 165, 32, 0); }
+        }
+        
+        @keyframes pulseIcon {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        @keyframes pulseIconHover {
+            0% { transform: translate(-50%, -50%) scale(1.1); box-shadow: 0 0 15px rgba(218, 165, 32, 0.5); }
+            100% { transform: translate(-50%, -50%) scale(1.15); box-shadow: 0 0 25px rgba(218, 165, 32, 0.8); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) perspective(800px) rotateY(-5deg); }
+            50% { transform: translateY(-10px) perspective(800px) rotateY(0deg); }
+        }
+        
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(218, 165, 32, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(218, 165, 32, 0.8); }
+        }
+        
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.5); }
+            100% { text-shadow: 0 0 15px rgba(255, 215, 0, 0.8); }
+        }
+        
+        @keyframes slideInRightMenu {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .animate-slide-left {
+            animation: slideInLeft 0.8s ease forwards;
+        }
+        
+        .animate-slide-right {
+            animation: slideInRight 0.8s ease forwards;
+        }
+        
+        .animate-fade-up {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-glow {
+            animation: glow 2s ease-in-out infinite;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; opacity: 0; }
+        .delay-2 { animation-delay: 0.4s; opacity: 0; }
+        .delay-3 { animation-delay: 0.6s; opacity: 0; }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content, .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-text h1 span {
+                font-size: 1.8rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: relative;
+            }
+            
+            .sidebar-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--maroon-dark);
+                flex-direction: column;
+                padding: 80px 20px 30px;
+                transition: right 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+                z-index: 1001;
+                overflow-y: auto;
+            }
+            
+            .sidebar-menu.active {
+                right: 0;
+                animation: slideInRightMenu 0.4s ease-out;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                width: 100%;
+                gap: 0;
+            }
+            
+            .nav-menu li {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+            
+            .nav-menu a {
+                padding: 15px 20px;
+                border-radius: 6px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 1rem;
+                justify-content: space-between;
+            }
+            
+            .pricing-cards {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 20px;
+            }
+            
+            .terms-content {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 1.9rem;
+            }
+            
+            .hero-text h1 span {
+                font-size: 1.6rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+            
+            .terms-title h2 {
+                font-size: 2rem;
+            }
+            
+            .pricing-title h2, .features-title h2, .faq-title h2 {
+                font-size: 1.7rem;
+            }
+            
+            .highlight-text h2 {
+                font-size: 1.7rem;
+            }
+            
+            .pricing-cards, .features-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .contact-info {
+                padding: 25px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.4rem;
+            }
+            
+            .logo-img {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .hero-text h1 {
+                font-size: 1.7rem;
+            }
+            
+            .hero-text h1 span {
+                font-size: 1.4rem;
+            }
+            
+            .cta-button {
+                padding: 8px 18px;
+                font-size: 0.9rem;
+                min-width: 130px;
+            }
+            
+            .terms-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .pricing-title h2, .features-title h2, .faq-title h2 {
+                font-size: 1.5rem;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .feature-icon-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .feature-icon {
+                width: 65px;
+                height: 65px;
+                font-size: 1.5rem;
+            }
+            
+            .feature-title {
+                font-size: 1.2rem;
+            }
+            
+            .menu-toggle {
+                font-size: 1.5rem;
+            }
+            
+            .pricing-price {
+                font-size: 1.8rem;
+            }
+            
+            .sidebar-menu {
+                width: 85%;
+                max-width: 300px;
+            }
+            
+            .terms-content {
+                padding: 20px;
+            }
+            
+            .terms-section-title {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Overlay for mobile menu */
+        .menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(3px);
+        }
+        
+        .menu-overlay.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        /* Close button for mobile menu */
+        .menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: none;
+        }
+        
+        @media (max-width: 992px) {
+            .menu-close {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dengan Logo dan Menu Sidebar -->
+    <header>
+        <div class="container header-container">
+            <div class="logo-container animate-slide-left">
+                <div class="logo-img">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiJL_W5mGANt472MBbTq69qA4BNtDQLTnjRiPcggKLuKa9dQ-nrPWxqghiQ2UbA5U66-sekSkF7HTXRCp8V8Ab-w4iHO6EVyrLT_61LJXlWZ_pBh_B3tnonQM00POIOq6LwOrICrdENtHjhe3zxvCEyb7FgR9eNYLUZaHzYoa_frzWcOthlr8lNjPTQUcI/s320/1000104366.png" 
+                         alt="Logo TESLASMART">
+                </div>
+                <div class="logo-text">TESLASMART</div>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="menu-overlay" id="menuOverlay"></div>
+            
+            <nav class="sidebar-menu" id="sidebarMenu">
+                <button class="menu-close" id="menuClose">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                    
+                    <!-- Profil - Membuka halaman baru/tab baru -->
+                    <li>
+                        <a href="profil.html" class="nav-link" target="_blank">
+                            <i class="fas fa-user"></i> Profil 
+                            <i class="fas fa-external-link-alt external-link-indicator"></i>
+                        </a>
+                    </li>
+                    
+                    <!-- Jenis Website - Membuka halaman baru/tab baru -->
+                    <li>
+                        <a href="jenis-jenis-website.html" class="nav-link" target="_blank">
+                            <i class="fas fa-globe"></i> Jenis Website
+                            <i class="fas fa-external-link-alt external-link-indicator"></i>
+                        </a>
+                    </li>
+                    
+                    <li><a href="jasa-website.html" class="nav-link"><i class="fas fa-star"></i> Keunggulan</a></li>
+                    <li><a href="jasa-website.html" class="nav-link"><i class="fas fa-tags"></i> Paket Harga</a></li>
+                    <li><a href="jasa-website.html" class="nav-link"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                    
+                    <!-- Syarat dan Ketentuan - Membuka halaman baru/tab baru -->
+                    <li>
+                        <a href="#" class="nav-link" target="_blank">
+                            <i class="fas fa-file-contract"></i> Syarat dan Ketentuan
+                            <i class="fas fa-external-link-alt external-link-indicator"></i>
+                        </a>
+                    </li>
+                    
+                    <li><a href="jasa-website.html" class="nav-link"><i class="fas fa-phone-alt"></i> Hubungi Kami</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section dengan teks utama -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text animate-fade-up">
+                    <h1>TESLASMART <span>Syarat dan Ketentuan</span></h1>
+                    <p>Ketahui persyaratan dan ketentuan layanan kami sebelum menggunakan jasa pembuatan website profesional dari TESLASMART.</p>
+                    
+                    <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20ingin%20bertanya%20tentang%20syarat%20dan%20ketentuan" 
+                       class="cta-button animate-fade-up delay-1" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Konsultasi
+                    </a>
+                </div>
+                
+                <div class="hero-image animate-slide-right">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjkKSegNOhUXouYXl0i-aCJWjthxEl5Y7XgOLH49wAyKx3qezVIhvsW-yq3Wv0KTBzTDoAL8nwqT6tWKnOGPm73G5ig4r6DDshJh8wAc2acGnecOkHKRP1VW8EsD4qMB0PfteKJLCp-TRYx3mYsk9XkE_O6HDwW76i5LxY6BnuoQJGV61ERuxP-YTP0zY8/s1280/1000600917.png" 
+                         alt="Website Development" class="hero-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Syarat dan Ketentuan Section -->
+    <section class="terms-section" id="terms">
+        <div class="container">
+            <div class="terms-title animate-fade-up">
+                <h2>Syarat dan Ketentuan Layanan</h2>
+            </div>
+            
+            <div class="terms-content animate-fade-up delay-1">
+                <div class="terms-intro">
+                    Para calon klien TeslaSmart harus membaca, memahami dan menyetujui perjanjian berikut ini sebelum klien memutuskan untuk menggunakan servis dari TeslaSmart. Sebaliknya klien harus tetap menyetujui perjanjian ini selama klien menjadi klien kami, termasuk penggantinya dan yang diijinkan menggantikannya.
+                </div>
+                
+                <h3 class="terms-section-title"><span class="bold-text">Deskripsi Layanan:</span></h3>
+                <ul class="terms-list">
+                    <li><span class="bold-text">Satu nama domain pilihan anda</span> yaitu .com/.net/.info dll.</li>
+                    <li><span class="bold-text">Space Hosting</span> sesuai dengan paket yang anda pilih.</li>
+                    <li><span class="bold-text">Toko online.</span></li>
+                    <li><span class="bold-text">Satu desain toko online</span> sesuai dengan pilihan anda yang sudah kami siapkan pada demo.</li>
+                    <li><span class="bold-text">Klien mempunyai hak akses penuh pada website</span>, sehingga klien dapat dengan mudah mengedit atau menambah keterangan pada website dan tidak mempunyai hak kepemilikan atas script aplikasi theme toko online yang digunakan.</li>
+                    <li><span class="bold-text">Proses pembuatan</span> kurang lebih 5 hari kerja.</li>
+                </ul>
+                
+                <h3 class="terms-section-title"><span class="bold-text">Biaya dan Pembayaran:</span></h3>
+                <ul class="terms-list">
+                    <li>Untuk pemesanan lakukan <span class="bold-text">DP diawal 50% dari harga paket</span>, untuk sisa nya dibayar bila web atau toko online anda sudah jadi.</li>
+                    <li>Pembayar bisa lewat <span class="bold-text">rekening BRI, DANA</span>.</li>
+                    <li>Bila web atau toko online anda sudah jadi dan anda tidak segera melakukan pembayaran, dalam tempo <span class="bold-text">satu minggu</span>, kami berhak untuk menonaktifkan atau mensuspen website anda.</li>
+                    <li>Bila client melakukan pembatalan secara sepihak tanpa ada alasan yang jelas sementara website sudah kami proses, maka <span class="bold-text">uang muka 50% hangus</span> tidak dapat diambil.</li>
+                    <li>Harga paket sudah termasuk biaya domain dan hosting satu tahun pertama, dan untuk tahun berikut nya dikenakan sesuai <span class="bold-text">biaya perpanjang sesuai pada paket</span>.</li>
+                    <li>Lakukan pembayaran untuk memperpanjang setiap tahun yaitu <span class="bold-text">satu bulan sebelum tanggal jatuh tempo</span>.</li>
+                    <li>Bila anda sudah melewati tanggal jatuh tempo dan belum melakukan pembayaran untuk memperpanjang, maka secara otomatis <span class="bold-text">website anda kesuspend atau tidak bisa diakses</span>.</li>
+                </ul>
+                
+                <h3 class="terms-section-title"><span class="bold-text">Penggunaan Layanan:</span></h3>
+                <ul class="terms-list">
+                    <li>Klient dilarang menggunakan website untuk menampilkan atau menjual atau meletakkan file atau apapun yang mengandung hal-hal sebagai berikut:
+                        <ul class="terms-sublist">
+                            <li>Menyingung suku, agama dan ras (SARA) tertentu.</li>
+                            <li>Bersifat pornografi baik berupa tulisan, gambar, dan vidio.</li>
+                            <li>Bersifat pembajakan lagu, film, video, sofewere, DVD porno dan hal yang melanggar hukum HAKI.</li>
+                            <li>Produk-produk yang tidak diijinkan untuk diperjual-belikan di wilayah hukum republik Indonesia.</li>
+                            <li>Melakukan spaming, mailbombing, dsb.</li>
+                            <li>Menggunakan memori/RAM/CPU time terlalu banyak.</li>
+                            <li>Mengganggu kegiatan user lain di server.</li>
+                            <li>Melakukan kegiatan lain yang mencurigakan dan/atau tidak aman (meningkatkan resiko terbobolnya account/server) Jika Anda berada di pasar untuk clothes, platform kami adalah pilihan terbaik Anda! Pusat perbelanjaan terbesar!</li>
+                        </ul>
+                    </li>
+                    <li>Website tidak dilakukan untuk menjual apapun barang yang melanggar hukum dan untuk tidak melakukan penipuan, bila terbukti dilakukan untuk hal-hal terlarang diatas maka kami berhak untuk menonaktifkan atau mensuspen website anda, dan kami bebas dari tuntutan dan pergantian apapun.</li>
+                    <li>TeslaSmart berhak memindahkan account hosting Klien ke server lain untuk tujuan menjaga stabilitas dan kinerja server, penggantian server secara darurat, atau tujuan lainnya. Perpindahan ini sebisa mungkin akan diberitahukan sebelumnya kepada Klien, atau jika tidak mungkin, segera sesudahnya. TeslaSmart akan berusaha sebaik-baiknya untuk memindahkan semua data dan setting account hosting Klien ke server yang baru.</li>
+                    <li>Kami akan menggunakan email klient untuk hal pemberitahuan pelayanan atau perpanjang hosting dan domain.</li>
+                    <li>Kami berhak untuk menerima atau menolak memberikan pelayanan kepada calon klien.</li>
+                    <li>Kami berhak untuk melakukan perubahan ketentuan layanan ini kapanpun tanpa melakukan pemberitahuan kepada para klien terlebih dahulu.</li>
+                </ul>
+                
+                <h3 class="terms-section-title"><span class="bold-text">Pembatasan Tanggung Jawab:</span></h3>
+                <ul class="terms-list">
+                    <li>Klien menyetujui bahwa <span class="bold-text">semua isi dari konten website adalah tanggung jawab dari klien sepenuhnya</span>.</li>
+                    <li>TeslaSmart tidak bertanggung jawab atas domain atau hosting Klien yang tidak dapat berfungsi akibat:
+                        <ul class="terms-sublist">
+                            <li>Kelalaian Klien.</li>
+                            <li>Pembajakan domain.</li>
+                            <li>Keterlambatan pembayaran domain atau hosting dari Klien.</li>
+                        </ul>
+                    </li>
+                    <li>Kami tidak bertanggung jawab atas terjadinya kerusakan atau kehilangan data yang diakibatkan oleh pengguna layanan atau oleh klient sendiri.</li>
+                    <li>Kami tidak memberikan kompensasi apapun jika terjadi kerusakan atau kehilangan data oleh sebab apapun, namun kami akan memberikan pelayanan yang terbaik untuk klient.</li>
+                    <li>Kami tidak bertanggung jawab pada penambahan/modifikasi/pengurangan service/module/desain website toko online anda, yang klien lakukan sendiri atau pihak lain.</li>
+                    <li>TeslaSmart hanya bertanggung jawab pada instalasi pertama, apabila dikemudian hari akan dilakukan instalasi ulang, maka hal tersebut menjadi tanggung jawab penuh dari klien.</li>
+                </ul>
+            </div>
+            
+            <div class="contact-invitation animate-fade-up delay-2">
+                <h2>Masih Ada Pertanyaan?</h2>
+                <p>Jika Anda masih memiliki pertanyaan mengenai syarat dan ketentuan layanan kami, jangan ragu untuk menghubungi tim customer service kami.</p>
+                
+                <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20ingin%20bertanya%20tentang%20syarat%20dan%20ketentuan" 
+                   class="cta-button" style="margin-top: 30px;" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Hubungi via WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Highlight Section -->
+    <section class="services-highlight">
+        <div class="container">
+            <div class="highlight-content animate-fade-up">
+                <div class="highlight-text">
+                    <h2>Mengapa Memilih TESLASMART?</h2>
+                    <p><strong>Layanan Profesional dengan Harga Terjangkau!</strong></p>
+                    <p>Kami memberikan jaminan kualitas terbaik untuk website bisnis Anda dengan dukungan penuh dari tim profesional.</p>
+                    <p>Transparansi dalam syarat dan ketentuan untuk melindungi hak dan kewajiban kedua belah pihak.</p>
+                    
+                    <a href="#pricing" 
+                       class="cta-button" style="margin-top: 15px;">
+                        <i class="fas fa-tags"></i> Lihat Paket Harga
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keunggulan Fitur Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="features-title animate-fade-up">
+                <h2>Keunggulan Layanan TESLASMART</h2>
+            </div>
+            
+            <div class="features-grid">
+                <!-- Transparansi -->
+                <div class="feature-card animate-fade-up delay-1">
+                    <div class="feature-icon-container">
+                        <div class="feature-icon-border"></div>
+                        <div class="feature-icon">
+                            <i class="fas fa-file-contract"></i>
+                        </div>
+                    </div>
+                    <h3 class="feature-title"><i class="fas fa-check-circle"></i> Transparansi Penuh</h3>
+                    <p class="feature-description">Syarat dan ketentuan yang jelas dan transparan untuk melindungi hak dan kewajiban klien serta kami sebagai penyedia layanan.</p>
+                </div>
+                
+                <!-- Support -->
+                <div class="feature-card animate-fade-up delay-2">
+                    <div class="feature-icon-container">
+                        <div class="feature-icon-border"></div>
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                    </div>
+                    <h3 class="feature-title"><i class="fas fa-check-circle"></i> Support 24/7</h3>
+                    <p class="feature-description">Tim customer service kami siap membantu Anda kapan saja melalui WhatsApp untuk konsultasi mengenai layanan kami.</p>
+                </div>
+                
+                <!-- Proses Cepat -->
+                <div class="feature-card animate-fade-up delay-3">
+                    <div class="feature-icon-container">
+                        <div class="feature-icon-border"></div>
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                    </div>
+                    <h3 class="feature-title"><i class="fas fa-check-circle"></i> Proses Cepat</h3>
+                    <p class="feature-description">Website Anda akan siap dalam waktu kurang dari 5 hari kerja setelah pembayaran DP 50% diterima.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="section-title animate-fade-up">
+                <h2>Informasi Kontak</h2>
+            </div>
+            
+            <div class="contact-content">
+                <div class="contact-image animate-slide-left delay-1">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfWIhY2URQXytDqbOpULRHV2YpVZHuLeCo8SjCq5m7vpxAwGIx9q8k5KJBLXncTX-G753cXYSpr_jX6H-W9WN9zCbdnCVrM-_zPRKQ0KB7g1FDD7Cvwd2HKQdP09U7HxdOyRW_0FgJsX2fkKW2v2xjJkmzjK4sBuSXEFh_4jEUj_NbSNHiWbkUCjyRKLc/s2000/1000104357.png" 
+                         alt="Contact Us" class="contact-img">
+                </div>
+                
+                <div class="contact-info animate-fade-up delay-2">
+                    <h3>Hubungi Kami</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Alamat</h4>
+                                <p>Kp. Sawah Rt. 002 Rw. 006<br>
+                                Desa Gunung Menyan<br>
+                                Kecamatan Pamijahan<br>
+                                Kabupaten Bogor<br>
+                                Kode POS 16810</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4>Telepon</h4>
+                                <p>085218483129</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <p>085218483129</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/6285218483129?text=Halo%20TESLASMART,%20saya%20ingin%20bertanya%20tentang%20syarat%20dan%20ketentuan%20layanan" 
+                       class="cta-button" style="margin-top: 20px; width: 100%;" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Konsultasi Syarat & Ketentuan
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">TESLASMART</div>
+                    <p>Perusahaan jasa pembuatan website profesional dengan syarat dan ketentuan yang jelas dan transparan. Kami berkomitmen memberikan layanan terbaik dengan harga terjangkau untuk membantu bisnis Anda berkembang di dunia digital.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Menu Cepat</h3>
+                    <ul>
+                        <li><a href="#home" class="footer-nav-link">Home</a></li>
+                        <li><a href="profil.html" class="footer-nav-link" target="_blank">Profil</a></li>
+                        <li><a href="jenis-jenis-website.html" class="footer-nav-link" target="_blank">Jenis Website</a></li>
+                        <li><a href="jasa-website.html" class="footer-nav-link">Keunggulan</a></li>
+                        <li><a href="#" class="footer-nav-link" target="_blank">Syarat & Ketentuan</a></li>
+                        <li><a href="jasa-website.html" class="footer-nav-link">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Layanan</h3>
+                    <ul>
+                        <li><a href="#web-design">Desain Website</a></li>
+                        <li><a href="#ecommerce">Toko Online</a></li>
+                        <li><a href="#seo">Optimasi SEO</a></li>
+                        <li><a href="#maintenance">Maintenance</a></li>
+                        <li><a href="#hosting">Web Hosting</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 TESLASMART. Semua hak dilindungi undang-undang.</p>
+                <p style="margin-top: 10px;">Jasa Pembuatan Website Profesional & Terpercaya</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const menuClose = document.getElementById('menuClose');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+        
+        // Function to open menu
+        function openMenu() {
+            sidebarMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Function to close menu
+        function closeMenu() {
+            sidebarMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Toggle mobile menu
+        menuToggle.addEventListener('click', openMenu);
+        menuClose.addEventListener('click', closeMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+        
+        // Close menu when clicking on a nav link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Only close menu on mobile
+                if (window.innerWidth <= 992) {
+                    closeMenu();
+                }
+                
+                // Check if link is external (opens in new tab)
+                if (link.getAttribute('target') === '_blank') {
+                    // Don't prevent default for external links
+                    return;
+                }
+                
+                // Handle internal links
+                const targetId = link.getAttribute('href');
+                if (targetId && targetId.startsWith('#')) {
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Add active class to nav link
+                        document.querySelectorAll('.nav-link').forEach(navLink => {
+                            navLink.classList.remove('active');
+                        });
+                        link.classList.add('active');
+                    }
+                }
+            });
+        });
+        
+        // Close menu when pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
+        
+        // Smooth scrolling for internal anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') {
+                    e.preventDefault();
+                    return;
+                }
+                
+                if (targetId.startsWith('#') && !this.getAttribute('target')) {
+                    e.preventDefault();
+                    
+                    // Close mobile menu if open
+                    closeMenu();
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Add active class to nav link
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        this.classList.add('active');
+                    }
+                }
+            });
+        });
+        
+        // Highlight active section in navigation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        // Only highlight internal links (not external ones)
+                        if (!link.getAttribute('target')) {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        }
+                    });
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add animation classes based on existing classes
+                    if (entry.target.classList.contains('animate-fade-up')) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                    if (entry.target.classList.contains('animate-slide-left')) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                    if (entry.target.classList.contains('animate-slide-right')) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                    
+                    // Trigger delay animations
+                    setTimeout(() => {
+                        if (entry.target.classList.contains('delay-1')) {
+                            entry.target.style.animationPlayState = 'running';
+                        }
+                    }, 200);
+                    
+                    setTimeout(() => {
+                        if (entry.target.classList.contains('delay-2')) {
+                            entry.target.style.animationPlayState = 'running';
+                        }
+                    }, 400);
+                    
+                    setTimeout(() => {
+                        if (entry.target.classList.contains('delay-3')) {
+                            entry.target.style.animationPlayState = 'running';
+                        }
+                    }, 600);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all animated elements
+        document.querySelectorAll('.animate-fade-up, .animate-slide-left, .animate-slide-right').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Animate elements with delay classes
+            setTimeout(() => {
+                document.querySelectorAll('.delay-1').forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }, 200);
+            
+            setTimeout(() => {
+                document.querySelectorAll('.delay-2').forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }, 400);
+            
+            setTimeout(() => {
+                document.querySelectorAll('.delay-3').forEach(el => {
+                    el.style.animationPlayState = 'running';
+                });
+            }, 600);
+            
+            // Set home link as active by default
+            const homeLink = document.querySelector('a[href="#home"]');
+            if (homeLink) {
+                homeLink.classList.add('active');
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Close menu if window is resized to desktop size
+            if (window.innerWidth > 992) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>
