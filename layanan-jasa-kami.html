@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Futuristik Grid 2x2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* REVISI: Background gradasi cerah lembut */
+        body {
+            background: linear-gradient(135deg, #e0f7fa 0%, #bbdefb 25%, #e1bee7 50%, #c8e6c9 75%, #fff9c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Efek partikel cahaya */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.3) 0%, transparent 25%),
+                radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.2) 0%, transparent 25%);
+            z-index: -1;
+            animation: floatBackground 30s ease-in-out infinite;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+        }
+        
+        .title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        /* REVISI: Warna teks menyesuaikan background cerah */
+        .title h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .title p {
+            color: #546e7a;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .highlight {
+            color: #3498db;
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        /* Grid 2x2 Horizontal */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 40px 30px;
+            justify-items: center;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Tombol yang lebih kecil */
+        .menu-button {
+            position: relative;
+            width: 160px; /* Ukuran diperkecil */
+            height: 160px; /* Ukuran diperkecil */
+            margin: 0;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.1),
+                0 4px 12px rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Efek lingkaran luar berputar */
+        .menu-button::before {
+            content: '';
+            position: absolute;
+            width: 112%;
+            height: 112%;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                var(--primary-color),
+                transparent
+            );
+            z-index: -2;
+            animation: rotate 3s linear infinite;
+            opacity: 0.8;
+        }
+        
+        /* Lingkaran dalam untuk latar belakang */
+        .menu-button::after {
+            content: '';
+            position: absolute;
+            width: 94%;
+            height: 94%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50%;
+            z-index: -1;
+            transition: all 0.4s ease;
+            box-shadow: 
+                inset 0 2px 10px rgba(255, 255, 255, 0.8),
+                inset 0 -2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .menu-button:hover::after {
+            background: rgba(255, 255, 255, 0.98);
+            transform: scale(0.98);
+            box-shadow: 
+                inset 0 4px 15px rgba(255, 255, 255, 0.9),
+                inset 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Ikon dan teks yang lebih kecil */
+        .icon {
+            font-size: 40px; /* Ikon diperkecil */
+            margin-bottom: 12px;
+            transition: all 0.4s ease;
+            z-index: 2;
+            filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+        }
+        
+        .button-text {
+            font-size: 16px; /* Teks diperkecil */
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            transition: all 0.4s ease;
+            text-align: center;
+            padding: 0 8px;
+        }
+        
+        .sub-text {
+            font-size: 12px; /* Subteks diperkecil */
+            margin-top: 3px;
+            opacity: 0.8;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+        
+        /* Efek hover */
+        .menu-button:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.15), 
+                0 0 40px var(--primary-glow),
+                0 8px 25px rgba(255, 255, 255, 0.4);
+        }
+        
+        .menu-button:hover .icon {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+        }
+        
+        .menu-button:hover .button-text {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+        
+        .menu-button:hover .sub-text {
+            opacity: 1;
+            transform: translateY(2px);
+        }
+        
+        /* Animasi rotasi */
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes floatBackground {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(-10px, 10px) scale(1.02); }
+            50% { transform: translate(10px, -10px) scale(1.04); }
+            75% { transform: translate(-10px, -10px) scale(1.02); }
+        }
+        
+        /* Animasi masuk untuk tombol */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Warna khusus untuk setiap tombol - REVISI dengan warna yang cocok untuk background cerah */
+        .advocacy-btn {
+            --primary-color: #3498db;
+            --primary-glow: rgba(52, 152, 219, 0.6);
+            animation: fadeInUp 0.6s ease 0.1s both;
+        }
+
+        .advocacy-btn .icon {
+            color: #2980b9;
+        }
+
+        .advocacy-btn .button-text {
+            color: #2c3e50;
+        }
+
+        .advocacy-btn .sub-text {
+            color: #7f8c8d;
+        }
+        
+        .design-btn {
+            --primary-color: #9b59b6;
+            --primary-glow: rgba(155, 89, 182, 0.6);
+            animation: fadeInUp 0.6s ease 0.2s both;
+        }
+
+        .design-btn .icon {
+            color: #8e44ad;
+        }
+
+        .design-btn .button-text {
+            color: #2c3e50;
+        }
+
+        .design-btn .sub-text {
+            color: #7f8c8d;
+        }
+        
+        .ai-class-btn {
+            --primary-color: #2ecc71;
+            --primary-glow: rgba(46, 204, 113, 0.6);
+            animation: fadeInUp 0.6s ease 0.3s both;
+        }
+
+        .ai-class-btn .icon {
+            color: #27ae60;
+        }
+
+        .ai-class-btn .button-text {
+            color: #2c3e50;
+        }
+
+        .ai-class-btn .sub-text {
+            color: #7f8c8d;
+        }
+        
+        .website-btn {
+            --primary-color: #f39c12;
+            --primary-glow: rgba(243, 156, 18, 0.6);
+            animation: fadeInUp 0.6s ease 0.4s both;
+        }
+
+        .website-btn .icon {
+            color: #d35400;
+        }
+
+        .website-btn .button-text {
+            color: #2c3e50;
+        }
+
+        .website-btn .sub-text {
+            color: #7f8c8d;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #7f8c8d;
+            font-size: 0.85rem;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Responsif untuk tablet */
+        @media (max-width: 768px) {
+            .menu-grid {
+                gap: 35px 25px;
+                max-width: 500px;
+            }
+            
+            .menu-button {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .icon {
+                font-size: 36px;
+            }
+            
+            .title h1 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        /* Responsif untuk mobile */
+        @media (max-width: 576px) {
+            .menu-grid {
+                gap: 30px 20px;
+            }
+            
+            .menu-button {
+                width: 140px;
+                height: 140px;
+            }
+            
+            .icon {
+                font-size: 34px;
+                margin-bottom: 10px;
+            }
+            
+            .button-text {
+                font-size: 15px;
+            }
+            
+            .sub-text {
+                font-size: 11px;
+            }
+            
+            .title h1 {
+                font-size: 2rem;
+            }
+            
+            .title p {
+                font-size: 1rem;
+                padding: 12px 20px;
+            }
+        }
+        
+        /* Untuk layar yang sangat kecil */
+        @media (max-width: 400px) {
+            .menu-grid {
+                gap: 25px 15px;
+            }
+            
+            .menu-button {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .icon {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>Layanan <span class="highlight">Profesional</span></h1>
+            <h3>Klik Menu Dibawah Untuk Memilih Kebutuhan Anda.!</h3>
+            <p>Eksplorasi layanan kami dengan desain futuristik dan pendekatan yang inovatif.</p>
+        </div>
+        
+        <!-- Grid 2x2 Horizontal -->
+        <div class="menu-grid">
+            <!-- Baris 1: Tombol 1 & 2 -->
+            <!-- REVISI: Tombol Service menjadi Advokasi Kasus -->
+            <a href="konsultasi-advokasi.html" target="_blank" class="menu-button advocacy-btn">
+                <!-- REVISI: Ikon gavel (keadilan) -->
+                <i class="icon fas fa-gavel"></i>
+                <div class="button-text">Advokasi Kasus</div>
+                <div class="sub-text">Jasa Konsultasi</div>
+            </a>
+            
+            <!-- Tombol Jasa Design -->
+            <a href="layanan-kami.html" target="_blank" class="menu-button design-btn">
+                <i class="icon fas fa-palette"></i>
+                <div class="button-text">Jasa Design</div>
+                <div class="sub-text">UI/UX & Grafis</div>
+            </a>
+            
+            <!-- Baris 2: Tombol 3 & 4 -->
+            <!-- Tombol Kelas AI -->
+            <a href="selamat-datang.html" target="_blank" class="menu-button ai-class-btn">
+                <i class="icon fas fa-robot"></i>
+                <div class="button-text">Kelas AI</div>
+                <div class="sub-text">Machine Learning</div>
+            </a>
+            
+            <!-- Tombol Jasa Website -->
+            <a href="jasa-website.html" target="_blank" class="menu-button website-btn">
+                <i class="icon fas fa-code"></i>
+                <div class="button-text">Jasa Website</div>
+                <div class="sub-text">Development</div>
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>© 2026 Layanan Profesional | Klik tombol untuk membuka halaman baru</p>
+        </div>
+    </div>
+    
+    <script>
+        // Menambahkan efek interaktif pada tombol
+        document.querySelectorAll('.menu-button').forEach(button => {
+            // Efek klik
+            button.addEventListener('click', function(e) {
+                // Animasi klik
+                this.style.transform = 'translateY(-5px) scale(0.95)';
+                
+                // Reset animasi setelah 300ms
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 300);
+                
+                // Log ke console (bisa dihapus di produksi)
+                console.log(`Membuka halaman baru: ${this.getAttribute('href')}`);
+            });
+            
+            // Efek hover dengan rotasi ikon yang berbeda
+            button.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.icon');
+                
+                // Rotasi ikon yang berbeda-beda
+                if (icon.classList.contains('fa-gavel')) {
+                    icon.style.transform = 'rotate(15deg) scale(1.1)';
+                } else if (icon.classList.contains('fa-palette')) {
+                    icon.style.transform = 'rotate(-10deg) scale(1.1)';
+                } else if (icon.classList.contains('fa-robot')) {
+                    icon.style.transform = 'scale(1.1)';
+                    icon.style.textShadow = '0 0 12px var(--primary-glow)';
+                } else if (icon.classList.contains('fa-code')) {
+                    icon.style.transform = 'scale(1.1)';
+                    icon.style.textShadow = '0 0 12px var(--primary-glow)';
+                }
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.icon');
+                icon.style.transform = '';
+                icon.style.textShadow = '';
+            });
+        });
+        
+        // Efek partikel saat hover
+        document.querySelectorAll('.menu-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                const particles = document.createElement('div');
+                particles.style.position = 'absolute';
+                particles.style.width = '100%';
+                particles.style.height = '100%';
+                particles.style.borderRadius = '50%';
+                particles.style.background = `radial-gradient(circle, ${this.style.getPropertyValue('--primary-glow')} 0%, transparent 70%)`;
+                particles.style.opacity = '0';
+                particles.style.zIndex = '1';
+                particles.style.animation = 'fadeInOut 1.2s ease';
+                
+                this.appendChild(particles);
+                
+                // Hapus elemen partikel setelah animasi selesai
+                setTimeout(() => {
+                    if (this.contains(particles)) {
+                        this.removeChild(particles);
+                    }
+                }, 1200);
+            });
+        });
+        
+        // Tambahkan stylesheet untuk animasi partikel
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; transform: scale(0.8); }
+                50% { opacity: 0.5; transform: scale(1.1); }
+                100% { opacity: 0; transform: scale(1.3); }
+            }
+            
+            /* Efek gelombang saat klik */
+            @keyframes ripple {
+                0% { transform: scale(0); opacity: 0.5; }
+                100% { transform: scale(1); opacity: 0; }
+            }
+
+            /* Efek cahaya pada tombol */
+            .menu-button:hover::after {
+                animation: pulseLight 1.5s infinite;
+            }
+
+            @keyframes pulseLight {
+                0%, 100% { box-shadow: inset 0 4px 15px rgba(255, 255, 255, 0.9), inset 0 -4px 15px rgba(0, 0, 0, 0.1); }
+                50% { box-shadow: inset 0 6px 20px rgba(255, 255, 255, 0.95), inset 0 -6px 20px rgba(0, 0, 0, 0.15); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+        
+        // Tambahkan efek ripple saat tombol diklik
+        document.querySelectorAll('.menu-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Hapus ripple sebelumnya jika ada
+                const existingRipple = this.querySelector('.ripple');
+                if (existingRipple) {
+                    existingRipple.remove();
+                }
+                
+                // Buat elemen ripple
+                const ripple = document.createElement('span');
+                ripple.classList.add('ripple');
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
+                ripple.style.transform = 'scale(0)';
+                ripple.style.animation = 'ripple 0.6s linear';
+                
+                // Ukuran ripple
+                const size = Math.max(this.offsetWidth, this.offsetHeight);
+                ripple.style.width = `${size}px`;
+                ripple.style.height = `${size}px`;
+                
+                // Posisi ripple
+                const rect = this.getBoundingClientRect();
+                ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+                ripple.style.top = `${e.clientY - rect.top - size/2}px`;
+                
+                this.appendChild(ripple);
+                
+                // Hapus ripple setelah animasi selesai
+                setTimeout(() => {
+                    if (ripple.parentNode === this) {
+                        this.removeChild(ripple);
+                    }
+                }, 600);
+            });
+        });
+
+        // Tambahkan efek partikel cahaya di background
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: 0;
+            `;
+            document.body.appendChild(particlesContainer);
+
+            // Buat partikel cahaya
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    background: rgba(255, 255, 255, ${Math.random() * 0.6 + 0.2});
+                    border-radius: 50%;
+                    width: ${Math.random() * 100 + 50}px;
+                    height: ${Math.random() * 100 + 50}px;
+                    filter: blur(${Math.random() * 20 + 10}px);
+                    animation: floatLight ${Math.random() * 30 + 20}s linear infinite;
+                    opacity: ${Math.random() * 0.4 + 0.1};
+                `;
+
+                // Posisi random
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+
+                particlesContainer.appendChild(particle);
+            }
+
+            // Tambahkan animasi float untuk cahaya
+            const lightStyle = document.createElement('style');
+            lightStyle.textContent = `
+                @keyframes floatLight {
+                    0% { transform: translate(0, 0) rotate(0deg); }
+                    25% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(90deg); }
+                    50% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(180deg); }
+                    75% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(270deg); }
+                    100% { transform: translate(0, 0) rotate(360deg); }
+                }
+            `;
+            document.head.appendChild(lightStyle);
+        });
+    </script>
+</body>
+</html>
