@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>TeslaSmart Class - AI-Prompt-Grog</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-content {
+            max-width: 900px;
+            margin: 0 auto;
+            flex: 1;
+        }
+        
+        .header-img {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.3);
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+        .header-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+        .header-img img:hover {
+            transform: scale(1.02);
+        }
+        
+        .title-section {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .title-section h2 {
+            font-size: 2.2em;
+            color: white;
+            letter-spacing: 1px;
+            font-weight: 700;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+        .title-section h3 {
+            font-size: 1.5em;
+            color: #ffd700;
+            font-weight: 500;
+            margin-top: 8px;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: white;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid rgba(255,215,0,0.5);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .divider {
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), rgba(255,215,0,0.8), rgba(255,255,255,0.8), transparent);
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        
+        .second-img {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 25px;
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.3);
+            border: 3px solid rgba(255,255,255,0.2);
+        }
+        .second-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .folder-section {
+            margin-top: 15px;
+        }
+        
+        /* Folder Utama - Ikon Tertutup 📁 */
+        .folder-item {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.2s;
+            overflow: hidden;
+        }
+        .folder-item:hover {
+            border-color: #ffd700;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .folder-header {
+            padding: 15px 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+            color: #1e293b;
+            user-select: none;
+            background: rgba(255,255,255,0.9);
+            transition: background 0.2s;
+        }
+        .folder-header:hover {
+            background: rgba(255,255,255,1);
+        }
+        .folder-header .arrow {
+            font-size: 1.3em;
+            transition: transform 0.3s;
+            width: 28px;
+            text-align: center;
+        }
+        .folder-header .arrow.open {
+            transform: rotate(90deg);
+        }
+        .folder-header .icon {
+            font-size: 1.4em;
+        }
+        .folder-header .title {
+            flex: 1;
+            font-size: 1.05em;
+        }
+        
+        .folder-content {
+            padding: 0 18px 18px 58px;
+            display: none;
+            background: rgba(248,250,252,0.9);
+        }
+        .folder-content.show {
+            display: block;
+        }
+        
+        /* Sub Folder - Ikon Terbuka 📂 */
+        .sub-folder-item {
+            background: white;
+            border-radius: 16px;
+            margin: 15px 0;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .sub-folder-header {
+            padding: 12px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: #2563eb;
+            user-select: none;
+            background: #f8fafc;
+            transition: background 0.2s;
+        }
+        .sub-folder-header:hover {
+            background: #f1f5f9;
+        }
+        .sub-folder-header .arrow {
+            font-size: 1.2em;
+            transition: transform 0.3s;
+            width: 24px;
+            text-align: center;
+        }
+        .sub-folder-header .arrow.open {
+            transform: rotate(90deg);
+        }
+        .sub-folder-header .icon {
+            font-size: 1.3em;
+        }
+        .sub-folder-header .title {
+            flex: 1;
+            font-size: 0.98em;
+        }
+        
+        .sub-folder-content {
+            padding: 0 16px 16px 50px;
+            display: none;
+            background: white;
+        }
+        .sub-folder-content.show {
+            display: block;
+        }
+        
+        .sub-item {
+            margin: 12px 0;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .link-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            color: #2563eb;
+            text-decoration: none;
+            word-break: break-all;
+            font-size: 0.95em;
+        }
+        .link-item:hover {
+            text-decoration: underline;
+            color: #1e40af;
+        }
+        
+        .clean-link {
+            color: #2563eb;
+            text-decoration: none;
+            word-break: break-all;
+            font-size: 0.95em;
+            display: inline-block;
+            padding: 5px 0;
+        }
+        .clean-link:hover {
+            text-decoration: underline;
+            color: #1e40af;
+        }
+        
+        .kode-badge {
+            display: inline-block;
+            background: #e2e8f0;
+            color: #334155;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-family: monospace;
+            margin-top: 8px;
+            border: 1px solid #cbd5e1;
+        }
+        
+        .video-container {
+            margin: 15px 0;
+        }
+        
+        .video-border {
+            padding: 8px;
+            border: 2px solid #dbeafe;
+            border-radius: 16px;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+        .video-border:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 8px 20px rgba(59,130,246,0.15);
+            transform: translateY(-2px);
+        }
+        
+        iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            border: none;
+        }
+        
+        .video-title {
+            text-align: center;
+            font-weight: 500;
+            margin-top: 8px;
+            margin-bottom: 5px;
+            padding: 5px 12px;
+            border: 2px solid #3b82f6;
+            border-radius: 5px;
+            display: inline-block;
+            background: #eff6ff;
+            color: #1e40af;
+            font-size: 0.8em;
+            transition: all 0.3s;
+            letter-spacing: 0.3px;
+        }
+        .video-title:hover {
+            background: #3b82f6;
+            color: white;
+            border-color: #1e40af;
+        }
+        
+        .red-text {
+            color: #dc2626;
+            font-weight: 600;
+            font-size: 0.9em;
+            margin: 8px 0;
+            padding: 8px 12px;
+            background: #fee2e2;
+            border-radius: 8px;
+            border-left: 4px solid #dc2626;
+        }
+        
+        .text-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+            margin: 15px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .text-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .text-card-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #2563eb;
+        }
+        
+        .text-card-title span {
+            font-size: 1.2em;
+        }
+        
+        .menu-dots {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+            color: #64748b;
+            padding: 0 10px;
+            border-radius: 8px;
+            transition: all 0.2s;
+            line-height: 1;
+        }
+        .menu-dots:hover {
+            background: #e2e8f0;
+            color: #0f172a;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.2);
+            padding: 6px 0;
+            min-width: 150px;
+            z-index: 100;
+            border: 1px solid #e2e8f0;
+            display: none;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+        .dropdown-menu div {
+            padding: 10px 16px;
+            cursor: pointer;
+            color: #334155;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+        .dropdown-menu div:hover {
+            background: #f1f5f9;
+            color: #0f172a;
+        }
+        
+        .js-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            resize: vertical;
+            background: white;
+        }
+        .js-textarea:focus {
+            outline: none;
+        }
+        
+        .instruction-text {
+            color: #334155;
+            font-style: italic;
+            padding: 8px 0 8px 20px;
+            margin: 10px 0;
+            border-left: 3px solid #94a3b8;
+            background: rgba(255,255,255,0.5);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .coming-soon {
+            display: inline-block;
+            background: #f59e0b;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .drive-link-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px dashed #3b82f6;
+            text-align: center;
+        }
+        .drive-link-card a {
+            color: #2563eb;
+            font-size: 1.1em;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .drive-link-card a:hover {
+            text-decoration: underline;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: white;
+            font-size: 0.9em;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .title-section h2 {
+                font-size: 1.8em;
+            }
+            .title-section h3 {
+                font-size: 1.2em;
+            }
+            .folder-header {
+                padding: 12px 15px;
+            }
+            .folder-header .title {
+                font-size: 0.95em;
+            }
+            .folder-content {
+                padding: 0 15px 15px 45px;
+            }
+            .video-title {
+                font-size: 0.75em;
+                padding: 4px 10px;
+            }
+            iframe {
+                height: 180px;
+            }
+            .link-item {
+                font-size: 0.85em;
+            }
+            .js-textarea {
+                font-size: 0.85em;
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <!-- Header Gambar -->
+        <div class="header-img">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiGtw2V1ax7yHV_0viUDFj_uQbBKt0imUzUEc18qKWm-sPfYVyC5RgJdMzcj9G-fS834HaU0Fo5MHvkkT-0djfNtUHfNiDW8A1hvKgUmG1xT2n1jK6P58I-90E97K0JSFLJR7tJuqwIHLPqFkyPY1woOZlAnoQoth-Wor5f8iG4GRL1kYWnSnFge7ObbvY/s320/1000662215.png" 
+                 alt="TeslaSmart Header"
+                 onerror="this.onerror=null; this.src='https://via.placeholder.com/800x200?text=TeslaSmart+Class';">
+        </div>
+
+        <!-- Judul dan Sub Judul -->
+        <div class="title-section">
+            <h2>TeslaSmart Class</h2>
+            <h3>AI-Prompt-Grog</h3>
+        </div>
+
+        <!-- Garis Pemisah -->
+        <div class="divider"></div>
+
+        <!-- Gambar Kedua -->
+        <div class="second-img">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhNmVuB_BtNZM-e2zZWTlRN0iC7du3bDf7uJ1Zdy4W781vOlQsNvAPK4ORIf4ob9bu6J0bCvrGbgB0zHF3LINvowH5rpK5fgBedmhZfnTovq6tZ1BQvOhqqPbApcXThezc2_4U2TEEm0U33WqFZWxhiOpUmmVsCU3To_OC1-tReySRfMR9RXdSZWl5q7z0/s320/1000664577.png"
+                 alt="Grog Avatar"
+                 onerror="this.onerror=null; this.src='https://via.placeholder.com/800x200?text=Grog+Avatar+AI';">
+        </div>
+
+        <!-- Folder Section -->
+        <div class="folder-section">
+
+            <!-- FOLDER 1: Akses Grog - AI Prompt (Canva AI) [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Akses Grog - AI Prompt (Canva AI)</span>
+                </div>
+                <div class="folder-content">
+                    <div class="sub-item">
+                        <a href="https://chatgpt.com/g/g-68f9ca285324819197496dc3274b09da-prompt-grog-ai-konsisten" 
+                           class="link-item" target="_blank" rel="noopener noreferrer">
+                            <span>🔗</span>
+                            <span>https://chatgpt.com/g/g-68f9ca285324819197496dc3274b09da-prompt-grog-ai-konsisten</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 2: Grog Avatar AI - Dreamina [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Grog Avatar AI - Dreamina (Edukatif, Informatif, Presentasi)</span>
+                </div>
+                <div class="folder-content">
+                    <div class="instruction-text">Tinggal Ikuti Instruksi Video</div>
+                    
+                    <!-- Video Grog Avatar AI -->
+                    <div class="video-container">
+                        <div class="video-border">
+                            <iframe src="https://www.youtube.com/embed/m-o7DXTOHy4" 
+                                    allowfullscreen
+                                    title="Grog Avatar AI - Dreamina (Edukatif, Informatif, Presentasi)"></iframe>
+                        </div>
+                        <div style="text-align: center;">
+                            <span class="video-title">VIDEO MATERI</span>
+                        </div>
+                    </div>
+
+                    <!-- Sub Folder: Akses Grog - AI Avatar [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Akses Grog - AI Avatar</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="sub-item">
+                                <a href="https://chatgpt.com/g/g-69182d3f99608191ba97b009beaea2f7-grog-avatar-ai" 
+                                   class="link-item" target="_blank" rel="noopener noreferrer">
+                                    <span>🔗</span>
+                                    <span>https://chatgpt.com/g/g-69182d3f99608191ba97b009beaea2f7-grog-avatar-ai</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 3: Konten Fakta Menarik - Clay [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Konten Fakta Menarik - Clay</span>
+                </div>
+                <div class="folder-content">
+                    <div class="instruction-text">Tinggal Ikuti Instruksi Video</div>
+                    
+                    <!-- Video CLAY -->
+                    <div class="video-container">
+                        <div class="video-border">
+                            <iframe src="https://www.youtube.com/embed/1XXJN2cZpkk" 
+                                    allowfullscreen
+                                    title="Video Clay Fakta Menarik"></iframe>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                            <span class="video-title">CLAY - FAKTA MENARIK</span>
+                        </div>
+                        <div style="margin-top: 8px; color: #475569; font-size: 0.85em; background: rgba(255,255,255,0.7); padding: 8px 12px; border-radius: 8px;">
+                            (Gapakai grog) + Pakai Suara dari Google AI Studio
+                        </div>
+                    </div>
+
+                    <!-- TEXT CARD 1: 20 Judul + Topik Konten -->
+                    <div class="text-card">
+                        <div class="text-card-header">
+                            <div class="text-card-title">
+                                <span>📋</span>
+                                <span>20 JUDUL + TOPIK KONTEN TikTok</span>
+                            </div>
+                            <div class="menu-dots" onclick="toggleMenu(this, event)">
+                                ⋮
+                                <div class="dropdown-menu">
+                                    <div onclick="copyText(this, 'jsContent1')">Copy Text</div>
+                                    <div onclick="copyLink(this, 'https://chatgpt.com/share/...')">Copy Link</div>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea class="js-textarea" id="jsContent1" readonly>Buatkan 20 JUDUL + TOPIK KONTEN TikTok berdasarkan:
+“FAKTA UNIK DI DUNIA YANG JARANG ORANG TAHU”
+yang relevan dengan tren terbaru dan serta pernah viral di internet saat ini DAN BISA BIKIN VIRAL DAN FYP SESUAI ALOGORTIMA RETENSI</textarea>
+                    </div>
+
+                    <!-- TEXT CARD 2: Skrip Konten Video -->
+                    <div class="text-card">
+                        <div class="text-card-header">
+                            <div class="text-card-title">
+                                <span>🎬</span>
+                                <span>SKRIP KONTEN VIDEO (Storytelling Lucu & Informatif)</span>
+                            </div>
+                            <div class="menu-dots" onclick="toggleMenu(this, event)">
+                                ⋮
+                                <div class="dropdown-menu">
+                                    <div onclick="copyText(this, 'jsContent2')">Copy Text</div>
+                                    <div onclick="copyLink(this, 'https://chatgpt.com/share/...')">Copy Link</div>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea class="js-textarea" id="jsContent2" readonly> BUATKAN SKRIP KONTEN VIDEO
+TIKTOK/SHORT BERGAYA STORYTELLING
+LUCU DAN INFORMATIF, UNTUK KONTEN FAKTA DENGAN 
+GAYA CLAY ANIMATION INFORMATIF. TOPIKNYA: (Isi Disini)
+ GUNAKAN BAHASA RINGAN, LUCU,      
+DAN GAMPANG DIVISUALISASIKAN.
+ADAPUN STRUKTUR SKRIPNYA SEBAGAI
+BERIKUT :
+1. HOOK / KAIL PANCINGAN 
+2. PERKENALAN TOPIK 
+3. PENJELASAN 1 - ASAL-USUL / FAKTA DASAR 
+4. PENJELASAN 2 - FAKTA PALING MENARIK / "WOW FACTOR" 
+5. HOOK 2, AGAR AUDIENS TETAP BETAH 
+6. FAKTA UNIK / SISI LAIN 
+7. KESIMPULAN 
+8. CALL TO ACTION / AJAKAN BERTINDAK
+SERTAKAN JUGA ARAHAN VISUALISINYA
+UNTUK SETIAP KALIMAT.
+SAYA INGIN MEMBUAT 10 ADEGAN, MASING MASING ADEGAN HANYA BERDURASI 5 DETIK TIDAK BOLEH LEBIH, SESUAIKAN JUMLAH KATANYA,, 
+PASTIKAN VOICE OVER/NASKAH NYA JELAS, DAN TIDAK NGAWUR, DAN KAYAK BUKAN BUATAN AI.</textarea>
+                    </div>
+
+                    <!-- TEXT CARD 3: Prompt Visualisasi Clay -->
+                    <div class="text-card">
+                        <div class="text-card-header">
+                            <div class="text-card-title">
+                                <span>🎨</span>
+                                <span>PROMPT TEXT TO VIDEO - CLAY ANIMATION</span>
+                            </div>
+                            <div class="menu-dots" onclick="toggleMenu(this, event)">
+                                ⋮
+                                <div class="dropdown-menu">
+                                    <div onclick="copyText(this, 'jsContent3')">Copy Text</div>
+                                    <div onclick="copyLink(this, 'https://chatgpt.com/share/...')">Copy Link</div>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea class="js-textarea" id="jsContent3" readonly>BUATKAN VISUALISASINYA BERUPA
+PROMPT TEXT TO VIDEO BERGAYA CLAY
+ANIMATION, DENGAN MASTER PROMPT INI:
+"CUTE 3D CLAYMATION STYLE, DETAILED MINIATURE WORLD,
+SOFT PLASTICINE TEXTURE, CINEMATIC
+LIGHTING, ATMOSPHERIC, SHALLOW
+DEPTH OF FIELD.
+
+PROMPT WAJIB SESUAIKAN ARAHAN VISUAL
+DENGAN NARASI YANG SUDAH DIBUAT PERSCENENYA YANG BERISI 6 DETIK, PASTIKAN
+MASUKKAN MASTER PROMPT DI AWAL SETIAP PROMPT. deskripsikan detail lengkap yg dipakai oleh karakter claynya dan deskripsikan secara eksplisit element enviromentnya mulai dari objek subjek dan tempat dari clay di setiap prompt agar konsisten”</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 4: Bikin Video Affiliate [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Bikin Video Affiliate</span>
+                </div>
+                <div class="folder-content">
+                    <div class="instruction-text">Tinggal Ikuti Instruksi Video</div>
+                    
+                    <!-- Tools LAMA [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Tools LAMA</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="sub-item">
+                                <div style="font-weight: 600; margin-bottom: 8px; color: #2563eb;">🔗 Akses Tools Affiliate V1 (Lama)</div>
+                                <a href="https://gemini.google.com/share/cd4e9c595018" 
+                                   class="clean-link" target="_blank" rel="noopener noreferrer">
+                                    https://gemini.google.com/share/cd4e9c595018
+                                </a>
+                            </div>
+                            
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/cwaZb1zCUeM" 
+                                            allowfullscreen
+                                            title="Video Tools Lama"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">VIDEO TUTORIAL TOOLS LAMA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools TERBARU [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Tools TERBARU</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="sub-item">
+                                <div style="font-weight: 600; margin-bottom: 8px; color: #2563eb;">🔗 Akses Grog - Affiliate Terbaru</div>
+                                <a href="https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221rub5QGRkDJdXkoLs1zV8WwfeLP1Wh5ON%22%5D,%22action%22:%22open%22,%22userId%22:%22116951033342699996745%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing" 
+                                   class="clean-link" target="_blank" rel="noopener noreferrer">
+                                    AI Studio - Affiliate Terbaru
+                                </a>
+                            </div>
+                            
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/Z6Mbm8WoMzo" 
+                                            allowfullscreen
+                                            title="Video Tools Terbaru"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">VIDEO TUTORIAL TOOLS TERBARU</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 5: Bikin Poster Promo / Infografis [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Bikin Poster Promo / Infografis</span>
+                </div>
+                <div class="folder-content">
+                    
+                    <!-- Poster / Promo [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Poster / Promo</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="instruction-text">Caranya</div>
+                            
+                            <div class="sub-item">
+                                <div style="font-weight: 600; margin-bottom: 8px; color: #2563eb;">Akses Tools Grog Design</div>
+                                <a href="https://chatgpt.com/g/g-6926bca4d86c8191a1636d677d1ed243-grog-design" 
+                                   class="clean-link" target="_blank" rel="noopener noreferrer">
+                                    https://chatgpt.com/g/g-6926bca4d86c8191a1636d677d1ed243-grog-design
+                                </a>
+                            </div>
+                            
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/KfQjQ_KYAEw" 
+                                            allowfullscreen
+                                            title="Video Tutorial Poster"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">VIDEO TUTORIAL POSTER</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Infografis [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Infografis</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="instruction-text">Tools + Tutorial</div>
+                            
+                            <div class="text-card">
+                                <div class="text-card-header">
+                                    <div class="text-card-title">
+                                        <span>📄</span>
+                                        <span>PANDUAN TOOLS AI PROMPT GENERATOR INFOGRAPHIC</span>
+                                    </div>
+                                    <div class="menu-dots" onclick="toggleMenu(this, event)">
+                                        ⋮
+                                        <div class="dropdown-menu">
+                                            <div onclick="copyText(this, 'driveLink')">Copy Link</div>
+                                            <div onclick="window.open('https://drive.google.com/file/d/1adzQCftoZEy_sdKKqzaKtJ-V5ky7bRSV/view', '_blank')">Buka Link</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <textarea class="js-textarea" id="driveLink" readonly>https://drive.google.com/file/d/1adzQCftoZEy_sdKKqzaKtJ-V5ky7bRSV/view
+
+PANDUAN TOOLS AI PROMPT GENERATOR INFOGRAPHIC GROG-DESIGN 2
+
+CARA GUNAKAN TOOLS AI PROMPT GENERATOR INFOGRAPHIC GROG-DESIGN 2:
+
+1. Buka Tools dan Ketikkan Perintah atau Topik Infografis/Poster (Lebih Detail Lebih Bagus).
+Contoh: "infografis penjelasan tentang fenomena terjadinya cuaca ekstrim di dunia secara lengkap, detail dan akurat, 3d globe."
+
+2. Tunggu Prompt Muncul, Lalu Salin
+
+3. Paste Ke Gemini, Gunakan Model Nano atau Banana. Pakai Pro lebih direkomendasikan
+
+4. Tunggu Hasilnya, Buka dan Download
+
+5. Result siap digunakan</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 6: Prompt Buat Youtuber [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Prompt Buat Youtuber (Kling, Veo, Sora)</span>
+                </div>
+                <div class="folder-content">
+                    <div class="instruction-text">Tinggal Ikuti Instruksi Video</div>
+                    <div class="instruction-text" style="margin-left: 20px;">Caranya</div>
+                    
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Akses Tools</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="sub-item">
+                                <a href="https://gemini.google.com/share/37da12a5e5b0" 
+                                   class="link-item" target="_blank" rel="noopener noreferrer">
+                                    <span>🔗</span>
+                                    <span>https://gemini.google.com/share/37da12a5e5b0</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 7: Konten Meniru Joget [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Konten Meniru Joget</span>
+                </div>
+                <div class="folder-content">
+                    <div class="instruction-text">Tinggal Ikuti Instruksi Video</div>
+                    
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Konten Joget</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/ZCVWT5-Ftq8" 
+                                            allowfullscreen
+                                            title="Video Tutorial Joget"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">VIDEO TUTORIAL JOGET</span>
+                                </div>
+                            </div>
+                            
+                            <div class="sub-item">
+                                <div style="font-weight: 600; margin-bottom: 8px; color: #2563eb;">📂 Akses Web Tools Joget</div>
+                                <a href="https://www.runninghub.ai/ai-detail/1990193963569213442" 
+                                   class="clean-link" target="_blank" rel="noopener noreferrer">
+                                    https://www.runninghub.ai/ai-detail/1990193963569213442
+                                </a>
+                                <div class="kode-badge">KODE : rh-v1019</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 8: Bikin Lagu + Video Clip [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Bikin Lagu + Video Clip</span>
+                </div>
+                <div class="folder-content">
+                    <div class="instruction-text">Tinggal Ikuti Instruksi Video</div>
+                    
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Bikin Video Clip</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/Nx9ZKgYjbkI" 
+                                            allowfullscreen
+                                            title="Video Tutorial Video Clip"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">VIDEO TUTORIAL VIDEO CLIP</span>
+                                </div>
+                            </div>
+                            
+                            <div class="sub-item">
+                                <div style="font-weight: 600; margin-bottom: 8px; color: #2563eb;">📂 Akses Grog - Music</div>
+                                <a href="https://chatgpt.com/g/g-695149b440d481919c67cdd43ea3c987-grog-musictm" 
+                                   class="clean-link" target="_blank" rel="noopener noreferrer">
+                                    https://chatgpt.com/g/g-695149b440d481919c67cdd43ea3c987-grog-musictm
+                                </a>
+                            </div>
+                            
+                            <div class="text-card">
+                                <div class="text-card-header">
+                                    <div class="text-card-title">
+                                        <span>🎭</span>
+                                        <span>CHARACTER MODEL SHEET PROMPT</span>
+                                    </div>
+                                    <div class="menu-dots" onclick="toggleMenu(this, event)">
+                                        ⋮
+                                        <div class="dropdown-menu">
+                                            <div onclick="copyText(this, 'modelSheet1')">Copy Text</div>
+                                            <div onclick="copyLink(this, 'https://chatgpt.com/share/...')">Copy Link</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <textarea class="js-textarea" id="modelSheet1" readonly>Create a single high-resolution CHARACTER MODEL SHEET in one image.
+
+STYLE:
+3D character, premium toy-like quality, smooth surfaces, soft lighting, studio white background, clean and minimal, cinematic yet neutral, suitable for animation reference.
+
+CHARACTER DESCRIPTION:
+bentuk wajah bulat, proporsi tubuh chibi dengan tinggi 3-4 kepala, usia remaja, ekspresi default ceria, kostum modern casual dengan hoodie dan sneakers, warna utama biru navy dan putih, material pakaian katun dan nilon mengkilap, aksesoris khas seperti headphone dan gelang.
+
+POSE & ANGLES (ALL IN ONE IMAGE, NEAT GRID LAYOUT):
+– Front view (neutral pose)
+– 3/4 left view
+– 3/4 right view
+– Left side view
+– Right side view
+– Back view
+– Slight chin up
+– Slight chin down
+– Full body standing pose
+
+EXPRESSION:
+neutral friendly expression, consistent face shape across all angles, same proportions in every view.
+
+DETAIL REQUIREMENTS:
+– identical character proportions in every angle
+– same costume, colors, textures, and accessories across all views
+– no motion blur
+– clear silhouette
+– consistent lighting direction
+– realistic soft shadow under feet
+
+ASSET FOCUS:
+this image must function as a MASTER CHARACTER REFERENCE for animation and video generation.
+
+COMPOSITION:
+grid-based layout, evenly spaced, centered character in each cell, clean margins, professional model sheet presentation.
+
+RENDER QUALITY:
+ultra-detailed, sharp focus, high resolution, production-ready, no text, no watermark, no logo.
+
+BACKGROUND:
+pure white or very light gray studio background.
+
+IMPORTANT:
+only ONE image containing ALL angles.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 9: Tools Ambil Prompt Video Orang Lain [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Tools Ambil Prompt Video Orang Lain (max 20 detik)</span>
+                </div>
+                <div class="folder-content">
+                    <div class="instruction-text">Tinggal Ikuti Instruksi Video</div>
+                    <div class="instruction-text" style="margin-left: 20px;">Akses</div>
+                    
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Akses tools</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="sub-item">
+                                <a href="https://gemini.google.com/share/750374a27db5" 
+                                   class="link-item" target="_blank" rel="noopener noreferrer">
+                                    <span>🔗</span>
+                                    <span>https://gemini.google.com/share/750374a27db5</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 10: Grog Cinema - Bikin Film [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Grog Cinema - Bikin Film</span>
+                </div>
+                <div class="folder-content">
+                    <div class="instruction-text">Tinggal Ikuti Instruksi Video</div>
+                    
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Bikin Film</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/PUrQfZMDouQ" 
+                                            allowfullscreen
+                                            title="Video Tutorial Film"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">VIDEO TUTORIAL FILM</span>
+                                </div>
+                            </div>
+                            
+                            <div class="sub-item">
+                                <div style="font-weight: 600; margin-bottom: 8px; color: #2563eb;">📂 Akses Grog - Cinema</div>
+                                <a href="https://ai.studio/apps/drive/1zUFdt3DPYM8z39brYWL-2Lbo_IbOBJQ8?fullscreenApplet=true" 
+                                   class="clean-link" target="_blank" rel="noopener noreferrer">
+                                    https://ai.studio/apps/drive/1zUFdt3DPYM8z39brYWL-2Lbo_IbOBJQ8?fullscreenApplet=true
+                                </a>
+                            </div>
+                            
+                            <div class="text-card">
+                                <div class="text-card-header">
+                                    <div class="text-card-title">
+                                        <span>🎭</span>
+                                        <span>CHARACTER MODEL SHEET PROMPT</span>
+                                    </div>
+                                    <div class="menu-dots" onclick="toggleMenu(this, event)">
+                                        ⋮
+                                        <div class="dropdown-menu">
+                                            <div onclick="copyText(this, 'modelSheet2')">Copy Text</div>
+                                            <div onclick="copyLink(this, 'https://chatgpt.com/share/...')">Copy Link</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <textarea class="js-textarea" id="modelSheet2" readonly>Create a single high-resolution CHARACTER MODEL SHEET in one image.
+
+STYLE:
+3D character, premium toy-like quality, smooth surfaces, soft lighting, studio white background, clean and minimal, cinematic yet neutral, suitable for animation reference.
+
+CHARACTER DESCRIPTION:
+bentuk wajah oval, proporsi tubuh realistik dengan tinggi 6-7 kepala, usia dewasa muda, ekspresi default serius namun ramah, kostum petualang dengan jaket kulit dan sepatu boot, warna utama coklat dan krem, material pakaian kulit dan denim, aksesoris khas seperti topi fedora dan tas selempang.
+
+POSE & ANGLES (ALL IN ONE IMAGE, NEAT GRID LAYOUT):
+– Front view (neutral pose)
+– 3/4 left view
+– 3/4 right view
+– Left side view
+– Right side view
+– Back view
+– Slight chin up
+– Slight chin down
+– Full body standing pose
+
+EXPRESSION:
+neutral friendly expression, consistent face shape across all angles, same proportions in every view.
+
+DETAIL REQUIREMENTS:
+– identical character proportions in every angle
+– same costume, colors, textures, and accessories across all views
+– no motion blur
+– clear silhouette
+– consistent lighting direction
+– realistic soft shadow under feet
+
+ASSET FOCUS:
+this image must function as a MASTER CHARACTER REFERENCE for animation and video generation.
+
+COMPOSITION:
+grid-based layout, evenly spaced, centered character in each cell, clean margins, professional model sheet presentation.
+
+RENDER QUALITY:
+ultra-detailed, sharp focus, high resolution, production-ready, no text, no watermark, no logo.
+
+BACKGROUND:
+pure white or very light gray studio background.
+
+IMPORTANT:
+only ONE image containing ALL angles.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JUDUL BARU: Materi Video -->
+            <div class="section-title">📺 Materi Video</div>
+
+            <!-- FOLDER 11: Materi Video Belajar Animasi Canva [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📁</span>
+                    <span class="title">Materi Video Belajar Animasi Canva - Grog AI Konsisten</span>
+                </div>
+                <div class="folder-content">
+                    <div class="instruction-text">Cara Membuat Animasi 3D dengan Canva (Unlimited/Tanpa Batasan)</div>
+                    
+                    <!-- PART 1 [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 1 - STEP AWAL - AKHIR</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/hMlp711L4Hc" 
+                                            allowfullscreen
+                                            title="Video Part 1"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PART 2 [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 2 - LANJUTAN UNTUK KONSISTEN ALUR DAN KARAKTER!</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/uM5E2-LDGjo" 
+                                            allowfullscreen
+                                            title="Video Part 2"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CARA UNLIMITED [📂] dengan teks merah -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">CARA UNLIMITED / GA TERBATAS BIKIN VIDEO DI CANVA</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="red-text">✨ TANPA BATASAN! BIKIN VIDEO SEBANYAK MUNGKIN ✨</div>
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/SsEus1PDs6k" 
+                                            allowfullscreen
+                                            title="Video Cara Unlimited"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">TUTORIAL UNLIMITED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cara pakai Referensi Tokoh [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Cara pakai Referensi Tokoh/Karakter Sesuai Yang Kita Inginkan</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/TJ9HUbTayGg" 
+                                            allowfullscreen
+                                            title="Video Referensi Tokoh"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">REFERENSI TOKOH</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cara 100% Konsisten Tokoh [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Cara 100% Konsisten Tokoh/Karakternya</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/BAJkKwkkAZo" 
+                                            allowfullscreen
+                                            title="Video Konsisten Tokoh"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">100% KONSISTEN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 12: Cara CUAN Jualan Produk Digital [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">💰</span>
+                    <span class="title">Cara CUAN Jualan Produk Digital (Lynkid)</span>
+                </div>
+                <div class="folder-content">
+                    <!-- PART 1 sampai 8 [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 1 - Gambaran dan Alur Jualan Produk Digital</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/wQCGeDm9mKw" 
+                                            allowfullscreen
+                                            title="Video Part 1"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 1</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 2 - Pengenalan Produk Digital</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/kaOMqYw5wc8" 
+                                            allowfullscreen
+                                            title="Video Part 2"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 3 - Persiapan Jualan Produk Digital</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/ekCVdXvz1vI" 
+                                            allowfullscreen
+                                            title="Video Part 3"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 3</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 4 - Tempat / Platform Kamu Jualan Produk Digital</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/hXuR4wOPUlU" 
+                                            allowfullscreen
+                                            title="Video Part 4"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 5 - MULAI, Bikin Akun Lynkid dan Desain LYNKID dengan Canva + Chat GPT</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/GCJiOx3batQ" 
+                                            allowfullscreen
+                                            title="Video Part 5"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 6 - Daftarin Produk Kamu ke Lynkid dan Cantumkan Ke Bio Tiktok</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/Q8mfJjmqTxI" 
+                                            allowfullscreen
+                                            title="Video Part 6"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 6</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 7 - Strategi Dan Formula Jualan Produk Digital (RAHASIA)</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/lNukuaFg0uc" 
+                                            allowfullscreen
+                                            title="Video Part 7"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 7</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">PART 8 … COMING SOON <span class="coming-soon">COMING SOON</span></span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/lNukuaFg0uc" 
+                                            allowfullscreen
+                                            title="Video Part 8"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PART 8</span>
+                                </div>
+                            </div>
+                    </div>
+               </div>
+
+                    <div class="instruction-text" style="margin-top: 20px; font-weight: 600;">TIPS DILUAR MATERI JUALAN PRODUK DIGITAL</div>
+
+                    <!-- Tips 1 [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Pengalaman cara aku bisa pecah telur jualan Produk Digital</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/CId3ZoCmeh8" 
+                                            allowfullscreen
+                                            title="Video Tips 1"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">PECAH TELUR</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips 2 [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Cara bikin sampul atau cover produk digital dengan CEPAT dan Praktis</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/VcIEIIX8Vg0" 
+                                            allowfullscreen
+                                            title="Video Tips 2"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">COVER CEPAT</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips 3 [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Cara Ubah dan Design Akun Lynk id kamu jadi terlihat terpercaya dan bagus!</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/mA7QGdBs7nY" 
+                                            allowfullscreen
+                                            title="Video Tips 3"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">DESIGN LYNKID</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips 4 [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Cara buat Design Canva kamu jadi seperti bentuk buku 3D "Pake Heyzine Flipbook"</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/5ZXjUhh5CSw" 
+                                            allowfullscreen
+                                            title="Video Tips 4"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">HEYZINE FLIPBOOK</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 13: Belajar Desain Canva untuk Membuat Produk Digital [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">📝</span>
+                    <span class="title">Belajar Desain Canva untuk Membuat Produk Digital</span>
+                </div>
+                <div class="folder-content">
+                    <!-- Buku Mewarnai [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Canva : Buat Buku Mewarnai Versi Premium</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/Bwit6H35U7A" 
+                                            allowfullscreen
+                                            title="Video Buku Mewarnai"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">BUKU MEWARNAI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Games Edukatif [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Canva : Buat Games Edukatif</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/2u29cJaTRRU" 
+                                            allowfullscreen
+                                            title="Video Games Edukatif"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">GAMES EDUKATIF</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stiker Nama Anak [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Canva : Bikin Stiker Nama Anak Custom</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/vtkoUnJeWNc" 
+                                            allowfullscreen
+                                            title="Video Stiker Nama"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">STIKER NAMA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cerita Animasi + Suara [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Canva : Belajar bikin Cerita Animasi + Suara</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/KP9snDvFxiw" 
+                                            allowfullscreen
+                                            title="Video Cerita Animasi"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">CERITA ANIMASI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard Anak [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Canva : Bikin Flashcard Anak</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/mYJm8qClcCM" 
+                                            allowfullscreen
+                                            title="Video Flashcard"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">FLASHCARD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 14: AKSES SEMUA PRODUK DIGITAL DISINI [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">🖥️</span>
+                    <span class="title">AKSES SEMUA PRODUK DIGITAL DISINI - BISA DIJUAL LAGI</span>
+                </div>
+                <div class="folder-content">
+                    <div class="drive-link-card">
+                        <a href="https://docs.google.com/document/d/1Rg98Oyk4romTnRTgWgAKBaOI_ilGb2Gf7hEwl5GWIO0/edit?usp=sharing" 
+                           target="_blank" rel="noopener noreferrer">
+                            📄 Google Drive - Koleksi Produk Digital
+                        </a>
+                        <div style="margin-top: 10px; font-size: 0.85em; color: #64748b;">
+                            https://docs.google.com/document/d/1Rg98Oyk4romTnRTgWgAKBaOI_ilGb2Gf7hEwl5GWIO0/edit?usp=sharing
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JUDUL BARU: WEB TOOLS AI -->
+            <div class="section-title">🌐 WEB TOOLS AI</div>
+
+            <!-- FOLDER 15: Platform Bikin VIDEO/FOTO AI [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">👉🏻</span>
+                    <span class="title">Platform Bikin VIDEO/FOTO AI - Kling, Sora, Veo 3 DLL UNLIMITED (Leonardo AI)</span>
+                </div>
+                <div class="folder-content">
+                    <!-- Cara Akses LEONARDO [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Cara Akses LEONARDO</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/4fWL1R8eLKg" 
+                                            allowfullscreen
+                                            title="Video Leonardo AI"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">LEONARDO AI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOLDER 15B: Platform Bikin Animasi Video/Foto Gratis [📁] -->
+            <div class="folder-item">
+                <div class="folder-header" onclick="toggleFolder(this)">
+                    <span class="arrow">➡️</span>
+                    <span class="icon">👉🏻</span>
+                    <span class="title">Platform Bikin Animasi Video/Foto Gratis (Meta AI)</span>
+                </div>
+                <div class="folder-content">
+                    <!-- Cara Akses META AI [📂] -->
+                    <div class="sub-folder-item">
+                        <div class="sub-folder-header" onclick="toggleSubFolder(this, event)">
+                            <span class="arrow">➡️</span>
+                            <span class="icon">📂</span>
+                            <span class="title">Cara Akses META AI</span>
+                        </div>
+                        <div class="sub-folder-content">
+                            <div class="video-container">
+                                <div class="video-border">
+                                    <iframe src="https://www.youtube.com/embed/rNZf3pEJ2Jc" 
+                                            allowfullscreen
+                                            title="Video Meta AI"></iframe>
+                                </div>
+                                <div style="text-align: center;">
+                                    <span class="video-title">META AI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            © 2026 TeslaSmart - New Era Digital AI Prompt
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk toggle folder utama (📁)
+        function toggleFolder(header) {
+            const folderItem = header.closest('.folder-item');
+            if (!folderItem) return;
+            
+            const content = folderItem.querySelector('.folder-content');
+            const arrow = header.querySelector('.arrow');
+            
+            if (content) {
+                content.classList.toggle('show');
+                arrow.classList.toggle('open');
+                
+                if (content.classList.contains('show')) {
+                    arrow.textContent = '⬇️';
+                } else {
+                    arrow.textContent = '➡️';
+                }
+            }
+        }
+
+        // Fungsi untuk toggle sub folder (📂)
+        function toggleSubFolder(header, event) {
+            if (event) event.stopPropagation();
+            
+            const subFolderItem = header.closest('.sub-folder-item');
+            if (!subFolderItem) return;
+            
+            const content = subFolderItem.querySelector('.sub-folder-content');
+            const arrow = header.querySelector('.arrow');
+            
+            if (content) {
+                content.classList.toggle('show');
+                arrow.classList.toggle('open');
+                
+                if (content.classList.contains('show')) {
+                    arrow.textContent = '⬇️';
+                } else {
+                    arrow.textContent = '➡️';
+                }
+            }
+        }
+
+        // Fungsi untuk toggle menu dropdown
+        function toggleMenu(dotsElement, event) {
+            event.stopPropagation();
+            const dropdown = dotsElement.querySelector('.dropdown-menu');
+            
+            document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                if (menu !== dropdown) menu.classList.remove('show');
+            });
+            
+            dropdown.classList.toggle('show');
+        }
+
+        // Fungsi copy text dari textarea
+        function copyText(element, textareaId) {
+            const textarea = document.getElementById(textareaId);
+            const text = textarea.value;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Text copied to clipboard!');
+                closeAllDropdowns();
+            }).catch(err => {
+                alert('Failed to copy text. Error: ' + err);
+            });
+        }
+
+        // Fungsi copy link
+        function copyLink(element, link) {
+            navigator.clipboard.writeText(link).then(() => {
+                alert('Link copied to clipboard!');
+                closeAllDropdowns();
+            }).catch(err => {
+                alert('Failed to copy link. Error: ' + err);
+            });
+        }
+
+        // Tutup semua dropdown
+        function closeAllDropdowns() {
+            document.querySelectorAll('.dropdown-menu.show').forEach(menu => {
+                menu.classList.remove('show');
+            });
+        }
+
+        // Tutup dropdown jika klik di luar
+        window.addEventListener('click', function(event) {
+            if (!event.target.closest('.menu-dots')) {
+                closeAllDropdowns();
+            }
+        });
+
+        // Inisialisasi: set semua folder dan sub folder tertutup
+        window.addEventListener('load', function() {
+            document.querySelectorAll('.folder-content, .sub-folder-content').forEach(content => {
+                content.classList.remove('show');
+            });
+            document.querySelectorAll('.arrow').forEach(arrow => {
+                arrow.textContent = '➡️';
+                arrow.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
