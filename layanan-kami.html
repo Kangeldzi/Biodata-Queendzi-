@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Vertikal Futuristik</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Header dengan gambar */
+        .custom-header {
+            width: 100%;
+            max-width: 900px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            animation: floatHeader 6s ease-in-out infinite;
+        }
+
+        .custom-header img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .custom-header:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Teks di bawah gambar */
+        .header-text {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        /* Border wrapper futuristik */
+        .border-wrapper {
+            width: 100%;
+            max-width: 900px;
+            border: none;
+            border-radius: 25px;
+            padding: 30px;
+            margin-top: 10px;
+            background: rgba(15, 15, 35, 0.7);
+            backdrop-filter: blur(15px);
+            box-shadow: 
+                0 15px 35px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* Efek cahaya di belakang */
+        .border-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(120, 119, 198, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        /* Kontainer tombol vertikal */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Tombol menu futuristik */
+        .menu-button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 80px;
+            padding: 0 30px;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            text-align: left;
+            text-decoration: none !important;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            background: linear-gradient(90deg, rgba(30, 30, 60, 0.9), rgba(20, 20, 40, 0.9));
+            z-index: 1;
+        }
+
+        /* Warna gradien untuk setiap tombol */
+        .menu-button:nth-child(1) { --primary-color: #4cc9f0; --secondary-color: #4361ee; }
+        .menu-button:nth-child(2) { --primary-color: #f72585; --secondary-color: #b5179e; }
+        .menu-button:nth-child(3) { --primary-color: #38b000; --secondary-color: #2d9140; }
+        .menu-button:nth-child(4) { --primary-color: #ff9e00; --secondary-color: #ff7b00; }
+
+        /* Efek cahaya di belakang tombol */
+        .menu-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent);
+            transition: left 0.7s ease;
+            z-index: -1;
+        }
+
+        /* Efek gradien untuk tombol */
+        .menu-button::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                var(--primary-color), 
+                var(--secondary-color));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+        }
+
+        /* Konten tombol */
+        .button-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            z-index: 2;
+        }
+
+        /* Ikon tombol */
+        .button-icon {
+            font-size: 24px;
+            margin-right: 20px;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        /* Teks tombol */
+        .button-text {
+            flex-grow: 1;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        /* Panah di kanan */
+        .button-arrow {
+            font-size: 20px;
+            opacity: 0.7;
+            transition: all 0.4s ease;
+            transform: translateX(0);
+        }
+
+        /* Badge untuk info tambahan */
+        .button-badge {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            margin-left: 15px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Efek hover pada tombol */
+        .menu-button:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.4),
+                0 0 30px var(--primary-color);
+            color: #fff;
+        }
+
+        .menu-button:hover::before {
+            left: 100%;
+        }
+
+        .menu-button:hover::after {
+            opacity: 1;
+        }
+
+        .menu-button:hover .button-icon {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px var(--primary-color);
+        }
+
+        .menu-button:hover .button-arrow {
+            opacity: 1;
+            transform: translateX(10px);
+        }
+
+        /* Animasi masuk tombol */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .menu-button {
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .menu-button:nth-child(1) { animation-delay: 0.1s; }
+        .menu-button:nth-child(2) { animation-delay: 0.2s; }
+        .menu-button:nth-child(3) { animation-delay: 0.3s; }
+        .menu-button:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Animasi header */
+        @keyframes floatHeader {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Animasi rotasi untuk background */
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+            margin-top: 30px;
+            padding: 15px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .border-wrapper {
+                padding: 20px;
+            }
+            
+            .menu-button {
+                height: 70px;
+                padding: 0 20px;
+                font-size: 16px;
+            }
+            
+            .button-icon {
+                font-size: 20px;
+                width: 40px;
+                height: 40px;
+                margin-right: 15px;
+            }
+            
+            .header-text {
+                font-size: 1.1rem;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-button {
+                height: 65px;
+                padding: 0 15px;
+                font-size: 15px;
+            }
+            
+            .button-icon {
+                font-size: 18px;
+                width: 35px;
+                height: 35px;
+                margin-right: 10px;
+            }
+            
+            .button-badge {
+                display: none;
+            }
+            
+            .header-text {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header dengan gambar -->
+    <div class="custom-header">
+        <img 
+            src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgC2c0N3bzqJU8e-4_-onN6WPtG3wLIIMUBfmAObKYlTFA5vdtiDXBo86H0ogTq3MNCyc2LDsZw71ySxMRoQRjMcJmnSwhpNtdbuujBOyaEwQ2O1Ya7SHUHe-JnqLfscnasCRLvf7uC_wFMI9Jt7s2eeodYjEzYNwJwklHLu8tuHjGokCJy4ooEcxSoI6eK/s1280/jasa%20(1280%20x%20300%20piksel)_20250119_190621_0000.jpg" 
+            alt="Gambar Header">
+        <div class="header-text">Silahkan Pilih Kebutuhan Anda.!</div>
+    </div>
+
+    <!-- Pembungkus untuk border -->
+    <div class="border-wrapper">
+        <!-- Kontainer untuk tombol -->
+        <div class="button-container">
+            <!-- Tombol 1 -->
+            <a href="https://www.teslasmart.my.id/p/tombol-menu-persegi-empat-gaya-css_5.html" 
+               class="menu-button" 
+               target="_blank" 
+               title="Layanan Jasa">
+                <div class="button-content">
+                    <div class="button-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="button-text">LAYANAN JASA</div>
+                    <div class="button-badge">Premium</div>
+                    <div class="button-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Tombol 2 -->
+            <a href="https://www.teslasmart.my.id/p/tombol-menu-vertikal-gaya-css-untuk_15.html" 
+               class="menu-button" 
+               target="_blank" 
+               title="Jasa Design">
+                <div class="button-content">
+                    <div class="button-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <div class="button-text">JASA DESIGN</div>
+                    <div class="button-badge">Kreatif</div>
+                    <div class="button-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Tombol 3 (Tambahan) -->
+            <a href="selamat-datang.html" 
+               class="menu-button" 
+               target="_blank" 
+               title="Kelas AI">
+                <div class="button-content">
+                    <div class="button-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="button-text">KELAS AI</div>
+                    <div class="button-badge">Trending</div>
+                    <div class="button-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
+            
+            <!-- Tombol 4 (Tambahan) -->
+            <a href="jasa-website.html" 
+               class="menu-button" 
+               target="_blank" 
+               title="Jasa Website">
+                <div class="button-content">
+                    <div class="button-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="button-text">JASA WEBSITE</div>
+                    <div class="button-badge">Modern</div>
+                    <div class="button-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2026 Layanan Digital Futuristik | Klik tombol untuk membuka halaman baru</p>
+    </div>
+
+    <script>
+        // Efek interaktif untuk tombol
+        document.querySelectorAll('.menu-button').forEach(button => {
+            // Efek saat diklik
+            button.addEventListener('click', function(e) {
+                // Efek ripple
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size/2;
+                const y = e.clientY - rect.top - size/2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.6);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    z-index: 0;
+                `;
+                
+                this.appendChild(ripple);
+                
+                // Hapus ripple setelah animasi
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+                
+                // Log ke console
+                console.log(`Navigating to: ${this.getAttribute('href')}`);
+            });
+            
+            // Efek saat hover
+            button.addEventListener('mouseenter', function() {
+                const icon = this.querySelector('.button-icon i');
+                if (icon.classList.contains('fa-cogs')) {
+                    icon.style.transform = 'rotate(20deg)';
+                } else if (icon.classList.contains('fa-palette')) {
+                    icon.style.transform = 'rotate(-15deg)';
+                } else if (icon.classList.contains('fa-robot')) {
+                    icon.style.animation = 'bounce 0.5s';
+                } else if (icon.classList.contains('fa-code')) {
+                    icon.style.transform = 'scale(1.2)';
+                }
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                const icon = this.querySelector('.button-icon i');
+                icon.style.transform = '';
+                icon.style.animation = '';
+            });
+        });
+        
+        // Tambahkan animasi bounce
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes bounce {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-5px); }
+            }
+            
+            /* Efek partikel untuk latar belakang */
+            body::before {
+                content: '';
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: 
+                    radial-gradient(circle at 20% 30%, rgba(120, 119, 198, 0.1) 0%, transparent 20%),
+                    radial-gradient(circle at 80% 70%, rgba(76, 201, 240, 0.1) 0%, transparent 20%),
+                    radial-gradient(circle at 40% 80%, rgba(247, 37, 133, 0.1) 0%, transparent 20%);
+                z-index: -1;
+                animation: floatBackground 20s ease-in-out infinite;
+            }
+            
+            @keyframes floatBackground {
+                0%, 100% { transform: translate(0, 0) scale(1); }
+                25% { transform: translate(-10px, 10px) scale(1.05); }
+                50% { transform: translate(10px, -10px) scale(1.1); }
+                75% { transform: translate(-10px, -10px) scale(1.05); }
+            }
+        `;
+        document.head.appendChild(styleSheet);
+        
+        // Efek partikel bergerak di background
+        document.addEventListener('DOMContentLoaded', function() {
+            const particlesContainer = document.createElement('div');
+            particlesContainer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+                overflow: hidden;
+            `;
+            document.body.appendChild(particlesContainer);
+            
+            // Buat partikel
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                const size = Math.random() * 4 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 20 + 10;
+                const delay = Math.random() * 5;
+                
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: rgba(255, 255, 255, ${Math.random() * 0.1 + 0.05});
+                    border-radius: 50%;
+                    left: ${posX}vw;
+                    top: ${posY}vh;
+                    animation: floatParticle ${duration}s linear ${delay}s infinite;
+                `;
+                
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Tambahkan animasi partikel
+            const particleAnimation = document.createElement('style');
+            particleAnimation.textContent = `
+                @keyframes floatParticle {
+                    0% {
+                        transform: translate(0, 0) rotate(0deg);
+                        opacity: 0;
+                    }
+                    10% {
+                        opacity: 0.7;
+                    }
+                    90% {
+                        opacity: 0.7;
+                    }
+                    100% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(particleAnimation);
+        });
+    </script>
+</body>
+</html>
