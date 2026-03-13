@@ -1226,7 +1226,7 @@
             </a>
             
             <!-- Tombol 3: Alamat Sekolah (Asal Sekolah) -->
-            <a href="https://maps.app.goo.gl/your-school-map-link" class="action-btn action-btn-koperasi" target="_blank">
+            <a href="#" class="action-btn action-btn-koperasi" target="_blank">
                 <i class="fas fa-school"></i> <!-- Ikon sekolah -->
                 <div class="action-btn-content">
                     <span class="action-btn-title">Alamat Sekolah</span>
@@ -1234,8 +1234,8 @@
                 </div>
             </a>
             
-            <!-- Tombol 4: WhatsApp Orang Tua (Kontak Darurat) -->
-            <a href="https://wa.me/6285218483129" class="action-btn" target="_blank">
+            <!-- Tombol 4: WhatsApp Orang Tua (Kontak Darurat) - DENGAN FORMAT PESAN -->
+            <a href="#" class="action-btn" id="whatsapp-parent-btn">
                 <i class="fab fa-whatsapp"></i> <!-- Ikon WhatsApp -->
                 <div class="action-btn-content">
                     <span class="action-btn-title">WhatsApp Orang Tua</span>
@@ -1284,8 +1284,8 @@
         </div>
     </footer>
     
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/6285218483129" class="whatsapp-btn" target="_blank" title="Chat via WhatsApp">
+    <!-- WhatsApp Button - FLOATING DENGAN FORMAT PESAN -->
+    <a href="#" class="whatsapp-btn" id="whatsapp-float-btn" title="Chat via WhatsApp">
         <i class="fab fa-whatsapp"></i>
         WhatsApp
     </a>
@@ -1625,13 +1625,13 @@
         });
 
         // Efek untuk WhatsApp button
-        const whatsappBtn = document.querySelector('.whatsapp-btn');
-        if (whatsappBtn) {
-            whatsappBtn.addEventListener('mouseenter', function() {
+        const whatsappFloatBtn = document.querySelector('#whatsapp-float-btn');
+        if (whatsappFloatBtn) {
+            whatsappFloatBtn.addEventListener('mouseenter', function() {
                 this.style.boxShadow = '0 10px 30px rgba(37, 211, 102, 0.6)';
             });
 
-            whatsappBtn.addEventListener('mouseleave', function() {
+            whatsappFloatBtn.addEventListener('mouseleave', function() {
                 this.style.boxShadow = '0 5px 20px rgba(37, 211, 102, 0.4)';
             });
         }
@@ -1691,6 +1691,65 @@
                 });
             }
         });
+
+        // ===== FUNGSI WHATSAPP DENGAN FORMAT PESAN BARU =====
+        // Format pesan WhatsApp sesuai permintaan terbaru
+        function getWhatsAppMessage() {
+            // Menggunakan string template untuk mempertahankan format
+            const message = 
+                "*┅═•❃✽༊°°🍀🌻🍀°°༊✽❃•═┅*\n" +
+                "*════ ◎•❀•◎﷽◎•❀•◎ ════*\n" +
+                "\n" +
+                "*_Assalamualaikum Warahmatullahi Wabarakatuh_*\n" +
+                "==========================\n" +
+                "*Halo Kang L, Saya Kirim Pesan Lewat Biodata Anak Anda*\n" +
+                "==========================\n" +
+                "*ATAS NAMA*\n" +
+                "*Nama : Queendzi*\n" +
+                "*Alamat : Kp. Sawah Rt. 002 Rw. 006 Desa Gunung Menyan Kecamatan Pamijahan Kabupaten Bogor Kode POS 16810*\n" +
+                "==========================\n" +
+                "*Keperluan Saya :*\n" +
+                "(Tulis Keperluan Anda Dibawah ini)\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "===========================\n" +
+                "*_Wassalamu'alaikum Warahmatullahi Wabarakatuh_*\n" +
+                "\n" +
+                "*┅═•❃✽༊°°🍀🌻🍀°°༊✽❃•═┅*";
+            
+            // Encode untuk URL
+            return encodeURIComponent(message);
+        }
+
+        // Fungsi untuk membuka WhatsApp dengan nomor dan pesan yang sudah diformat
+        function openWhatsApp() {
+            const phoneNumber = "6285218483129"; // Nomor WhatsApp tujuan
+            const message = getWhatsAppMessage();
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+            
+            // Buka di tab baru
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Event listener untuk tombol WhatsApp Orang Tua di action buttons
+        const whatsappParentBtn = document.getElementById('whatsapp-parent-btn');
+        if (whatsappParentBtn) {
+            whatsappParentBtn.addEventListener('click', function(e) {
+                e.preventDefault(); // Mencegah link default (#)
+                openWhatsApp(); // Panggil fungsi untuk membuka WhatsApp
+            });
+        }
+
+        // Event listener untuk tombol WhatsApp floating
+        const whatsappFloatBtnElement = document.getElementById('whatsapp-float-btn');
+        if (whatsappFloatBtnElement) {
+            whatsappFloatBtnElement.addEventListener('click', function(e) {
+                e.preventDefault(); // Mencegah link default (#)
+                openWhatsApp(); // Panggil fungsi untuk membuka WhatsApp
+            });
+        }
 
         // Animasi saat halaman dimuat
         document.addEventListener('DOMContentLoaded', function() {
