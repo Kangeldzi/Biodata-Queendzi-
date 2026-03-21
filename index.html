@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>Biodata Anak</title>
+    <title>Biodata Queendzi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -227,7 +227,7 @@
             font-size: 1.2rem;
         }
 
-        /* MUSIC BAR STYLING - Diposisikan di bawah email dan di atas navbar */
+        /* MUSIC BAR STYLING */
         .music-bar-container {
             display: flex;
             justify-content: center;
@@ -422,7 +422,7 @@
             color: white;
             border: none;
             padding: 14px 22px;
-            border-radius: 10px;           /* Border radius 10px */
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -459,7 +459,7 @@
         }
 
         .action-btn i {
-            font-size: 2rem;                /* Ikon 2rem di sisi kiri */
+            font-size: 2rem;
             margin-right: 18px;
             width: 40px;
             text-align: center;
@@ -491,7 +491,6 @@
             font-weight: 400;
         }
 
-        /* Tombol Koperasi dengan warna khusus */
         .action-btn-koperasi {
             background: linear-gradient(135deg, #2e7d32, #1b5e20) !important;
         }
@@ -502,6 +501,391 @@
 
         .action-btn-koperasi:hover {
             background: linear-gradient(135deg, #1b5e20, #2e7d32) !important;
+        }
+
+        /* ========== GALERI STYLES ========== */
+        .gallery-section {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            padding: 2rem 1.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid rgba(26, 35, 126, 0.3);
+        }
+
+        .section-title i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        /* GRID 3x2 - 3 kolom horizontal, 2 baris vertikal */
+        .grid-3x2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            width: 100%;
+        }
+
+        .thumbnail-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            transform: translateY(0px);
+            animation: cardGlowPulse 2s infinite alternate;
+            animation-play-state: paused;
+        }
+
+        .thumbnail-card:hover {
+            transform: scale(1.03) translateY(-8px);
+            box-shadow: 0 30px 45px -12px rgba(0, 0, 0, 0.35), 0 0 0 2px var(--secondary-color) inset;
+            animation-play-state: running;
+        }
+
+        .media-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: #e0f2fe;
+        }
+
+        .thumb-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease-out, filter 0.4s;
+            will-change: transform;
+        }
+
+        .thumbnail-card:hover .thumb-img {
+            transform: scale(1.12) translateX(4%) translateY(3%);
+            filter: brightness(1.05) contrast(1.08);
+        }
+
+        .video-thumb {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #0a2f3f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .video-thumb iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+            border: none;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .play-overlay i {
+            font-size: 3.8rem;
+            color: white;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        .thumbnail-card:hover .play-overlay {
+            background: rgba(0, 0, 0, 0.45);
+            backdrop-filter: blur(4px);
+        }
+
+        .thumbnail-card:hover .play-overlay i {
+            transform: scale(1.2);
+            color: #ffecb3;
+        }
+
+        .card-info {
+            padding: 0.9rem 1rem 1rem;
+            background: linear-gradient(135deg, #f8fafc, #eef2f8);
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(26, 35, 126, 0.2);
+        }
+
+        .card-info h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            background: var(--secondary-color)20;
+            padding: 3px 10px;
+            border-radius: 40px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .card-info p {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .more-link {
+            display: inline-block;
+            margin-top: 2rem;
+            text-align: center;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-bg));
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+            letter-spacing: 0.5px;
+        }
+
+        .more-link i {
+            margin-left: 8px;
+            transition: transform 0.2s;
+        }
+
+        .more-link:hover {
+            background: linear-gradient(135deg, var(--secondary-color), #0097a7);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .more-link:hover i {
+            transform: translateX(6px);
+        }
+
+        @keyframes borderGlow {
+            0% { box-shadow: 0 0 0 0px var(--secondary-color)40; }
+            100% { box-shadow: 0 0 0 3px var(--secondary-color)80; }
+        }
+
+        .thumbnail-card {
+            animation: borderGlow 3s infinite alternate;
+            animation-play-state: paused;
+        }
+
+        .thumbnail-card:hover {
+            animation-play-state: running;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .grid-3x2 .thumbnail-card {
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .grid-3x2 .thumbnail-card:nth-child(1) { animation-delay: 0.05s; }
+        .grid-3x2 .thumbnail-card:nth-child(2) { animation-delay: 0.1s; }
+        .grid-3x2 .thumbnail-card:nth-child(3) { animation-delay: 0.15s; }
+        .grid-3x2 .thumbnail-card:nth-child(4) { animation-delay: 0.2s; }
+        .grid-3x2 .thumbnail-card:nth-child(5) { animation-delay: 0.25s; }
+        .grid-3x2 .thumbnail-card:nth-child(6) { animation-delay: 0.3s; }
+
+        /* Modal Lightbox untuk Galeri */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeInModal 0.3s ease;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; backdrop-filter: blur(0); }
+            to { opacity: 1; backdrop-filter: blur(12px); }
+        }
+
+        .gallery-modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            background: transparent;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-media-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #0f2c3c;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 235, 170, 0.6);
+            padding: 20px;
+        }
+
+        .close-gallery-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            color: white;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-gallery-modal:hover {
+            background: #ff4757;
+            transform: scale(1.08);
+            border-color: white;
+        }
+
+        .modal-media {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 70vh;
+            display: block;
+            margin: 0 auto;
+            border-radius: 0;
+        }
+
+        .modal-youtube-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .youtube-video-container {
+            width: 100%;
+            background: black;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .youtube-video-container iframe {
+            width: 100%;
+            height: 450px;
+            display: block;
+            border: none;
+        }
+
+        .video-info {
+            padding: 12px;
+            background: #0f2c3c;
+            color: white;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .tombol-tandai {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        .tombol-tandai:hover {
+            background-color: #0056b3;
+        }
+
+        .video-footer-text {
+            font-size: 14px;
+            text-align: center;
+            margin-top: 10px;
+            color: #fff;
         }
 
         /* Social Media Section */
@@ -588,14 +972,12 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        /* Social Media Colors */
         .tiktok { background: linear-gradient(135deg, #000000, #69C9D0, #EE1D52); }
         .facebook { background: linear-gradient(135deg, #1877F2, #0D5B9E); }
         .youtube { background: linear-gradient(135deg, #FF0000, #CC0000); }
         .instagram { background: linear-gradient(135deg, #E4405F, #405DE6, #833AB4); }
         .twitter { background: linear-gradient(135deg, #000000, #1DA1F2); }
 
-        /* WhatsApp Button Baru - Persegi Panjang di Tengah */
         .whatsapp-btn {
             position: fixed;
             bottom: 30px;
@@ -657,7 +1039,6 @@
             }
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 20px;
@@ -732,7 +1113,6 @@
             padding: 25px;
         }
 
-        /* Tabel Data Pribadi - DIPERBAIKI untuk Mobile */
         .personal-data-table {
             width: 100%;
             border-collapse: collapse;
@@ -767,7 +1147,6 @@
             line-height: 1.5;
         }
 
-        /* List Styles */
         .skills-list, .experience-list, .organization-list {
             list-style-type: none;
         }
@@ -811,7 +1190,6 @@
             border-bottom: none;
         }
 
-        /* Hobbies */
         .hobbies {
             display: flex;
             flex-wrap: wrap;
@@ -827,7 +1205,6 @@
             border: 1px solid rgba(0, 188, 212, 0.3);
         }
 
-        /* Prestasi */
         .achievement-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -841,23 +1218,6 @@
             border-left: 4px solid var(--accent-color);
         }
 
-        /* Keterampilan Teknis */
-        .programming-skills {
-            margin-top: 15px;
-        }
-
-        .tech-badge {
-            display: inline-block;
-            background-color: rgba(0, 188, 212, 0.1);
-            color: var(--primary-color);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin: 5px;
-            border: 1px solid rgba(0, 188, 212, 0.2);
-        }
-
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -919,7 +1279,6 @@
             }
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .container {
                 padding: 0 15px;
@@ -976,7 +1335,26 @@
                 font-size: 0.75rem;
             }
             
-            /* Modal Data Pribadi Mobile */
+            .grid-3x2 {
+                gap: 1rem;
+            }
+            
+            .card-info h3 {
+                font-size: 0.85rem;
+            }
+            
+            .play-overlay i {
+                font-size: 2.4rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.4rem;
+            }
+            
+            .gallery-section {
+                padding: 1.5rem 1rem;
+            }
+            
             .modal-content {
                 max-height: 90vh;
                 margin: 10px;
@@ -1008,8 +1386,16 @@
                 bottom: 20px;
             }
             
-            .section-title h2 {
-                font-size: 1.8rem;
+            .close-gallery-modal {
+                width: 38px;
+                height: 38px;
+                font-size: 1.5rem;
+                top: 12px;
+                right: 12px;
+            }
+            
+            .youtube-video-container iframe {
+                height: 350px;
             }
         }
 
@@ -1081,7 +1467,23 @@
                 font-size: 0.7rem;
             }
             
-            /* Modal Data Pribadi Extra Small */
+            .grid-3x2 {
+                gap: 0.8rem;
+            }
+            
+            .card-info {
+                padding: 0.6rem;
+            }
+            
+            .badge {
+                font-size: 0.55rem;
+            }
+            
+            .more-link {
+                font-size: 0.9rem;
+                padding: 10px 16px;
+            }
+            
             .modal-header {
                 padding: 18px 20px;
             }
@@ -1126,6 +1528,23 @@
                 font-size: 0.85rem;
                 bottom: 15px;
             }
+            
+            .close-gallery-modal {
+                width: 34px;
+                height: 34px;
+                font-size: 1.3rem;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .youtube-video-container iframe {
+                height: 250px;
+            }
+            
+            .tombol-tandai {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
@@ -1144,7 +1563,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="profile-photo">                   
-                  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6UGy_CyHH4FrSeccK2ZttN5cT48RNbVmx6In2SHzm0v7vaPdWL_Bmgzx1Ksrv4wCQDFNVYt8jSXfpx5MivZRIm0Dx5gtNOdMh8F1RByiCITFJER6-u2gu7An1jCqoykicCPJDxvk0Wq8bFA4hZiBDHaDStjmJg8cmUMyqCCM52DSjNPTQlumIr7NJZgw/s320/1000682993.png" alt="Deskripsi foto" style="width:100%; height:100%; object-fit:cover;">
+                  <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi6UGy_CyHH4FrSeccK2ZttN5cT48RNbVmx6In2SHzm0v7vaPdWL_Bmgzx1Ksrv4wCQDFNVYt8jSXfpx5MivZRIm0Dx5gtNOdMh8F1RByiCITFJER6-u2gu7An1jCqoykicCPJDxvk0Wq8bFA4hZiBDHaDStjmJg8cmUMyqCCM52DSjNPTQlumIr7NJZgw/s320/1000682993.png" alt="Foto Queendzi" style="width:100%; height:100%; object-fit:cover;">
                 </div>
                 <div class="name-title">
                     <h1>Queendzi Humairah Asmaul Husna</h1>
@@ -1159,16 +1578,12 @@
         </div>
     </header>
     
-    <!-- MUSIC BAR - Diposisikan di bawah email dan di atas navbar (TENGAH) -->
+    <!-- MUSIC BAR -->
     <div class="music-bar-container">
         <div id="music-bar">
-            <button id="playBtn">⏸️</button> <!-- Dimulai dengan pause karena autoplay -->
+            <button id="playBtn">⏸️</button>
             <button id="nextBtn">⏩</button>
-            
-            <div id="progress-container">
-                <div id="progress"></div>
-            </div>
-            
+            <div id="progress-container"><div id="progress"></div></div>
             <input type="range" id="volume" min="0" max="1" step="0.01" value="0.7">
         </div>
     </div>
@@ -1179,64 +1594,43 @@
     <div class="navbar-container">
         <div class="container">
             <div class="navbar">
-                <button class="nav-item" data-modal="modal-personal">
-                    <i class="fas fa-user-circle"></i> Data Pribadi
-                </button>
-                <button class="nav-item" data-modal="modal-education">
-                    <i class="fas fa-graduation-cap"></i> Pendidikan
-                </button>
-                <button class="nav-item" data-modal="modal-hobby">
-                    <i class="fas fa-heart"></i> Hobi
-                </button>
-                <button class="nav-item" data-modal="modal-experience">
-                    <i class="fas fa-briefcase"></i> Pengalaman Kerja
-                </button>
-                <button class="nav-item" data-modal="modal-achievement">
-                    <i class="fas fa-star"></i> Prestasi
-                </button>
-                <button class="nav-item" data-modal="modal-skills">
-                    <i class="fas fa-code"></i> Keterampilan
-                </button>
-                <button class="nav-item" data-modal="modal-organization">
-                    <i class="fas fa-users"></i> Pengalaman Organisasi
-                </button>
+                <button class="nav-item" data-modal="modal-personal"><i class="fas fa-user-circle"></i> Data Pribadi</button>
+                <button class="nav-item" data-modal="modal-education"><i class="fas fa-graduation-cap"></i> Pendidikan</button>
+                <button class="nav-item" data-modal="modal-hobby"><i class="fas fa-heart"></i> Hobi</button>
+                <button class="nav-item" data-modal="modal-experience"><i class="fas fa-briefcase"></i> Pengalaman Kerja</button>
+                <button class="nav-item" data-modal="modal-achievement"><i class="fas fa-star"></i> Prestasi</button>
+                <button class="nav-item" data-modal="modal-skills"><i class="fas fa-code"></i> Keterampilan</button>
+                <button class="nav-item" data-modal="modal-organization"><i class="fas fa-users"></i> Pengalaman Organisasi</button>
             </div>
         </div>
     </div>
     
-    <!-- ACTION BUTTONS - VERTIKAL LAYOUT (UPDATED) -->
+    <!-- ACTION BUTTONS -->
     <div class="container">
         <div class="action-buttons">
-            <!-- Tombol 1: Data Kedua Orang Tua (Biodata Ayah & Ibu) -->
             <a href="kedua-orang-tua.html" class="action-btn" target="_blank">
-                <i class="fas fa-users"></i> <!-- Ikon keluarga -->
+                <i class="fas fa-users"></i>
                 <div class="action-btn-content">
                     <span class="action-btn-title">Data Kedua Orang Tua</span>
                     <span class="action-btn-desc">Biodata Ayah & Ibu</span>
                 </div>
             </a>
-            
-            <!-- Tombol 2: Biodata Ayah (Profil Lengkap) -->
             <a href="biodata-abi.html" class="action-btn" target="_blank">
-                <i class="fas fa-male"></i> <!-- Ikon laki-laki/pria -->
+                <i class="fas fa-male"></i>
                 <div class="action-btn-content">
                     <span class="action-btn-title">Biodata Ayah</span>
                     <span class="action-btn-desc">Profil Lengkap</span>
                 </div>
             </a>
-            
-            <!-- Tombol 3: Alamat Sekolah (Asal Sekolah) -->
             <a href="#" class="action-btn action-btn-koperasi" target="_blank">
-                <i class="fas fa-school"></i> <!-- Ikon sekolah -->
+                <i class="fas fa-school"></i>
                 <div class="action-btn-content">
                     <span class="action-btn-title">Alamat Sekolah</span>
                     <span class="action-btn-desc">Asal Sekolah</span>
                 </div>
             </a>
-            
-            <!-- Tombol 4: WhatsApp Orang Tua (Kontak Darurat) - DENGAN FORMAT PESAN -->
             <a href="#" class="action-btn" id="whatsapp-parent-btn">
-                <i class="fab fa-whatsapp"></i> <!-- Ikon WhatsApp -->
+                <i class="fab fa-whatsapp"></i>
                 <div class="action-btn-content">
                     <span class="action-btn-title">WhatsApp Orang Tua</span>
                     <span class="action-btn-desc">Kontak Darurat</span>
@@ -1245,54 +1639,59 @@
         </div>
     </div>
     
-    <!-- ===== HAPUS SERVICES SECTION (LAYANAN JASA KAMI) ===== -->
-    
-    <!-- ===== HAPUS GALLERY SECTION (GALERI FOTO) ===== -->
-    
-    <!-- ===== HAPUS LIGHTBOX SECTION (TIDAK DIPERLUKAN LAGI) ===== -->
-    
-    <!-- ===== HAPUS VIDEO SECTION ===== -->
+    <!-- ========== GALERI FOTO (3x2) ========== -->
+    <div class="container">
+        <div class="gallery-section">
+            <div class="section-title">
+                <i class="fas fa-camera-retro"></i>
+                <h2>📸 Galeri Foto Queendzi · 3x2</h2>
+            </div>
+            <div class="grid-3x2" id="photoGrid"></div>
+            <a href="#" class="more-link" target="_blank" rel="noopener noreferrer">
+                Lihat Foto Selengkapnya.. <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <!-- ========== GALERI VIDEO (3x2) ========== -->
+        <div class="gallery-section">
+            <div class="section-title">
+                <i class="fas fa-video"></i>
+                <h2>🎬 Galeri Video Queendzi · 3x2</h2>
+            </div>
+            <div class="grid-3x2" id="videoGrid"></div>
+            <a href="#" class="more-link" target="_blank" rel="noopener noreferrer">
+                Lihat Video Selengkapnya.. <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
     
     <!-- Social Media Section -->
     <div class="social-section">
         <div class="container">
             <h2 class="social-title">Follow Me</h2>
             <div class="social-icons">
-                <a href="#" class="social-icon tiktok" title="TikTok">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-                <a href="#" class="social-icon facebook" title="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="social-icon youtube" title="YouTube">
-                    <i class="fab fa-youtube"></i>
-                </a>
-                <a href="#" class="social-icon instagram" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="social-icon twitter" title="Twitter / X">
-                    <i class="fab fa-twitter"></i>
-                </a>
+                <a href="#" class="social-icon tiktok"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-icon youtube"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
             </div>
         </div>
     </div>
     
-    <!-- Footer (UPDATED) -->
     <footer>
         <div class="container">
-            <p>Biodata Anak | © 2026</p>
+            <p>Biodata Queendzi | © 2026</p>
         </div>
     </footer>
     
-    <!-- WhatsApp Button - FLOATING DENGAN FORMAT PESAN -->
-    <a href="#" class="whatsapp-btn" id="whatsapp-float-btn" title="Chat via WhatsApp">
+    <!-- WhatsApp Button Floating -->
+    <a href="#" class="whatsapp-btn" id="whatsapp-float-btn">
         <i class="fab fa-whatsapp"></i>
         WhatsApp
     </a>
     
     <!-- Modal Windows -->
-    
-    <!-- Modal Data Pribadi -->
     <div id="modal-personal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1301,48 +1700,20 @@
             </div>
             <div class="modal-body">
                 <table class="personal-data-table">
-                    <tr>
-                        <td>Nama</td>
-                        <td>: Queendzi Humairah Asmaul Husna</td>
-                    </tr>
-                    <tr>
-                        <td>Tempat, Tgl Lahir</td>
-                        <td>: Bogor, 01 Desember 2015</td>
-                    </tr>
-                    <tr>
-                        <td>Alamat</td>
-                        <td>: Kp. Sawah Rt. 02 Rw. 06, Ds. Gunung Menyan, Kecamatan Pamijahan, Kabupaten Bogor</td>
-                    </tr>
-                    <tr>
-                        <td>Jenis Kelamin</td>
-                        <td>: Perempuan</td>
-                    </tr>
-                    <tr>
-                        <td>Telepon Ibu Kandung</td>
-                        <td>: 0857-1546-6347</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td>: Belum Punya</td>
-                    </tr>
-                    <tr>
-                        <td>Kewarganegaraan</td>
-                        <td>: Indonesia</td>
-                    </tr>
-                    <tr>
-                        <td>Agama</td>
-                        <td>: Islam</td>
-                    </tr>
-                    <tr>
-                        <td>Golongan Darah</td>
-                        <td>: 0</td>
-                    </tr>
+                    <tr><td>Nama</td><td>: Queendzi Humairah Asmaul Husna</td></tr>
+                    <tr><td>Tempat, Tgl Lahir</td><td>: Bogor, 01 Desember 2015</td></tr>
+                    <tr><td>Alamat</td><td>: Kp. Sawah Rt. 02 Rw. 06, Ds. Gunung Menyan, Kecamatan Pamijahan, Kabupaten Bogor</td></tr>
+                    <tr><td>Jenis Kelamin</td><td>: Perempuan</td></tr>
+                    <tr><td>Telepon Ibu Kandung</td><td>: 0857-1546-6347</td></tr>
+                    <tr><td>Email</td><td>: Belum Punya</td></tr>
+                    <tr><td>Kewarganegaraan</td><td>: Indonesia</td></tr>
+                    <tr><td>Agama</td><td>: Islam</td></tr>
+                    <tr><td>Golongan Darah</td><td>: 0</td></tr>
                 </table>
             </div>
         </div>
     </div>
     
-    <!-- Modal Pendidikan -->
     <div id="modal-education" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1351,36 +1722,17 @@
             </div>
             <div class="modal-body">
                 <table class="education-table">
-                    <tr>
-                        <td><strong>PAUD Murah Hati</strong></td>
-                        <td>: 2020 - 2021</td>
-                    </tr>
-                    <tr>
-                        <td><strong>RA Insan Bakti</strong></td>
-                        <td>: 2021 - 2022</td>
-                   </tr>
-                    <tr>
-                        <td><strong>SDN Situ Udik</strong></td>
-                        <td>: 2023 - 2028</td>
-                    </tr>
-                    <tr>
-                        <td><strong>SMP</strong></td>
-                        <td>: 0 - 0</td>
-                    </tr>
-                    <tr>
-                        <td><strong>SMA</strong></td>
-                        <td>: 0 - 0</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Universitas</strong></td>
-                        <td>: 0 - 0</td>
-                    </tr>
+                    <tr><td><strong>PAUD Murah Hati</strong></td><td>: 2020 - 2021</td></tr>
+                    <tr><td><strong>RA Insan Bakti</strong></td><td>: 2021 - 2022</td></tr>
+                    <tr><td><strong>SDN Situ Udik</strong></td><td>: 2023 - 2028</td></tr>
+                    <tr><td><strong>SMP</strong></td><td>: 0 - 0</td></tr>
+                    <tr><td><strong>SMA</strong></td><td>: 0 - 0</td></tr>
+                    <tr><td><strong>Universitas</strong></td><td>: 0 - 0</td></tr>
                 </table>
             </div>
         </div>
     </div>
     
-    <!-- Modal Hobi -->
     <div id="modal-hobby" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1393,14 +1745,10 @@
                     <div class="hobby-tag">Avatar World</div>
                     <div class="hobby-tag">Baby Toys</div>
                 </div>
-                <p style="margin-top: 20px; font-style: italic; color: var(--text-light);">
-                    Hobi-hobi ini membantu dalam pengembangan pribadi dan menjaga keseimbangan antara pekerjaan dan kehidupan pribadi.
-                </p>
             </div>
         </div>
     </div>
     
-    <!-- Modal Pengalaman Kerja -->
     <div id="modal-experience" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1408,17 +1756,11 @@
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <ul class="experience-list">
-                    <li>Belum Kerja</li>
-                </ul>
-                <p style="margin-top: 20px; font-style: italic; color: var(--text-light);">
-                    Pengalaman kerja yang luas di berbagai perusahaan dan proyek menunjukkan kemampuan adaptasi dan keahlian yang beragam.
-                </p>
+                <ul class="experience-list"><li>Belum Kerja</li></ul>
             </div>
         </div>
     </div>
     
-    <!-- Modal Prestasi -->
     <div id="modal-achievement" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1427,36 +1769,17 @@
             </div>
             <div class="modal-body">
                 <div class="achievement-grid">
-                    <div class="achievement-item">
-                        <h3>Peringkat #3 PAUD Murah Hati</h3>
-                        <p>Periode Tahun 2021 - 2022</p>
-                    </div>
-                    <div class="achievement-item">
-                        <h3>Peringkat #1 RA Insan Bakti</h3>
-                        <p>Periode Tahun 2022 - 2023</p>
-                    </div>
-                    <div class="achievement-item">
-                        <h3>Peringkat #1 SDN Situ Udik</h3>
-                        <p>Periode Tahun 2023</p>
-                    </div>
-                    <div class="achievement-item">
-                        <h3>Peringkat #1 SDN Situ Udik</h3>
-                        <p>Periode Tahun 2024</p>
-                    </div>
-                    <div class="achievement-item">
-                        <h3>Peringkat #1 SDN Situ Udik</h3>
-                        <p>Periode Tahun 2025</p>
-                    </div>
-                    <div class="achievement-item">
-                        <h3>Peringkat #1 SDN Situ Udik</h3>
-                        <p>Periode Tahun 2026</p>
-                    </div>
+                    <div class="achievement-item"><h3>Peringkat #3 PAUD Murah Hati</h3><p>Periode Tahun 2021 - 2022</p></div>
+                    <div class="achievement-item"><h3>Peringkat #1 RA Insan Bakti</h3><p>Periode Tahun 2022 - 2023</p></div>
+                    <div class="achievement-item"><h3>Peringkat #1 SDN Situ Udik</h3><p>Periode Tahun 2023</p></div>
+                    <div class="achievement-item"><h3>Peringkat #1 SDN Situ Udik</h3><p>Periode Tahun 2024</p></div>
+                    <div class="achievement-item"><h3>Peringkat #1 SDN Situ Udik</h3><p>Periode Tahun 2025</p></div>
+                    <div class="achievement-item"><h3>Peringkat #1 SDN Situ Udik</h3><p>Periode Tahun 2026</p></div>
                 </div>
             </div>
         </div>
     </div>
     
-    <!-- Modal Keterampilan -->
     <div id="modal-skills" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1464,7 +1787,6 @@
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <h3 style="color: var(--primary-color); margin-bottom: 15px;">Keterampilan Teknis</h3>
                 <ul class="skills-list">
                     <li>Konten Kreator</li>
                     <li>Editor Video</li>
@@ -1472,40 +1794,36 @@
                     <li>Membuat Mainan BlindBox</li>
                     <li>Mengerjakan Pekerjaan Rumah</li>
                     <li>Publik Speaking</li>
-                </ul>     
+                </ul>
             </div>
         </div>
     </div>
     
-    <!-- Modal Pengalaman Organisasi -->
     <div id="modal-organization" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2><i class="fas fa-users"></i> Pengalaman Organisasi</h2>
+                <h2><i class="fas fa-users"></i> PENGALAMAN ORGANISASI</h2>
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
-                <ul class="organization-list">
-                    <li>Belum Pernah Berorganisasi</li>
-                    <li>-</li>
-                    <li>-</li>
-                    <li>-</li>
-                </ul>
-                <p style="margin-top: 20px; font-style: italic; color: var(--text-light);">
-                    Pengalaman organisasi menunjukkan kemampuan kepemimpinan, kerja sama tim, dan kontribusi terhadap masyarakat.
-                </p>
+                <ul class="organization-list"><li>Belum Pernah Berorganisasi</li></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Lightbox untuk Galeri -->
+    <div id="galleryModal" class="gallery-modal">
+        <div class="gallery-modal-content">
+            <div class="gallery-media-container" id="galleryMediaContainer">
+                <div id="galleryModalMedia"></div>
             </div>
         </div>
     </div>
 
     <script>
-        // MUSIC PLAYER FUNCTIONALITY - DIPERBAIKI
-        const playlist = [
-            "https://cdn.jsdelivr.net/gh/Kangeldzi/Biodata-Queendzi-@main/Music/POTRET%20-%20Bunda%20_Official%204K%20Remastered%20Video.mp3"
-        ];
-
+        // MUSIC PLAYER FUNCTIONALITY
+        const playlist = ["https://cdn.jsdelivr.net/gh/Kangeldzi/Biodata-Queendzi-@main/Music/POTRET%20-%20Bunda%20_Official%204K%20Remastered%20Video.mp3"];
         let currentTrack = 0;
-
         const audio = document.getElementById("audioPlayer");
         const playBtn = document.getElementById("playBtn");
         const nextBtn = document.getElementById("nextBtn");
@@ -1513,83 +1831,24 @@
         const progressContainer = document.getElementById("progress-container");
         const volume = document.getElementById("volume");
 
-        // Set sumber audio pertama
         audio.src = playlist[currentTrack];
         audio.volume = volume.value;
 
-        // AUTOPLAY SAAT HALAMAN DIBUKA
         window.addEventListener("load", () => {
-            audio.play().then(() => {
-                playBtn.innerHTML = "⏸️";
-            }).catch((error) => {
-                console.log("Autoplay prevented:", error);
-                playBtn.innerHTML = "▶️";
-                // Beberapa browser memblokir autoplay, jadi kita tampilkan pesan
-                alert("Klik tombol play untuk memulai musik");
-            });
+            audio.play().then(() => playBtn.innerHTML = "⏸️").catch(() => playBtn.innerHTML = "▶️");
         });
-
-        // PLAY / PAUSE
-        playBtn.onclick = () => {
-            if (audio.paused) {
-                audio.play();
-                playBtn.innerHTML = "⏸️";
-            } else {
-                audio.pause();
-                playBtn.innerHTML = "▶️";
-            }
-        };
-
-        // NEXT SONG
-        nextBtn.onclick = () => {
-            currentTrack++;
-            if (currentTrack >= playlist.length) {
-                currentTrack = 0;
-            }
-            audio.src = playlist[currentTrack];
-            audio.play();
-            playBtn.innerHTML = "⏸️";
-        };
-
-        // AUTO NEXT SAAT LAGU SELESAI
-        audio.addEventListener("ended", () => {
-            currentTrack++;
-            if (currentTrack >= playlist.length) {
-                currentTrack = 0;
-            }
-            audio.src = playlist[currentTrack];
-            audio.play();
-        });
-
-        // PROGRESS BAR
-        audio.addEventListener("timeupdate", () => {
-            if (audio.duration) {
-                const percent = (audio.currentTime / audio.duration) * 100;
-                progress.style.width = percent + "%";
-            }
-        });
-
-        // SEEK PROGRESS
-        progressContainer.addEventListener("click", (e) => {
-            const width = progressContainer.clientWidth;
-            const clickX = e.offsetX;
-            const duration = audio.duration;
-            if (duration) {
-                audio.currentTime = (clickX / width) * duration;
-            }
-        });
-
-        // VOLUME CONTROL
-        volume.addEventListener("input", () => {
-            audio.volume = volume.value;
-        });
+        playBtn.onclick = () => { audio.paused ? audio.play() : audio.pause(); playBtn.innerHTML = audio.paused ? "▶️" : "⏸️"; };
+        nextBtn.onclick = () => { currentTrack = (currentTrack + 1) % playlist.length; audio.src = playlist[currentTrack]; audio.play(); playBtn.innerHTML = "⏸️"; };
+        audio.addEventListener("ended", () => { currentTrack = (currentTrack + 1) % playlist.length; audio.src = playlist[currentTrack]; audio.play(); });
+        audio.addEventListener("timeupdate", () => { if(audio.duration) progress.style.width = (audio.currentTime / audio.duration) * 100 + "%"; });
+        progressContainer.addEventListener("click", (e) => { if(audio.duration) audio.currentTime = (e.offsetX / progressContainer.clientWidth) * audio.duration; });
+        volume.addEventListener("input", () => audio.volume = volume.value);
 
         // Efek parallax pada shapes
         document.addEventListener('mousemove', (e) => {
             const shapes = document.querySelectorAll('.shape');
             const mouseX = e.clientX / window.innerWidth;
             const mouseY = e.clientY / window.innerHeight;
-            
             shapes.forEach((shape, index) => {
                 const speed = (index + 1) * 0.3;
                 const x = (mouseX * speed * 20) - 10;
@@ -1598,181 +1857,156 @@
             });
         });
 
-        // Efek untuk action buttons
-        const actionButtons = document.querySelectorAll('.action-btn');
-        actionButtons.forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-                this.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 188, 212, 0.4)';
-            });
-
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-                this.style.boxShadow = 'var(--shadow)';
-            });
-        });
-
-        // Efek untuk nav items
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            item.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px)';
-            });
-
-            item.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Efek untuk WhatsApp button
-        const whatsappFloatBtn = document.querySelector('#whatsapp-float-btn');
-        if (whatsappFloatBtn) {
-            whatsappFloatBtn.addEventListener('mouseenter', function() {
-                this.style.boxShadow = '0 10px 30px rgba(37, 211, 102, 0.6)';
-            });
-
-            whatsappFloatBtn.addEventListener('mouseleave', function() {
-                this.style.boxShadow = '0 5px 20px rgba(37, 211, 102, 0.4)';
-            });
-        }
-
-        // Modal functions
+        // Modal functions untuk biodata
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
+            if (modal) { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
         }
-
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'none';
+            if (modal) { modal.style.display = 'none'; document.body.style.overflow = 'auto'; }
+        }
+        document.querySelectorAll('.nav-item').forEach(btn => { btn.addEventListener('click', () => openModal(btn.getAttribute('data-modal'))); });
+        document.querySelectorAll('.close-modal').forEach(btn => { btn.addEventListener('click', function() { closeModal(this.closest('.modal').id); }); });
+        document.querySelectorAll('.modal').forEach(modal => { modal.addEventListener('click', function(e) { if(e.target === this) closeModal(this.id); }); });
+        document.addEventListener('keydown', e => { if(e.key === 'Escape') document.querySelectorAll('.modal').forEach(m => { if(m.style.display === 'flex') closeModal(m.id); }); });
+
+        // ===== FUNGSI WHATSAPP =====
+        function getWhatsAppMessage() {
+            return encodeURIComponent("*┅═•❃✽༊°°🍀🌻🍀°°༊✽❃•═┅*\n*════ ◎•❀•◎﷽◎•❀•◎ ════*\n\n*_Assalamualaikum Warahmatullahi Wabarakatuh_*\n==========================\n*Halo Kang L, Saya Kirim Pesan Lewat Biodata Anak Anda*\n==========================\n*ATAS NAMA*\n*Nama : Queendzi*\n*Alamat : Kp. Sawah Rt. 002 Rw. 006 Desa Gunung Menyan Kecamatan Pamijahan Kabupaten Bogor Kode POS 16810*\n==========================\n*Keperluan Saya :*\n(Tulis Keperluan Anda Dibawah ini)\n\n\n\n\n===========================\n*_Wassalamu'alaikum Warahmatullahi Wabarakatuh_*\n\n*┅═•❃✽༊°°🍀🌻🍀°°༊✽❃•═┅*");
+        }
+        function openWhatsApp() { window.open(`https://wa.me/6285218483129?text=${getWhatsAppMessage()}`, '_blank'); }
+        document.getElementById('whatsapp-parent-btn')?.addEventListener('click', e => { e.preventDefault(); openWhatsApp(); });
+        document.getElementById('whatsapp-float-btn')?.addEventListener('click', e => { e.preventDefault(); openWhatsApp(); });
+
+        // ========== GALERI DATA DAN FUNGSI ==========
+        // Data Foto untuk Queendzi (6 item)
+        const photoItems = [
+            { title: "Queendzi", desc: "Foto Profil", src: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoV9X3QmNsVUQ96-zk9JeG9Nk7eMJUWrKofq1KRpQUxEhoZZtmAFI-DOuKxahz6ad3AEFWPVo4tk9UPpHarkZvGeVVUg46G_CXOCV4gJug4dEJ4uk-Io_Co96VvUQG6oQQ-gfJJ8G1rJYd6qfUkyE5uCPMtsO-B6lp6GT6d5salOryujOVt1V3nBjYg0w/s1248/1000682954.jpg", hdSrc: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgoV9X3QmNsVUQ96-zk9JeG9Nk7eMJUWrKofq1KRpQUxEhoZZtmAFI-DOuKxahz6ad3AEFWPVo4tk9UPpHarkZvGeVVUg46G_CXOCV4gJug4dEJ4uk-Io_Co96VvUQG6oQQ-gfJJ8G1rJYd6qfUkyE5uCPMtsO-B6lp6GT6d5salOryujOVt1V3nBjYg0w/s1248/1000682954.jpg", badge: "Profil" },
+            { title: "Foto 2", desc: "Momen bahagia", src: "https://picsum.photos/id/100/600/600", hdSrc: "https://picsum.photos/id/100/1200/1200", badge: "Foto" },
+            { title: "Foto 3", desc: "Bersama teman", src: "https://picsum.photos/id/101/600/600", hdSrc: "https://picsum.photos/id/101/1200/1200", badge: "Foto" },
+            { title: "Foto 4", desc: "Kegiatan sekolah", src: "https://picsum.photos/id/102/600/600", hdSrc: "https://picsum.photos/id/102/1200/1200", badge: "Foto" },
+            { title: "Foto 5", desc: "Liburan", src: "https://picsum.photos/id/103/600/600", hdSrc: "https://picsum.photos/id/103/1200/1200", badge: "Foto" },
+            { title: "Foto 6", desc: "Keluarga", src: "https://picsum.photos/id/104/600/600", hdSrc: "https://picsum.photos/id/104/1200/1200", badge: "Foto" }
+        ];
+
+        // Data Video untuk Queendzi dengan YouTube ID
+        const videoItems = [
+            { title: "Video Queendzi", desc: "Konten spesial", videoId: "fVwG7Z_fgzU", badge: "YouTube" },
+            { title: "Video 02", desc: "Konten menarik 2", videoId: "dQw4w9WgXcQ", badge: "YouTube" },
+            { title: "Video 03", desc: "Konten menarik 3", videoId: "fVsONlc3OUY", badge: "YouTube" },
+            { title: "Video 04", desc: "Konten menarik 4", videoId: "QrGrOK8oZG8", badge: "YouTube" },
+            { title: "Video 05", desc: "Konten menarik 5", videoId: "xVcYVwZRqkk", badge: "YouTube" },
+            { title: "Video 06", desc: "Konten menarik 6", videoId: "J3VX1VhD4fQ", badge: "YouTube" }
+        ];
+
+        const photoGrid = document.getElementById('photoGrid');
+        const videoGrid = document.getElementById('videoGrid');
+        const galleryModal = document.getElementById('galleryModal');
+        const galleryModalMedia = document.getElementById('galleryModalMedia');
+        const galleryMediaContainer = document.getElementById('galleryMediaContainer');
+
+        function addCloseButtonToContainer() {
+            let closeBtn = document.querySelector('#galleryMediaContainer .close-gallery-modal');
+            if (!closeBtn) {
+                closeBtn = document.createElement('div');
+                closeBtn.className = 'close-gallery-modal';
+                closeBtn.innerHTML = '&times;';
+                closeBtn.onclick = () => {
+                    galleryModal.style.display = 'none';
+                    galleryModalMedia.innerHTML = '';
+                    document.body.style.overflow = 'auto';
+                };
+                galleryMediaContainer.appendChild(closeBtn);
+            }
+        }
+
+        function createPhotoCard(item) {
+            const card = document.createElement('div');
+            card.className = 'thumbnail-card';
+            const mediaWrapper = document.createElement('div');
+            mediaWrapper.className = 'media-wrapper';
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.alt = item.title;
+            img.className = 'thumb-img';
+            img.loading = 'lazy';
+            mediaWrapper.appendChild(img);
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'card-info';
+            infoDiv.innerHTML = `<h3><span>${item.title}</span><span class="badge">${item.badge}</span></h3><p><i class="fas fa-camera"></i> ${item.desc}</p>`;
+            card.appendChild(mediaWrapper);
+            card.appendChild(infoDiv);
+            card.addEventListener('click', () => {
+                galleryModalMedia.innerHTML = `<img src="${item.hdSrc}" class="modal-media" style="max-width:100%; max-height:70vh;">`;
+                galleryModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                addCloseButtonToContainer();
+            });
+            return card;
+        }
+
+        function createVideoCard(item) {
+            const card = document.createElement('div');
+            card.className = 'thumbnail-card';
+            const mediaWrapper = document.createElement('div');
+            mediaWrapper.className = 'media-wrapper';
+            const videoDiv = document.createElement('div');
+            videoDiv.className = 'video-thumb';
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube.com/embed/${item.videoId}?autoplay=0&controls=0&modestbranding=1&rel=0&showinfo=0&disablekb=1`;
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.objectFit = 'cover';
+            iframe.style.pointerEvents = 'none';
+            videoDiv.appendChild(iframe);
+            const overlay = document.createElement('div');
+            overlay.className = 'play-overlay';
+            overlay.innerHTML = '<i class="fas fa-play-circle"></i>';
+            videoDiv.appendChild(overlay);
+            mediaWrapper.appendChild(videoDiv);
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'card-info';
+            infoDiv.innerHTML = `<h3><span>${item.title}</span><span class="badge">${item.badge}</span></h3><p><i class="fas fa-video"></i> ${item.desc}</p>`;
+            card.appendChild(mediaWrapper);
+            card.appendChild(infoDiv);
+            card.addEventListener('click', () => {
+                const modalContent = `
+                    <div class="modal-youtube-wrapper">
+                        <div class="youtube-video-container">
+                            <iframe src="https://www.youtube.com/embed/${item.videoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-info">🎬 ${item.title} — ${item.desc}</div>
+                        <div style="text-align: center; padding: 10px;"><button id="tombolTandai" class="tombol-tandai">Tandai Selesai</button></div>
+                        <p class="video-footer-text">Video Queendzi</p>
+                    </div>
+                `;
+                galleryModalMedia.innerHTML = modalContent;
+                galleryModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                addCloseButtonToContainer();
+                const tombol = document.getElementById('tombolTandai');
+                if (tombol) {
+                    tombol.onclick = function() {
+                        this.textContent = this.textContent === 'Tandai Selesai' ? 'Tandai Sudah Selesai' : 'Tandai Selesai';
+                    };
+                }
+            });
+            return card;
+        }
+
+        photoItems.forEach(item => { photoGrid.appendChild(createPhotoCard(item)); });
+        videoItems.forEach(item => { videoGrid.appendChild(createVideoCard(item)); });
+
+        galleryModal.onclick = (e) => {
+            if (e.target === galleryModal) {
+                galleryModal.style.display = 'none';
+                galleryModalMedia.innerHTML = '';
                 document.body.style.overflow = 'auto';
             }
-        }
-
-        // Event listeners untuk tombol navbar
-        document.querySelectorAll('.nav-item').forEach(button => {
-            button.addEventListener('click', function() {
-                const modalId = this.getAttribute('data-modal');
-                openModal(modalId);
-            });
-        });
-
-        // Event listeners untuk tombol close modal
-        document.querySelectorAll('.close-modal').forEach(button => {
-            button.addEventListener('click', function() {
-                const modal = this.closest('.modal');
-                if (modal) {
-                    closeModal(modal.id);
-                }
-            });
-        });
-
-        // Tutup modal ketika klik di luar konten modal
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('click', function(e) {
-                if (e.target === this) {
-                    closeModal(this.id);
-                }
-            });
-        });
-
-        // Tutup modal dengan tombol Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                // Close modals if open
-                document.querySelectorAll('.modal').forEach(modal => {
-                    if (modal.style.display === 'flex') {
-                        closeModal(modal.id);
-                    }
-                });
-            }
-        });
-
-        // ===== FUNGSI WHATSAPP DENGAN FORMAT PESAN BARU =====
-        // Format pesan WhatsApp sesuai permintaan terbaru
-        function getWhatsAppMessage() {
-            // Menggunakan string template untuk mempertahankan format
-            const message = 
-                "*┅═•❃✽༊°°🍀🌻🍀°°༊✽❃•═┅*\n" +
-                "*════ ◎•❀•◎﷽◎•❀•◎ ════*\n" +
-                "\n" +
-                "*_Assalamualaikum Warahmatullahi Wabarakatuh_*\n" +
-                "==========================\n" +
-                "*Halo Kang L, Saya Kirim Pesan Lewat Biodata Anak Anda*\n" +
-                "==========================\n" +
-                "*ATAS NAMA*\n" +
-                "*Nama : Queendzi*\n" +
-                "*Alamat : Kp. Sawah Rt. 002 Rw. 006 Desa Gunung Menyan Kecamatan Pamijahan Kabupaten Bogor Kode POS 16810*\n" +
-                "==========================\n" +
-                "*Keperluan Saya :*\n" +
-                "(Tulis Keperluan Anda Dibawah ini)\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "\n" +
-                "===========================\n" +
-                "*_Wassalamu'alaikum Warahmatullahi Wabarakatuh_*\n" +
-                "\n" +
-                "*┅═•❃✽༊°°🍀🌻🍀°°༊✽❃•═┅*";
-            
-            // Encode untuk URL
-            return encodeURIComponent(message);
-        }
-
-        // Fungsi untuk membuka WhatsApp dengan nomor dan pesan yang sudah diformat
-        function openWhatsApp() {
-            const phoneNumber = "6285218483129"; // Nomor WhatsApp tujuan
-            const message = getWhatsAppMessage();
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
-            
-            // Buka di tab baru
-            window.open(whatsappUrl, '_blank');
-        }
-
-        // Event listener untuk tombol WhatsApp Orang Tua di action buttons
-        const whatsappParentBtn = document.getElementById('whatsapp-parent-btn');
-        if (whatsappParentBtn) {
-            whatsappParentBtn.addEventListener('click', function(e) {
-                e.preventDefault(); // Mencegah link default (#)
-                openWhatsApp(); // Panggil fungsi untuk membuka WhatsApp
-            });
-        }
-
-        // Event listener untuk tombol WhatsApp floating
-        const whatsappFloatBtnElement = document.getElementById('whatsapp-float-btn');
-        if (whatsappFloatBtnElement) {
-            whatsappFloatBtnElement.addEventListener('click', function(e) {
-                e.preventDefault(); // Mencegah link default (#)
-                openWhatsApp(); // Panggil fungsi untuk membuka WhatsApp
-            });
-        }
-
-        // Animasi saat halaman dimuat
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animasi untuk elemen utama
-            const elements = [
-                ...document.querySelectorAll('.social-icon'),
-                ...document.querySelectorAll('.action-btn'),
-                ...document.querySelectorAll('.nav-item')
-            ];
-            
-            elements.forEach((el, index) => {
-                if (!el) return;
-                
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                    el.style.opacity = '1';
-                    el.style.transform = 'translateY(0)';
-                }, 200 + (index * 100));
-            });
-        });
+        };
     </script>
 </body>
 </html>
