@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Galeri Foto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a237e;
+            --secondary-color: #00bcd4;
+            --text-color: #333;
+            --text-light: #777;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f5f7ff;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+
+        /* ========== GALERI STYLES ========== */
+        .gallery-section {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(2px);
+            border-radius: 48px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid rgba(26, 35, 126, 0.3);
+        }
+
+        .section-title i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            background: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        /* GRID 3x2 - 3 kolom horizontal, 2 baris vertikal */
+        .grid-3x2 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.8rem;
+            width: 100%;
+        }
+
+        .thumbnail-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #ffffffdd;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            animation: borderGlow 3s infinite alternate;
+            animation-play-state: paused;
+        }
+
+        .thumbnail-card:hover {
+            transform: scale(1.03) translateY(-8px);
+            box-shadow: 0 30px 45px -12px rgba(0, 0, 0, 0.35), 0 0 0 2px var(--secondary-color) inset;
+            animation-play-state: running;
+        }
+
+        .media-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: #e0f2fe;
+        }
+
+        .thumb-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease-out, filter 0.4s;
+            will-change: transform;
+        }
+
+        .thumbnail-card:hover .thumb-img {
+            transform: scale(1.12) translateX(4%) translateY(3%);
+            filter: brightness(1.05) contrast(1.08);
+        }
+
+        .card-info {
+            padding: 0.9rem 1rem 1rem;
+            background: linear-gradient(135deg, #f8fafc, #eef2f8);
+            border-top: 1px solid rgba(26, 35, 126, 0.2);
+        }
+
+        .card-info h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            background: var(--secondary-color)20;
+            padding: 3px 10px;
+            border-radius: 40px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .card-info p {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            margin-top: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .more-link {
+            display: inline-block;
+            margin-top: 2rem;
+            text-align: center;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--primary-color), #0a0e2a);
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+            letter-spacing: 0.5px;
+        }
+
+        .more-link i {
+            margin-left: 8px;
+            transition: transform 0.2s;
+        }
+
+        .more-link:hover {
+            background: linear-gradient(135deg, var(--secondary-color), #0097a7);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+        }
+
+        .more-link:hover i {
+            transform: translateX(6px);
+        }
+
+        @keyframes borderGlow {
+            0% { box-shadow: 0 0 0 0px var(--secondary-color)40; }
+            100% { box-shadow: 0 0 0 3px var(--secondary-color)80; }
+        }
+
+        .thumbnail-card {
+            animation: borderGlow 3s infinite alternate;
+            animation-play-state: paused;
+        }
+
+        .thumbnail-card:hover {
+            animation-play-state: running;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .grid-3x2 .thumbnail-card {
+            animation: fadeInUp 0.5s ease backwards;
+        }
+
+        .grid-3x2 .thumbnail-card:nth-child(1) { animation-delay: 0.05s; }
+        .grid-3x2 .thumbnail-card:nth-child(2) { animation-delay: 0.1s; }
+        .grid-3x2 .thumbnail-card:nth-child(3) { animation-delay: 0.15s; }
+        .grid-3x2 .thumbnail-card:nth-child(4) { animation-delay: 0.2s; }
+        .grid-3x2 .thumbnail-card:nth-child(5) { animation-delay: 0.25s; }
+        .grid-3x2 .thumbnail-card:nth-child(6) { animation-delay: 0.3s; }
+
+        /* Modal Lightbox untuk Galeri */
+        .gallery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            animation: fadeInModal 0.3s ease;
+        }
+
+        @keyframes fadeInModal {
+            from { opacity: 0; backdrop-filter: blur(0); }
+            to { opacity: 1; backdrop-filter: blur(12px); }
+        }
+
+        .gallery-modal-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            background: transparent;
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-media-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #0f2c3c;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 235, 170, 0.6);
+            padding: 20px;
+        }
+
+        .close-gallery-modal {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            color: white;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 1001;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-gallery-modal:hover {
+            background: #ff4757;
+            transform: scale(1.08);
+            border-color: white;
+        }
+
+        .modal-media {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 70vh;
+            display: block;
+            margin: 0 auto;
+            border-radius: 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid-3x2 {
+                gap: 1rem;
+            }
+            
+            .card-info h3 {
+                font-size: 0.85rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.4rem;
+            }
+            
+            .gallery-section {
+                padding: 1.5rem 1rem;
+            }
+            
+            .close-gallery-modal {
+                width: 38px;
+                height: 38px;
+                font-size: 1.5rem;
+                top: 12px;
+                right: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid-3x2 {
+                gap: 0.8rem;
+            }
+            
+            .card-info {
+                padding: 0.6rem;
+            }
+            
+            .badge {
+                font-size: 0.55rem;
+            }
+            
+            .more-link {
+                font-size: 0.9rem;
+                padding: 10px 16px;
+            }
+            
+            .close-gallery-modal {
+                width: 34px;
+                height: 34px;
+                font-size: 1.3rem;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ========== GALERI FOTO GRID 3x2 ========== -->
+        <div class="gallery-section">
+            <div class="section-title">
+                <i class="fas fa-camera-retro"></i>
+                <h2>📸 Galeri Foto</h2>
+            </div>
+            <div class="grid-3x2" id="photoGrid">
+                <!-- Foto 1 -->
+                <div class="thumbnail-card" onclick="openGalleryImage('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjeIiBl5_ajrxAagCWP3en4uYQ8CjwQRsWe2EoMPZ_2kp_H-Mp9qYKuLi5NMmHwthEBJS5cKdCu0aY1Q1wVVDvGymR7Ln1LNPjlCbkOm0DhwP0TdaOEDY_PQIM0QQ7MgS3VaqojVfpDsWdLsFHiMma5Ei02LzOiRkZMLl8mFBzSAFwf49cr481S6R9MhL4/s1280/1000779936.jpg')">
+                    <div class="media-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjeIiBl5_ajrxAagCWP3en4uYQ8CjwQRsWe2EoMPZ_2kp_H-Mp9qYKuLi5NMmHwthEBJS5cKdCu0aY1Q1wVVDvGymR7Ln1LNPjlCbkOm0DhwP0TdaOEDY_PQIM0QQ7MgS3VaqojVfpDsWdLsFHiMma5Ei02LzOiRkZMLl8mFBzSAFwf49cr481S6R9MhL4/s1280/1000779936.jpg" alt="Foto 1" class="thumb-img" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3><span>Kang L</span><span class="badge">Galeri Foto</span></h3>
+                        <p><i class="fas fa-camera"></i> Foto #1</p>
+                    </div>
+                </div>
+                <!-- Foto 2 -->
+                <div class="thumbnail-card" onclick="openGalleryImage('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDh0fLKXzb4Uj3kU6AgbMAgiKz8omXCJ73jKzl7hAXJ19IxQv2Gn3eBpUdrrF6WkXg5AImCBow8Uwa3irRVV5-zlEwLRF2kotvN7rdoUs5t7AOLXRtq0CCSrdLagJ06V_mLKZ3BgpCxLfVOzQuOhcPyixf_wJt3OLAe2EkvIWqVj_7obDI0C_6RvvzwGw/s1280/1000839041.jpg')">
+                    <div class="media-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDh0fLKXzb4Uj3kU6AgbMAgiKz8omXCJ73jKzl7hAXJ19IxQv2Gn3eBpUdrrF6WkXg5AImCBow8Uwa3irRVV5-zlEwLRF2kotvN7rdoUs5t7AOLXRtq0CCSrdLagJ06V_mLKZ3BgpCxLfVOzQuOhcPyixf_wJt3OLAe2EkvIWqVj_7obDI0C_6RvvzwGw/s1280/1000839041.jpg" alt="Foto 2" class="thumb-img" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3><span>Kang L</span><span class="badge">Galeri Foto</span></h3>
+                        <p><i class="fas fa-camera"></i> Foto #2</p>
+                    </div>
+                </div>
+                <!-- Foto 3 -->
+                <div class="thumbnail-card" onclick="openGalleryImage('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUqnZ5M-BhW7sifufq3YrgBgevigPLMKZXvCKwPCKsFYxt8pQqg5Jk6i2meW-eYB0o81AL8JoRsgqsv9SIEMzdfxx8fsyonGJFhKm9vbx9MlBXkE-eK4RqqNaUtmCoY1ajRPhKyi2bJxxcfLxlOkYVWeIDDTwJta4fuISwXmVqRkJk_vt4dzN0wCO-7bQ/s1280/1000839044.jpg')">
+                    <div class="media-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUqnZ5M-BhW7sifufq3YrgBgevigPLMKZXvCKwPCKsFYxt8pQqg5Jk6i2meW-eYB0o81AL8JoRsgqsv9SIEMzdfxx8fsyonGJFhKm9vbx9MlBXkE-eK4RqqNaUtmCoY1ajRPhKyi2bJxxcfLxlOkYVWeIDDTwJta4fuISwXmVqRkJk_vt4dzN0wCO-7bQ/s1280/1000839044.jpg" alt="Foto 3" class="thumb-img" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3><span>Kang L</span><span class="badge">Galeri Foto</span></h3>
+                        <p><i class="fas fa-camera"></i> Foto #3</p>
+                    </div>
+                </div>
+                <!-- Foto 4 -->
+                <div class="thumbnail-card" onclick="openGalleryImage('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIEmPMAh6knFKU7v3XVisTNZjfm7YnOpjQNboSrLjwEDqo2vUQ93jNGeKyN9XhmM-dOVlAUkPrSVU3iC0JDs-DspeTfSZ1UhtdhwGWyPzhqkLpOEVVezNjzHNA6ViLjbL3QtFroIcO91IDCHHs1YwHWuwwyq8VCzq7slOz-nsh935k2ch36RLHkyz7u1g/s1280/1000839038.jpg')">
+                    <div class="media-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgIEmPMAh6knFKU7v3XVisTNZjfm7YnOpjQNboSrLjwEDqo2vUQ93jNGeKyN9XhmM-dOVlAUkPrSVU3iC0JDs-DspeTfSZ1UhtdhwGWyPzhqkLpOEVVezNjzHNA6ViLjbL3QtFroIcO91IDCHHs1YwHWuwwyq8VCzq7slOz-nsh935k2ch36RLHkyz7u1g/s1280/1000839038.jpg" alt="Foto 4" class="thumb-img" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3><span>Kang L</span><span class="badge">Galeri Foto</span></h3>
+                        <p><i class="fas fa-camera"></i> Foto #4</p>
+                    </div>
+                </div>
+                <!-- Foto 5 -->
+                <div class="thumbnail-card" onclick="openGalleryImage('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhJu7G5Z3ac2iKjJrfyD60p7LNHI5HY_Q4aJFPtBghOBkrQGCoi3UYLuqnyJ32EXdO4CScZY5c2qigSqZDuB85T03aVu369TuaDDhkeKuy6YykWn9mxt4zf1pr6ECvNyAAMi1cqWQ-MJ4sk8RtnbErYcMdyXQ_s2OR2jc3G5FjQG82-VtBCqg1D1NAsJ3g/s1280/1000839037.jpg')">
+                    <div class="media-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhJu7G5Z3ac2iKjJrfyD60p7LNHI5HY_Q4aJFPtBghOBkrQGCoi3UYLuqnyJ32EXdO4CScZY5c2qigSqZDuB85T03aVu369TuaDDhkeKuy6YykWn9mxt4zf1pr6ECvNyAAMi1cqWQ-MJ4sk8RtnbErYcMdyXQ_s2OR2jc3G5FjQG82-VtBCqg1D1NAsJ3g/s1280/1000839037.jpg" alt="Foto 5" class="thumb-img" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3><span>Kang L</span><span class="badge">Galeri Foto</span></h3>
+                        <p><i class="fas fa-camera"></i> Foto #5</p>
+                    </div>
+                </div>
+                <!-- Foto 6 -->
+                <div class="thumbnail-card" onclick="openGalleryImage('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQtj-EckbKFixXoGWp8Xj_Wju8Q0zdq5phD7CPPHyVWH50SXcody5JhrRXRISuZg9UaLsUylpifu7I8mETmcCSUKY6UMcGu_VJn8nwqq72SGJrr0ZY0bBaC7VcJgGJTc5UCwFRf5reAhX6rhO8R6J61U99Hp8XrzeKejvgH7-NWMrHPFvxblnZmJZHmD0/s1280/1000839043.jpg')">
+                    <div class="media-wrapper">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQtj-EckbKFixXoGWp8Xj_Wju8Q0zdq5phD7CPPHyVWH50SXcody5JhrRXRISuZg9UaLsUylpifu7I8mETmcCSUKY6UMcGu_VJn8nwqq72SGJrr0ZY0bBaC7VcJgGJTc5UCwFRf5reAhX6rhO8R6J61U99Hp8XrzeKejvgH7-NWMrHPFvxblnZmJZHmD0/s1280/1000839043.jpg" alt="Foto 6" class="thumb-img" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3><span>Kang L</span><span class="badge">Galeri Foto</span></h3>
+                        <p><i class="fas fa-camera"></i> Foto #6</p>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="more-link" target="_blank" rel="noopener noreferrer">
+                Lihat Foto Selengkapnya.. <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Modal Lightbox untuk Galeri -->
+    <div id="galleryModal" class="gallery-modal">
+        <div class="gallery-modal-content">
+            <div class="gallery-media-container" id="galleryMediaContainer">
+                <div id="galleryModalMedia"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== GALERI FUNGSI ==========
+        const galleryModal = document.getElementById('galleryModal');
+        const galleryModalMedia = document.getElementById('galleryModalMedia');
+        const galleryMediaContainer = document.getElementById('galleryMediaContainer');
+
+        function addCloseButtonToContainer() {
+            let closeBtn = document.querySelector('#galleryMediaContainer .close-gallery-modal');
+            if (!closeBtn) {
+                closeBtn = document.createElement('div');
+                closeBtn.className = 'close-gallery-modal';
+                closeBtn.innerHTML = '&times;';
+                closeBtn.onclick = () => {
+                    galleryModal.style.display = 'none';
+                    galleryModalMedia.innerHTML = '';
+                    document.body.style.overflow = 'auto';
+                };
+                galleryMediaContainer.appendChild(closeBtn);
+            }
+        }
+
+        function openGalleryImage(imageUrl) {
+            galleryModalMedia.innerHTML = `<img src="${imageUrl}" class="modal-media" style="max-width:100%; max-height:70vh;">`;
+            galleryModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            addCloseButtonToContainer();
+        }
+
+        // Tutup modal jika klik di luar area konten
+        galleryModal.onclick = (e) => {
+            if (e.target === galleryModal) {
+                galleryModal.style.display = 'none';
+                galleryModalMedia.innerHTML = '';
+                document.body.style.overflow = 'auto';
+            }
+        };
+    </script>
+</body>
+</html>
