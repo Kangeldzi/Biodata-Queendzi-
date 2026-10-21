@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor Profil — Portofolio Aku</title>
+  <style>
+    :root { --bg: #f6f8ff; --ink: #263653; --line: #e7eaf4; --primary: #438fd1; --danger: #e74c3c; }
+    body { margin: 0; font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--ink); padding: 20px; }
+    .container { max-width: 800px; margin: auto; background: #fff; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    h1 { margin-top: 0; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+    input, textarea { width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 8px; box-sizing: border-box; font-family: inherit; }
+    button { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 15px; }
+    button:hover { opacity: 0.9; }
+    .btn-danger { background: var(--danger); padding: 8px 12px; font-size: 12px; }
+    .btn-add { background: #2ecc71; padding: 8px 12px; font-size: 12px; margin-top: 5px; }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    @media(max-width: 600px) { .row { grid-template-columns: 1fr; } }
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #263653; color: #fff; padding: 12px 20px; border-radius: 10px; opacity: 0; transition: 0.3s; z-index: 100; }
+    .toast.show { opacity: 1; }
+    .section-title { margin-top: 30px; border-bottom: 2px solid var(--line); padding-bottom: 5px; color: var(--primary); }
+    .dynamic-item { background: var(--bg); padding: 15px; border-radius: 10px; margin-bottom: 10px; border: 1px solid var(--line); position: relative;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✏️ Editor Profil</h1>
+    <p>Perbarui data di bawah ini. Data akan tersimpan otomatis di browser dan tampil di halaman utama.</p>
+    
+    <form id="editorForm">
+      <h3 class="section-title">Data Utama</h3>
+      <div class="row">
+        <div class="form-group"><label>Nama Lengkap</label><input type="text" id="name" required></div>
+        <div class="form-group"><label>Nama Panggilan</label><input type="text" id="nickname"></div>
+      </div>
+      <div class="row">
+        <div class="form-group"><label>Nama Sekolah</label><input type="text" id="school"></div>
+        <div class="form-group"><label>Kelas</label><input type="text" id="className"></div>
+      </div>
+      <div class="row">
+        <div class="form-group"><label>Tahun Ajaran</label><input type="text" id="year"></div>
+        <div class="form-group"><label>Jenis Kelamin</label><input type="text" id="gender"></div>
+      </div>
+      <div class="row">
+        <div class="form-group"><label>Status Anak</label><input type="text" id="status"></div>
+        <div class="form-group"><label>Kode Siswa</label><input type="text" id="studentNo"></div>
+      </div>
+      <div class="row">
+        <div class="form-group"><label>No WhatsApp</label><input type="text" id="phone"></div>
+        <div class="form-group"><label>Email</label><input type="email" id="email"></div>
+      </div>
+      <div class="form-group"><label>Alamat</label><input type="text" id="address"></div>
+      <div class="form-group"><label>URL Foto Profil (Avatar)</label><input type="url" id="photo"></div>
+      
+      <h3 class="section-title">Profil Singkat</h3>
+      <div class="row">
+        <div class="form-group"><label>Hobi</label><input type="text" id="hobby"></div>
+        <div class="form-group"><label>Cita-cita</label><input type="text" id="dream"></div>
+      </div>
+      <div class="form-group"><label>Pelajaran Favorit</label><input type="text" id="subject"></div>
+      <div class="form-group"><label>Tentang Saya</label><textarea id="about" rows="3"></textarea></div>
+      <div class="form-group"><label>Motto Hidup</label><input type="text" id="motto"></div>
+      
+      <!-- PENDIDIKAN DINAMIS -->
+      <h3 class="section-title">Riwayat Pendidikan</h3>
+      <div id="pendidikanContainer"></div>
+      <button type="button" class="btn-add" onclick="addPendidikan()">+ Tambah Pendidikan</button>
+
+      <!-- KETERAMPILAN DINAMIS -->
+      <h3 class="section-title">Keterampilan</h3>
+      <div id="keterampilanContainer"></div>
+      <button type="button" class="btn-add" onclick="addKeterampilan()">+ Tambah Keterampilan</button>
+
+      <!-- PENGALAMAN KERJA DINAMIS -->
+      <h3 class="section-title">Pengalaman Kerja</h3>
+      <div id="pengalamanKerjaContainer"></div>
+      <button type="button" class="btn-add" onclick="addPengalamanKerja()">+ Tambah Pengalaman Kerja</button>
+
+      <!-- PENGALAMAN ORGANISASI DINAMIS -->
+      <h3 class="section-title">Pengalaman Organisasi</h3>
+      <div id="pengalamanOrganisasiContainer"></div>
+      <button type="button" class="btn-add" onclick="addPengalamanOrganisasi()">+ Tambah Pengalaman Organisasi</button>
+
+      <br><br>
+      <button type="submit" style="width: 100%; font-size: 16px; padding: 15px;">💾 Simpan Data</button>
+      <a href="index.html" style="display:block; text-align:center; margin-top:15px; color:var(--primary); text-decoration:none; font-weight: bold;">← Kembali ke Portofolio</a>
+    </form>
+  </div>
+  <div class="toast" id="toast">Data berhasil disimpan!</div>
+
+  <script>
+    const STORAGE_KEY = "myStudentPortfolio.v4";
+    const DEFAULT_STUDENT = {
+      name: "Queendzi Humairah Asmaul Husna", nickname: "Queendzi", school: "SD Negri Situ Udik", className: "Kelas 5C", year: "2026/2027", studentNo: "DEMO-001", status: "Anak Pertama", phone: "0852-1848-3129", email: "queendzi.hah@gmail.com", address: "Kp. Sawah Rt. 002 Rw. 006 Desa Gunung Menyan, Kecamatan Pamijahan, Kabupaten Bogor", gender: "Perempuan", photo: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXe_ozbCgMbl8NiixpOpFjs3zSAEOB-LLhdu6G4NibTmCWOZZXJq0ddFFw2S-UUz0IzfS5jQ4ZV_IkN06xJ_8ZGFERaSm_Ytonb48S-RXOwpoqCiCcCLUqnpBC97iMrUM3w7TeCcdOeVEeIDHU1GspLx15CPyNCEO5JPGSZxoTaRLVhY0zPhyhcAKYbiI/s416/1000850674.jpg", hobby: "Menggambar 🎨", dream: "Guru", subject: "Matematika", about: "Aku Queendzi...", extra: "Ingin belajar...", motto: "Jangan takut mencoba...",
+      pendidikan: [{ jenjang: "PAUD/TK", sekolah: "TK Tunas Harapan", tahun: "2018 - 2020" }, { jenjang: "SD", sekolah: "SD Negri Situ Udik", tahun: "2020 - Sekarang" }],
+      keterampilan: [{ nama: "Menggambar", deskripsi: "Mahir mewarnai" }],
+      pengalamanKerja: [{ posisi: "Ketua Kelas", tempat: "SDN Situ Udik", tahun: "2023" }],
+      pengalamanOrganisasi: [{ organisasi: "Pramuka", peran: "Anggota", tahun: "2022" }]
+    };
+
+    let student = JSON.parse(localStorage.getItem(STORAGE_KEY)) || DEFAULT_STUDENT;
+    // Pastikan array exist
+    if(!Array.isArray(student.pendidikan)) student.pendidikan = [];
+    if(!Array.isArray(student.keterampilan)) student.keterampilan = [];
+    if(!Array.isArray(student.pengalamanKerja)) student.pengalamanKerja = [];
+    if(!Array.isArray(student.pengalamanOrganisasi)) student.pengalamanOrganisasi = [];
+
+    // --- RENDER DYNAMIC FORMS ---
+    function renderPendidikan() {
+      const c = document.getElementById("pendidikanContainer"); c.innerHTML = "";
+      student.pendidikan.forEach((item, i) => {
+        c.innerHTML += `<div class="dynamic-item">
+          <div class="row">
+            <div class="form-group"><label>Jenjang</label><input type="text" value="${item.jenjang||''}" onchange="updateArr('pendidikan',${i},'jenjang',this.value)"></div>
+            <div class="form-group"><label>Sekolah</label><input type="text" value="${item.sekolah||''}" onchange="updateArr('pendidikan',${i},'sekolah',this.value)"></div>
+          </div>
+          <div class="form-group"><label>Tahun</label><input type="text" value="${item.tahun||''}" onchange="updateArr('pendidikan',${i},'tahun',this.value)"></div>
+          <button type="button" class="btn-danger" onclick="removeArr('pendidikan',${i})">Hapus</button>
+        </div>`;
+      });
+    }
+    function addPendidikan() { student.pendidikan.push({jenjang:"",sekolah:"",tahun:""}); renderPendidikan(); }
+
+    function renderKeterampilan() {
+      const c = document.getElementById("keterampilanContainer"); c.innerHTML = "";
+      student.keterampilan.forEach((item, i) => {
+        c.innerHTML += `<div class="dynamic-item">
+          <div class="form-group"><label>Nama Keterampilan</label><input type="text" value="${item.nama||''}" onchange="updateArr('keterampilan',${i},'nama',this.value)"></div>
+          <div class="form-group"><label>Deskripsi</label><input type="text" value="${item.deskripsi||''}" onchange="updateArr('keterampilan',${i},'deskripsi',this.value)"></div>
+          <button type="button" class="btn-danger" onclick="removeArr('keterampilan',${i})">Hapus</button>
+        </div>`;
+      });
+    }
+    function addKeterampilan() { student.keterampilan.push({nama:"",deskripsi:""}); renderKeterampilan(); }
+
+    function renderPengalamanKerja() {
+      const c = document.getElementById("pengalamanKerjaContainer"); c.innerHTML = "";
+      student.pengalamanKerja.forEach((item, i) => {
+        c.innerHTML += `<div class="dynamic-item">
+          <div class="row">
+            <div class="form-group"><label>Posisi</label><input type="text" value="${item.posisi||''}" onchange="updateArr('pengalamanKerja',${i},'posisi',this.value)"></div>
+            <div class="form-group"><label>Tempat</label><input type="text" value="${item.tempat||''}" onchange="updateArr('pengalamanKerja',${i},'tempat',this.value)"></div>
+          </div>
+          <div class="form-group"><label>Tahun</label><input type="text" value="${item.tahun||''}" onchange="updateArr('pengalamanKerja',${i},'tahun',this.value)"></div>
+          <button type="button" class="btn-danger" onclick="removeArr('pengalamanKerja',${i})">Hapus</button>
+        </div>`;
+      });
+    }
+    function addPengalamanKerja() { student.pengalamanKerja.push({posisi:"",tempat:"",tahun:""}); renderPengalamanKerja(); }
+
+    function renderPengalamanOrganisasi() {
+      const c = document.getElementById("pengalamanOrganisasiContainer"); c.innerHTML = "";
+      student.pengalamanOrganisasi.forEach((item, i) => {
+        c.innerHTML += `<div class="dynamic-item">
+          <div class="row">
+            <div class="form-group"><label>Organisasi</label><input type="text" value="${item.organisasi||''}" onchange="updateArr('pengalamanOrganisasi',${i},'organisasi',this.value)"></div>
+            <div class="form-group"><label>Peran</label><input type="text" value="${item.peran||''}" onchange="updateArr('pengalamanOrganisasi',${i},'peran',this.value)"></div>
+          </div>
+          <div class="form-group"><label>Tahun</label><input type="text" value="${item.tahun||''}" onchange="updateArr('pengalamanOrganisasi',${i},'tahun',this.value)"></div>
+          <button type="button" class="btn-danger" onclick="removeArr('pengalamanOrganisasi',${i})">Hapus</button>
+        </div>`;
+      });
+    }
+    function addPengalamanOrganisasi() { student.pengalamanOrganisasi.push({organisasi:"",peran:"",tahun:""}); renderPengalamanOrganisasi(); }
+
+    // Global Helper
+    window.updateArr = function(arrName, index, key, val) { student[arrName][index][key] = val; };
+    window.removeArr = function(arrName, index) { student[arrName].splice(index, 1); eval(`render${arrName.charAt(0).toUpperCase() + arrName.slice(1)}()`); };
+
+    // Render awal
+    renderPendidikan();
+    renderKeterampilan();
+    renderPengalamanKerja();
+    renderPengalamanOrganisasi();
+
+    // Load static fields
+    function loadForm() {
+      document.getElementById("name").value = student.name || "";
+      document.getElementById("nickname").value = student.nickname || "";
+      document.getElementById("school").value = student.school || "";
+      document.getElementById("className").value = student.className || "";
+      document.getElementById("year").value = student.year || "";
+      document.getElementById("gender").value = student.gender || "";
+      document.getElementById("status").value = student.status || "";
+      document.getElementById("studentNo").value = student.studentNo || "";
+      document.getElementById("phone").value = student.phone || "";
+      document.getElementById("email").value = student.email || "";
+      document.getElementById("address").value = student.address || "";
+      document.getElementById("photo").value = student.photo || "";
+      document.getElementById("hobby").value = student.hobby || "";
+      document.getElementById("dream").value = student.dream || "";
+      document.getElementById("subject").value = student.subject || "";
+      document.getElementById("about").value = student.about || "";
+      document.getElementById("motto").value = student.motto || "";
+    }
+
+    document.getElementById("editorForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      student.name = document.getElementById("name").value;
+      student.nickname = document.getElementById("nickname").value;
+      student.school = document.getElementById("school").value;
+      student.className = document.getElementById("className").value;
+      student.year = document.getElementById("year").value;
+      student.gender = document.getElementById("gender").value;
+      student.status = document.getElementById("status").value;
+      student.studentNo = document.getElementById("studentNo").value;
+      student.phone = document.getElementById("phone").value;
+      student.email = document.getElementById("email").value;
+      student.address = document.getElementById("address").value;
+      student.photo = document.getElementById("photo").value;
+      student.hobby = document.getElementById("hobby").value;
+      student.dream = document.getElementById("dream").value;
+      student.subject = document.getElementById("subject").value;
+      student.about = document.getElementById("about").value;
+      student.motto = document.getElementById("motto").value;
+      // Note: Arrays sudah di-update onchange secara langsung ke `student`
+
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(student));
+      showToast("✅ Data berhasil disimpan!");
+      setTimeout(() => window.location.href = "index.html", 1500);
+    });
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      toast.textContent = msg;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    loadForm();
+  </script>
+</body>
+</html>
