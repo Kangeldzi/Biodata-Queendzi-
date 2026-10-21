@@ -14,6 +14,7 @@
     input, textarea { width: 100%; padding: 10px; border: 1px solid var(--line); border-radius: 8px; box-sizing: border-box; font-family: inherit; }
     button { background: var(--primary); color: white; border: none; padding: 12px 20px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 15px; }
     button:hover { opacity: 0.9; }
+    button:disabled { background: #a0c4e4; cursor: not-allowed; }
     .btn-danger { background: var(--danger); padding: 8px 12px; font-size: 12px; }
     .btn-add { background: #2ecc71; padding: 8px 12px; font-size: 12px; margin-top: 5px; }
     .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
@@ -27,7 +28,7 @@
 <body>
   <div class="container">
     <h1>✏️ Editor Profil</h1>
-    <p>Perbarui data di bawah ini. Data akan tersimpan otomatis di browser dan tampil di halaman utama.</p>
+    <p>Perbarui data di bawah ini. Data akan tersimpan otomatis di browser (LocalStorage) dan dikirim ke Google Spreadsheet.</p>
     
     <form id="editorForm">
       <h3 class="section-title">Data Utama</h3>
@@ -84,13 +85,18 @@
       <button type="button" class="btn-add" onclick="addPengalamanOrganisasi()">+ Tambah Pengalaman Organisasi</button>
 
       <br><br>
-      <button type="submit" style="width: 100%; font-size: 16px; padding: 15px;">💾 Simpan Data</button>
+      <button type="submit" id="submitBtn" style="width: 100%; font-size: 16px; padding: 15px;">💾 Simpan Data</button>
       <a href="index.html" style="display:block; text-align:center; margin-top:15px; color:var(--primary); text-decoration:none; font-weight: bold;">← Kembali ke Portofolio</a>
     </form>
   </div>
   <div class="toast" id="toast">Data berhasil disimpan!</div>
 
   <script>
+    // ==========================================
+    // KONFIGURASI GOOGLE SPREADSHEETS API
+    // ==========================================
+    const GOOGLE_SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycby87RjAw2iUsK2jzPyzK5idblYG-Yt59cQquLih2CnzMivUa0yK2pfxTO2e2_iItlWXKQ/exec";
+
     const STORAGE_KEY = "myStudentPortfolio.v4";
     const DEFAULT_STUDENT = {
       name: "Queendzi Humairah Asmaul Husna", nickname: "Queendzi", school: "SD Negri Situ Udik", className: "Kelas 5C", year: "2026/2027", studentNo: "DEMO-001", status: "Anak Pertama", phone: "0852-1848-3129", email: "queendzi.hah@gmail.com", address: "Kp. Sawah Rt. 002 Rw. 006 Desa Gunung Menyan, Kecamatan Pamijahan, Kabupaten Bogor", gender: "Perempuan", photo: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXe_ozbCgMbl8NiixpOpFjs3zSAEOB-LLhdu6G4NibTmCWOZZXJq0ddFFw2S-UUz0IzfS5jQ4ZV_IkN06xJ_8ZGFERaSm_Ytonb48S-RXOwpoqCiCcCLUqnpBC97iMrUM3w7TeCcdOeVEeIDHU1GspLx15CPyNCEO5JPGSZxoTaRLVhY0zPhyhcAKYbiI/s416/1000850674.jpg", hobby: "Menggambar 🎨", dream: "Guru", subject: "Matematika", about: "Aku Queendzi...", extra: "Ingin belajar...", motto: "Jangan takut mencoba...",
@@ -196,9 +202,17 @@
       document.getElementById("motto").value = student.motto || "";
     }
 
+    // ==========================================
+    // PROSES SUBMIT FORM (Lokal + Google Sheets)
+    // ==========================================
     document.getElementById("editorForm").addEventListener("submit", function(e) {
       e.preventDefault();
       
+      const btn = document.getElementById("submitBtn");
+      btn.disabled = true;
+      btn.textContent = "⏳ Menyimpan...";
+
+      // 1. Ambil semua data dari input statis
       student.name = document.getElementById("name").value;
       student.nickname = document.getElementById("nickname").value;
       student.school = document.getElementById("school").value;
@@ -216,20 +230,48 @@
       student.subject = document.getElementById("subject").value;
       student.about = document.getElementById("about").value;
       student.motto = document.getElementById("motto").value;
-      // Note: Arrays sudah di-update onchange secara langsung ke `student`
+      // (Data dinamis seperti pendidikan/keterampilan sudah terupdate via onchange)
 
+      // 2. Simpan ke LocalStorage
       localStorage.setItem(STORAGE_KEY, JSON.stringify(student));
-      showToast("✅ Data berhasil disimpan!");
-      setTimeout(() => window.location.href = "index.html", 1500);
+
+      // 3. Kirim ke Google Spreadsheet
+      if (GOOGLE_SHEETS_ENDPOINT) {
+        fetch(GOOGLE_SHEETS_ENDPOINT, {
+          method: "POST",
+          mode: "no-cors", // Wajib no-cors untuk Apps Script
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8"
+          },
+          body: JSON.stringify({
+            action: "saveProfile",
+            data: student,
+            timestamp: new Date().toISOString()
+          })
+        }).then(() => {
+          // Karena mode no-cors tidak mengembalikan response valid, kita anggap sukses jika tidak error
+          showToast("✅ Data berhasil disimpan ke Browser & Google Sheets!");
+          setTimeout(() => window.location.href = "index.html", 2000);
+        }).catch((err) => {
+          console.error("Gagal kirim ke Spreadsheet:", err);
+          showToast("⚠️ Tersimpan di Browser, tapi gagal ke Google Sheets.");
+          setTimeout(() => window.location.href = "index.html", 2000);
+        });
+      } else {
+        // Jika URL kosong, hanya simpan lokal
+        showToast("✅ Data berhasil disimpan lokal (URL Spreadsheet kosong).");
+        setTimeout(() => window.location.href = "index.html", 1500);
+      }
     });
 
     function showToast(msg) {
       const toast = document.getElementById("toast");
       toast.textContent = msg;
       toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 3000);
+      // Tidak dihilangkan otomatis karena kita akan redirect
     }
 
+    // Panggil load form saat halaman dimuat
     loadForm();
   </script>
 </body>
