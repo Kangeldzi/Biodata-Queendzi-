@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri Video — Portofolio Aku</title>
+  <style>
+    body{margin:0;font-family:system-ui,sans-serif;background:#f6f8ff;color:#263653;padding:20px}
+    .wrap{max-width:1120px;margin:auto}
+    h1{text-align:center;margin-bottom:30px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    @media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}
+    .card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.05);cursor:pointer;transition:0.3s;padding-bottom:15px}
+    .card:hover{transform:translateY(-5px)}
+    .thumb{height:180px;background:#263653;display:flex;align-items:center;justify-content:center;color:#fff;font-size:40px}
+    .info{padding:15px}
+    .info h3{margin:0 0 5px;font-size:16px}
+    .info p{margin:0;font-size:13px;color:#68758d}
+    .back{display:inline-block;margin-bottom:20px;color:#438fd1;font-weight:bold;text-decoration:none}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+    .modal.open{display:flex}
+    .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:800px;width:100%;text-align:center}
+    .iframe-container{position:relative;padding-bottom:56.25%;height:0;margin-bottom:10px;}
+    .iframe-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:10px;}
+    .close-btn{background:#438fd1;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;margin-top:15px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="index.html" class="back">← Kembali ke Portofolio</a>
+    <h1>🎬 Galeri Video</h1>
+    <div class="grid" id="videoGrid"></div>
+  </div>
+
+  <div class="modal" id="videoModal">
+    <div class="modal-content">
+      <h2 id="modalTitle" style="margin-top:0"></h2>
+      <div class="iframe-container"><iframe id="modalIframe" src="" allowfullscreen></iframe></div>
+      <p id="modalDesc"></p>
+      <button class="close-btn" onclick="document.getElementById('videoModal').classList.remove('open');document.getElementById('modalIframe').src='';">Tutup</button>
+    </div>
+  </div>
+
+  <script>
+    const videos = [
+      {title:"Video Perkenalan", desc:"Perkenalan diri Queendzi.", url:"https://www.youtube.com/embed/dQw4w9WgXcQ"},
+      {title:"Kegiatan Sekolah", desc:"Keseruan di sekolah.", url:"https://www.youtube.com/embed/dQw4w9WgXcQ"},
+      {title:"Karya Kreatif", desc:"Hasil karya Queendzi.", url:"https://www.youtube.com/embed/dQw4w9WgXcQ"},
+      {title:"Lomba Pidato", desc:"Penampilan lomba pidato.", url:"https://www.youtube.com/embed/dQw4w9WgXcQ"},
+      {title:"Pensi Kelas", desc:"Pentas seni kelas 5C.", url:"https://www.youtube.com/embed/dQw4w9WgXcQ"},
+      {title:"Tugas Proyek", desc:"Presentasi proyek sains.", url:"https://www.youtube.com/embed/dQw4w9WgXcQ"}
+    ];
+    const grid = document.getElementById("videoGrid");
+    videos.forEach((v, i) => {
+      const el = document.createElement("div");
+      el.className = "card";
+      el.innerHTML = `<div class="thumb">🎬</div><div class="info"><h3>${i+1}. ${v.title}</h3><p>${v.desc}</p></div>`;
+      el.onclick = () => {
+        document.getElementById("modalIframe").src = v.url;
+        document.getElementById("modalTitle").textContent = v.title;
+        document.getElementById("modalDesc").textContent = v.desc;
+        document.getElementById("videoModal").classList.add("open");
+      };
+      grid.appendChild(el);
+    });
+  </script>
+</body>
+</html>
