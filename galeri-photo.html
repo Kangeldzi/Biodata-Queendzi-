@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeri Photo — Portofolio Aku</title>
+  <style>
+    body{margin:0;font-family:system-ui,sans-serif;background:#f6f8ff;color:#263653;padding:20px}
+    .wrap{max-width:1120px;margin:auto}
+    h1{text-align:center;margin-bottom:30px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+    @media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}}
+    .card{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.05);cursor:pointer;transition:0.3s}
+    .card:hover{transform:translateY(-5px)}
+    .card img{width:100%;height:200px;object-fit:cover}
+    .info{padding:15px}
+    .info h3{margin:0 0 5px;font-size:16px}
+    .info p{margin:0;font-size:13px;color:#68758d}
+    .back{display:inline-block;margin-bottom:20px;color:#438fd1;font-weight:bold;text-decoration:none}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+    .modal.open{display:flex}
+    .modal-content{background:#fff;padding:20px;border-radius:20px;max-width:800px;width:100%;text-align:center}
+    .modal-content img{max-width:100%;max-height:70vh;border-radius:10px}
+    .close-btn{background:#438fd1;color:white;border:none;padding:10px 20px;border-radius:8px;cursor:pointer;margin-top:15px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="index.html" class="back">← Kembali ke Portofolio</a>
+    <h1>📷 Galeri Photo</h1>
+    <div class="grid" id="photoGrid"></div>
+  </div>
+
+  <div class="modal" id="photoModal">
+    <div class="modal-content">
+      <img id="modalImg" src="" alt="">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDesc"></p>
+      <button class="close-btn" onclick="document.getElementById('photoModal').classList.remove('open')">Tutup</button>
+    </div>
+  </div>
+
+  <script>
+    const photos = [
+      {title:"Gambar Favoritku", desc:"Karya seni Queendzi.", img:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=600"},
+      {title:"Tugas Sekolah", desc:"Dokumentasi tugas.", img:"https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=600"},
+      {title:"Kegiatan Seru", desc:"Kegiatan sekolah.", img:"https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=600"},
+      {title:"Foto Kelas", desc:"Kebersamaan di kelas.", img:"https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?q=80&w=600"},
+      {title:"Pramuka", desc:"Kegiatan pramuka.", img:"https://images.unsplash.com/photo-1577896851231-70ef18881754?q=80&w=600"},
+      {title:"Lomba Mewarnai", desc:"Juara lomba mewarnai.", img:"https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?q=80&w=600"}
+    ];
+    const grid = document.getElementById("photoGrid");
+    photos.forEach((p, i) => {
+      const el = document.createElement("div");
+      el.className = "card";
+      el.innerHTML = `<img src="${p.img}" loading="lazy"><div class="info"><h3>${i+1}. ${p.title}</h3><p>${p.desc}</p></div>`;
+      el.onclick = () => {
+        document.getElementById("modalImg").src = p.img;
+        document.getElementById("modalTitle").textContent = p.title;
+        document.getElementById("modalDesc").textContent = p.desc;
+        document.getElementById("photoModal").classList.add("open");
+      };
+      grid.appendChild(el);
+    });
+  </script>
+</body>
+</html>
