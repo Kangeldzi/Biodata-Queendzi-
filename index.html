@@ -82,12 +82,34 @@
     .id-sub{font-size:clamp(10px,1.5vw,13px);opacity:.82}
     .id-details{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
     .pill{padding:5px 9px;background:#ffffffb8;border:1px solid #fff;border-radius:99px;font-size:10px;font-weight:850}
-    .id-footer{position:absolute;bottom:15px;left:clamp(15px,3vw,26px);right:clamp(15px,3vw,26px);display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:850;z-index:1}
+    /* Ubah footer agar mengalir natural di bawah, bukan absolute */
+    .id-footer {
+    /* Hapus position: absolute; */
+    position: relative; 
+    margin-top: auto; /* Mendorong footer ke paling bawah */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 10px;
+    font-weight: 850;
+    z-index: 1;
+    width: 100%;
+    padding-top: 10px;
+    }
     .id-back h3{font-size:clamp(16px,2.2vw,22px);margin:10px 0 6px}
     .id-back p{font-size:clamp(10px,1.45vw,13px);margin:0;max-width:90%}
     
     /* PERBAIKAN TUMPANG TINDIH TEKS PADA BACK-GRID */
-    .back-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px;position:relative;z-index:1;margin-bottom: 40px;} /* margin-bottom ditambah agar tidak menabrak footer */
+    /* Beri jarak bawah pada back-grid agar tidak menabrak footer */
+    .back-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 9px;
+    margin-top: 15px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 45px; /* TAMBAHKAN INI: Memberi ruang untuk footer */
+     }
     .back-item{background:#ffffff9c;border:1px solid #fff;border-radius:13px;padding:8px 10px;min-width:0;display:flex;flex-direction:column;justify-content:center;}
     .back-item small{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.7px;opacity:.7;margin-bottom:2px;}
     .back-item strong{font-size:clamp(10px,1.4vw,13px);overflow-wrap:anywhere;display:block;line-height:1.2;}
@@ -136,7 +158,7 @@
     .stat strong{display:block;font-size:25px;line-height:1.2}.stat span:last-child{font-size:12px;color:var(--muted)}
     .cta{padding:28px;border-radius:28px;background:linear-gradient(120deg,#dff4ff,#fbe3f0,#fff0c5);color:#263653;display:flex;align-items:center;justify-content:space-between;gap:20px}
     .cta h2{margin:0 0 5px}.cta p{margin:0;color:#68758d}
-    footer{padding:30px 0 42px;color:var(--muted);font-size:13px}
+    .footer{padding:30px 0 42px;color:var(--muted);font-size:13px}
     .footer-inner{border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
     .to-top{position:fixed;right:18px;bottom:18px;z-index:40;width:45px;height:45px;border:0;border-radius:16px;background:var(--blue-deep);color:white;font-size:20px;box-shadow:0 8px 22px #438fd155;display:none}
     .to-top.show{display:block}
@@ -226,7 +248,7 @@
       .menu-btn{display:grid}.navlinks{display:none;position:absolute;top:64px;left:12px;right:12px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);flex-direction:column;align-items:stretch;gap:0}
       .navlinks.open{display:flex}.navlinks a{padding:12px;border-radius:10px}.navlinks a:hover{background:var(--bg)}
       .hero{padding-top:35px}h1{letter-spacing:-1.4px}.hero p{font-size:15px}.hero-art{min-height:225px}.blob{width:210px;height:210px}.mascot{font-size:100px}
-      section{padding:27px 0}.section-head{display:block}.section-head p{margin-top:7px}.id-face{border-radius:18px}.id-card{aspect-ratio:1.48}.id-footer{bottom:10px}
+      .section{padding:27px 0}.section-head{display:block}.section-head p{margin-top:7px}.id-face{border-radius:18px}.id-card{aspect-ratio:1.48}.id-footer{bottom:10px}
       .side-panel{padding:19px}.about-grid{grid-template-columns:1fr}.about-art{min-height:175px;font-size:85px}.about-copy{padding:20px}
       .gallery-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.work-info{padding:11px}.work-info h3{font-size:14px}
       .stats-grid{grid-template-columns:1fr}.stat{padding:15px}.cta{display:block;padding:23px}.cta .btn{margin-top:16px}
@@ -277,7 +299,7 @@
     <section class="hero" id="beranda">
       <div class="wrap hero-grid">
         <div class="hero-copy reveal">
-          <span class="eyebrow">🌈 PORTOFOLIO PELAJAR CILIK</span>
+          <span class="eyebrow">🌈 PORTOFOLIO PELAJAR</span>
           <h1>Halo, teman-teman!<br><span class="gradient-text">Kenali Diriku</span> ✨</h1>
           <p>Selamat datang di dunia kecilku! Di sini kamu bisa mengenal diriku, melihat hobi, karya, dan cerita seru perjalanan belajarku.</p>
           <div class="hero-buttons">
@@ -345,8 +367,22 @@
                     <div class="back-item"><small>Status</small><strong id="backStatus">Anak Pertama 🌱</strong></div>
                   </div>
                   <!-- Teks diperbaiki -->
-                  <div class="id-footer" style="position: absolute; bottom: 15px; width: calc(100% - 52px);"><span>💖 TERUS BERSINAR</span><span id="backYear">TA 2026/2027</span></div>
-                </article>
+                  <article class="id-face id-back">
+  <div class="id-head"><div class="school-mark"><span>🌈</span><span>KARTU CERITA DIRIKU</span></div><span class="id-tag">MY PROFILE</span></div>
+  <h3 id="backMotto">“Jangan takut mencoba, karena semua ahli pernah menjadi pemula! ✨”</h3>
+  <p id="backAbout">Aku Queendzi Humaira...</p>
+  <div class="back-grid">
+    <div class="back-item"><small>Hobi favorit</small><strong id="backHobby">Menggambar 🎨</strong></div>
+    <div class="back-item"><small>Cita-cita</small><strong id="backDream">Guru</strong></div>
+    <div class="back-item"><small>Pelajaran favorit</small><strong id="backSubject">Matematika</strong></div>
+    <div class="back-item"><small>Status</small><strong id="backStatus">Anak Pertama 🌱</strong></div>
+  </div>
+  <!-- Footer sekarang mengalir natural, tidak ditimpa -->
+  <div class="id-footer">
+    <span>💖 TERUS BERSINAR</span>
+    <span id="backYear">TA 2026/2027</span>
+  </div>
+</article>
               </div>
             </div>
             <p class="flip-hint">👆 Ketuk kartu untuk membaliknya</p>
@@ -604,7 +640,7 @@
   <script>
     "use strict";
 
-    const GOOGLE_SHEETS_ENDPOINT = ""; // Isi URL Web App Apps Script Anda
+    const GOOGLE_SHEETS_ENDPOINT = '‎https://script.google.com/macros/s/AKfycby87RjAw2iUsK2jzPyzK5idblYG-Yt59cQquLih2CnzMivUa0yK2pfxTO2e2_iItlWXKQ/exec"; // Isi URL Web App Apps Script Anda
 
     const DEFAULT_STUDENT = {
       name: "Queendzi Humairah Asmaul Husna",
