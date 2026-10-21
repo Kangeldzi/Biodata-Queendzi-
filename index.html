@@ -82,10 +82,18 @@
     .id-sub{font-size:clamp(10px,1.5vw,13px);opacity:.82}
     .id-details{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
     .pill{padding:5px 9px;background:#ffffffb8;border:1px solid #fff;border-radius:99px;font-size:10px;font-weight:850}
-    .id-footer{position:absolute;bottom:15px;left:clamp(15px,3vw,26px);right:clamp(15px,3vw,26px);display:flex;justify-content:space-between;align-items:center;font-size:10px;font-weight:850;z-index:1}
+    
     .id-back h3{font-size:clamp(16px,2.2vw,22px);margin:10px 0 6px;position:relative;z-index:1;}
     .id-back p{font-size:clamp(10px,1.45vw,13px);margin:0;max-width:90%;position:relative;z-index:1;}
-    ‎.back-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px;position:relative;z-index:1}
+    
+    .back-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-top: 15px;
+      position: relative;
+      z-index: 1;
+    }
     .back-item{background:#ffffff9c;border:1px solid #fff;border-radius:13px;padding:8px 10px;min-width:0;display:flex;flex-direction:column;justify-content:center;}
     .back-item small{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.7px;opacity:.7;margin-bottom:2px;}
     .back-item strong{font-size:clamp(10px,1.4vw,13px);overflow-wrap:anywhere;display:block;line-height:1.2;}
@@ -318,60 +326,48 @@
           <button class="nav-chip" type="button" id="navPengalamanOrganisasi">🤝 Pengalaman Organisasi</button>
         </div>
 
-    <main>
-    <section class="hero" id="beranda">
-      <div class="wrap hero-grid">
-        <div class="hero-copy reveal">
-          <span class="eyebrow">🌈 PORTOFOLIO PELAJAR CILIK</span>
-          <h1>Halo, teman-teman!<br><span class="gradient-text">Kenali Diriku</span> ✨</h1>
-          <p>Selamat datang di dunia kecilku! Di sini kamu bisa mengenal diriku, melihat hobi, karya, dan cerita seru perjalanan belajarku.</p>
-          <div class="hero-buttons">
-            <a class="btn btn-primary" href="#kartu">💳 Lihat Kartu Saya</a>
-            <a class="btn btn-soft" href="#galeri">🎨 Jelajahi Karya</a>
-          </div>
-          <div class="hero-note">⭐ Terus belajar · Berani mencoba · Bahagia berkarya</div>
-        </div>
-        <div class="hero-art reveal" aria-label="Ilustrasi buku sekolah dan bintang">
-          <div class="blob"></div><div class="mascot" aria-hidden="true">🧑‍🎓</div>
-          <span class="float f1" aria-hidden="true">⭐</span><span class="float f2" aria-hidden="true">🌈</span><span class="float f3" aria-hidden="true">✏️</span><span class="float f4" aria-hidden="true">💖</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="kartu">
-      <div class="wrap">
-        <div class="section-head reveal"><div><div class="kicker">KARTU IDENTITAS</div><h2>Kartu Pelajar Digital 💳</h2></div><p>Klik kartu untuk melihat sisi belakang. Data pada kartu bisa kamu sesuaikan melalui tombol Edit Profil.</p></div>
         <div class="id-layout">
           <div>
             <div class="id-scene" id="studentCardScene">
               <div class="id-card" id="studentCard" tabindex="0" role="button" aria-label="Balik kartu identitas" aria-pressed="false">
                 <article class="id-face id-front">
                   <div class="id-head">
-                    <div class="school-mark"><span>🏫</span><span id="cardSchoolShort">SEKOLAHKU</span></div>
+                    <div class="school-mark"><span>🏫</span><span id="cardSchoolShort">SD NEGRI SITU UDIK</span></div>
                     <span class="id-tag">STUDENT ID</span>
                   </div>
                   <div class="id-main">
-                    <div class="avatar-frame" id="cardAvatarFrame"><span class="avatar-placeholder">🧒</span></div>
+                    <div class="avatar-frame" id="cardAvatarFrame">
+                      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXe_ozbCgMbl8NiixpOpFjs3zSAEOB-LLhdu6G4NibTmCWOZZXJq0ddFFw2S-UUz0IzfS5jQ4ZV_IkN06xJ_8ZGFERaSm_Ytonb48S-RXOwpoqCiCcCLUqnpBC97iMrUM3w7TeCcdOeVEeIDHU1GspLx15CPyNCEO5JPGSZxoTaRLVhY0zPhyhcAKYbiI/s416/1000850674.jpg" alt="Foto Queendzi">
+                    </div>
                     <div style="min-width:0">
-                      <div class="id-name" id="cardName">Nama Siswa</div>
-                      <div class="id-sub" id="cardNickname">Nama panggilan: Teman Kecil</div>
-                      <div class="id-details"><span class="pill" id="cardClass">Kelas 5</span><span class="pill" id="cardYear">2026/2027</span></div>
+                      <div class="id-name" id="cardName">Queendzi Humairah Asmaul Husna</div>
+                      <div class="id-sub" id="cardNickname">Nama panggilan: Queendzi</div>
+                      <div class="id-details">
+                        <span class="pill" id="cardClass">Kelas 5C</span>
+                        <span class="pill" id="cardYear">2026/2027</span>
+                        <span class="pill" id="cardGender">Perempuan</span>
+                      </div>
                     </div>
                   </div>
                   <div class="id-footer"><span>🌟 BELAJAR & BERKARYA</span><span id="cardStudentNo">ID: DEMO-001</span></div>
                 </article>
+                
                 <article class="id-face id-back">
                   <div class="id-head"><div class="school-mark"><span>🌈</span><span>KARTU CERITA DIRIKU</span></div><span class="id-tag">MY PROFILE</span></div>
-                  <h3 id="backMotto">“Aku bisa belajar hal baru!”</h3>
-                  <p id="backAbout">Setiap hari adalah kesempatan untuk tumbuh, mencoba, dan menjadi lebih baik.</p>
+                  <h3 id="backMotto">“Jangan takut mencoba, karena semua ahli pernah menjadi pemula! ✨”</h3>
+                  <p id="backAbout">Aku Queendzi Humairah Asmaul Husna...</p>
                   <div class="back-grid">
                     <div class="back-item"><small>Hobi favorit</small><strong id="backHobby">Menggambar 🎨</strong></div>
                     <div class="back-item"><small>Cita-cita</small><strong id="backDream">Guru</strong></div>
                     <div class="back-item"><small>Pelajaran favorit</small><strong id="backSubject">Matematika</strong></div>
-                    <div class="back-item"><small>Status</small><strong>Pelajar aktif 🌱</strong></div>
+                    <div class="back-item"><small>Status</small><strong id="backStatus">Anak Pertama 🌱</strong></div>
                   </div>
-                  <div class="id-footer"><span>💖 TERUS BERSINAR</span><span id="backYear">TA 2026/2027</span></div>
+                  <div class="id-footer">
+                    <span>💖 TERUS BERSINAR</span>
+                    <span id="backYear">TA 2026/2027</span>
+                  </div>
                 </article>
+
               </div>
             </div>
             <p class="flip-hint">👆 Ketuk kartu untuk membaliknya</p>
