@@ -78,12 +78,54 @@
     .school-mark{display:flex;align-items:center;gap:8px;font-weight:900;font-size:clamp(10px,1.5vw,14px)}
     .school-mark span:first-child{width:34px;height:34px;background:#fff9;border-radius:12px;display:grid;place-items:center;font-size:20px}
     .id-tag{font-size:9px;letter-spacing:1.1px;font-weight:950;background:#fff9;padding:7px 9px;border-radius:99px}
-    .id-main{display:flex;align-items:center;gap:clamp(12px,2.4vw,22px);margin-top:clamp(12px,2vw,23px);position:relative;z-index:1}
-    .avatar-frame{width:clamp(75px,14vw,112px);aspect-ratio:1;flex-shrink:0;border:4px solid #fff;border-radius:23px;background:linear-gradient(135deg,#bde8ff,#ffd8e9);display:grid;place-items:center;overflow:hidden;box-shadow:0 8px 17px #6e86aa25}
-    .avatar-frame img{width:100%;height:100%;object-fit:cover}
-    .avatar-placeholder{font-size:48px}
-    .id-name{font-size:clamp(16px,2.5vw,25px);font-weight:950;line-height:1.12;margin-bottom:5px;overflow-wrap:anywhere}
-    .id-sub{font-size:clamp(10px,1.5vw,13px);opacity:.82}
+        /* Mengatur posisi sejajar antara foto dan teks */
+    .id-main{
+      display:flex;
+      align-items:center; /* Teks sejajar di tengah secara vertikal dengan foto */
+      gap: 15px; /* Jarak antara foto dan teks */
+      margin-top:clamp(10px,2vw,20px);
+      position:relative;
+      z-index:1;
+    }
+
+    /* Bingkai Foto diubah menjadi rasio 2x3 (Potrait) */
+    .avatar-frame{
+      width: clamp(65px, 16vw, 85px); /* Lebar disesuaikan */
+      aspect-ratio: 2 / 3; /* Ini kunci rasio 2x3 */
+      flex-shrink:0;
+      border:3px solid #fff;
+      border-radius:15px; /* Sudut sedikit lebih kotak agar cocok untuk potrait */
+      background:linear-gradient(135deg,#bde8ff,#ffd8e9);
+      display:grid;
+      place-items:center;
+      overflow:hidden;
+      box-shadow:0 8px 17px #6e86aa25;
+    }
+    
+    .avatar-frame img{
+      width:100%;
+      height:100%;
+      object-fit:cover; /* Memastikan foto tidak gepeng, melainkan terpotong rapi */
+    }
+    
+    .avatar-placeholder{
+      font-size:40px;
+    }
+
+    /* Menggeser dan merapikan teks di sebelah kanan foto */
+    .id-name{
+      font-size:clamp(15px,2.2vw,22px); /* Ukuran font disesuaikan sedikit */
+      font-weight:950;
+      line-height:1.15;
+      margin-bottom:4px;
+      overflow-wrap:anywhere;
+    }
+    
+    .id-sub{
+      font-size:clamp(10px,1.4vw,12px);
+      opacity:.82;
+      margin-bottom: 6px; /* Jarak ke badge kelas */
+    }
     .id-details{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
     .pill{padding:5px 9px;background:#ffffffb8;border:1px solid #fff;border-radius:99px;font-size:10px;font-weight:850}
     
@@ -389,7 +431,7 @@
 
         <div class="id-layout">
           <div>
-                        <div class="id-scene" id="studentCardScene">
+              <div class="id-scene" id="studentCardScene">
               <div class="id-card" id="studentCard" tabindex="0" role="button" aria-label="Balik kartu identitas" aria-pressed="false">
                 
                 <!-- SISI DEPAN -->
@@ -399,10 +441,12 @@
                     <span class="id-tag">STUDENT ID</span>
                   </div>
                   <div class="id-main">
+                    <!-- Foto -->
                     <div class="avatar-frame" id="cardAvatarFrame">
                       <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXe_ozbCgMbl8NiixpOpFjs3zSAEOB-LLhdu6G4NibTmCWOZZXJq0ddFFw2S-UUz0IzfS5jQ4ZV_IkN06xJ_8ZGFERaSm_Ytonb48S-RXOwpoqCiCcCLUqnpBC97iMrUM3w7TeCcdOeVEeIDHU1GspLx15CPyNCEO5JPGSZxoTaRLVhY0zPhyhcAKYbiI/s416/1000850674.jpg" alt="Foto Queendzi">
                     </div>
-                    <div style="min-width:0">
+                    <!-- Teks -->
+                    <div style="flex: 1; min-width: 0;">
                       <div class="id-name" id="cardName">Queendzi Humairah Asmaul Husna</div>
                       <div class="id-sub" id="cardNickname">Nama panggilan: Queendzi</div>
                       <div class="id-details">
