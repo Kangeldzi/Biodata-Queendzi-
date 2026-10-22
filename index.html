@@ -401,7 +401,7 @@
         <div class="hero-copy reveal">
           <span class="eyebrow">🌈 PORTOFOLIO PELAJAR</span>
           <h1>Halo, teman-teman!<br><span class="gradient-text">Kenali Diriku</span> ✨</h1>
-          <p>Selamat datang di dunia kecilku! Di sini kamu bisa mengenal diriku, melihat hobi, karya, dan cerita seru perjalanan belajarku.</p>
+          <p>Selamat datang di Portofolio Aku! Di sini kamu bisa mengenal diriku, melihat hobi, karya, dan cerita seru perjalanan belajarku.</p>
           <div class="hero-buttons">
             <a class="btn btn-primary" href="#kartu">💳 Lihat Kartu Saya</a>
             <a class="btn btn-soft" href="#galeri">🎨 Jelajahi Karya</a>
@@ -419,11 +419,11 @@
       <div class="wrap">
         <div class="section-head reveal"><div><div class="kicker">KARTU IDENTITAS</div><h2>Kartu Pelajar Digital 💳</h2></div><p>Klik kartu untuk melihat sisi belakang. Data pada kartu bisa kamu sesuaikan melalui tombol Edit Profil.</p></div>
 
-        <div class="navbar-scroll reveal" role="tablist" aria-label="Menu navigasi horizontal">
-          <button class="nav-chip active" type="button" data-scroll="biodata">🗂️ Data Pribadi</button>
+          <div class="navbar-scroll reveal" role="tablist" aria-label="Menu navigasi horizontal">
+          <button class="nav-chip active" type="button" id="navDataPribadi">🗂️ Data Pribadi</button>
           <button class="nav-chip" type="button" id="navPendidikan">🎓 Pendidikan</button>
-          <button class="nav-chip" type="button" data-scroll="hobi">🎨 Hobi</button>
-          <button class="nav-chip" type="button" data-scroll="prestasi">🏆 Prestasi</button>
+          <button class="nav-chip" type="button" id="navHobi">🎨 Hobi</button>
+          <button class="nav-chip" type="button" id="navPrestasi">🏆 Prestasi</button>
           <button class="nav-chip" type="button" id="navKeterampilan">💡 Keterampilan</button>
           <button class="nav-chip" type="button" id="navPengalamanKerja">💼 Pengalaman Kerja</button>
           <button class="nav-chip" type="button" id="navPengalamanOrganisasi">🤝 Pengalaman Organisasi</button>
@@ -523,10 +523,10 @@
             <span class="quick-icon" style="background:#fff0c5">📍</span>
             <span><small>Google Maps</small><strong>Alamat Sekolah</strong></span>
           </a>
-          <a class="quick-card" href="https://wa.me/6285218483128?text=*%E2%94%85%E2%95%90%E2%80%A2%E2%9D%83%E2%9C%BD%F0%BC%8A%C2%B0%C2%B0%F0%9F%8D%80%F0%9F%8C%BB%F0%9F%8D%80%C2%B0%C2%B0%F0%BC%8A%E2%9C%BD%E2%9D%83%E2%80%A2%E2%95%90%E2%94%85*%0A*%E2%95%90%E2%95%90%E2%95%90%E2%95%90%20%E2%97%8E%E2%80%A2%E2%9D%80%E2%80%A2%E2%97%8E%EF%B7%BD%E2%97%8E%E2%80%A2%E2%9D%80%E2%80%A2%E2%97%8E%20%E2%95%90%E2%95%90%E2%95%90%E2%95%90*%0A%0A*_Assalamualaikum%20Warahmatullahi%20Wabarakatuh_*%0A==========================%0A*Halo%20Kang%20L%2C%20Saya%20Kirim%20Pesan%20Lewat%20Biodata%20Anak%20Anda*%0A==========================%0A*ATAS%20NAMA*%0A*Nama%20%3A%20Queendzi*%0A*Alamat%20%3A%20Kp.%20Sawah%20Rt.%20002%20Rw.%20006%20Desa%20Gunung%20Menyan%20Kecamatan%20Pamijahan%20Kabupaten%20Bogor%20Kode%20POS%2016810*%0A==========================%0A*Keperluan%20Saya%20%3A*%0A(Tulis%20Keperluan%20Anda%20Dibawah%20ini)%0A%0A%0A%0A%0A===========================%0A*_Wassalamu%27alaikum%20Warahmatullahi%20Wabarakatuh_*%0A%0A*%E2%94%85%E2%95%90%E2%80%A2%E2%9D%83%E2%9C%BD%F0%BC%8A%C2%B0%C2%B0%F0%9F%8D%80%F0%9F%8C%BB%F0%9F%8D%80%C2%B0%C2%B0%F0%BC%8A%E2%9C%BD%E2%9D%83%E2%80%A2%E2%95%90%E2%94%85*" target="_blank" rel="noopener">
+            <a class="quick-card" href="https://wa.me/6285218483128?text=*%E2%94%85%E2%95%90%E2%80%A2%E2%9D%83%E2%9C%BD%F0%BC%8A%C2%B0%C2%B0%F0%9F%8D%80%F0%9F%8C%BB%F0%9F%8D%80%C2%B0%C2%B0%F0%BC%8A%E2%9C%BD%E2%9D%83%E2%80%A2%E2%95%90%E2%94%85*%0A*%E2%95%90%E2%95%90%E2%95%90%E2%95%90%20%E2%97%8E%E2%80%A2%E2%9D%80%E2%80%A2%E2%97%8E%EF%B7%BD%E2%97%8E%E2%80%A2%E2%9D%80%E2%80%A2%E2%97%8E%20%E2%95%90%E2%95%90%E2%95%90%E2%95%90*%0A%0A*_Assalamualaikum%20Warahmatullahi%20Wabarakatuh_*%0A==========================%0A*Halo%20Kang%20L%2C%20Saya%20Kirim%20Pesan%20Lewat%20Biodata%20Anak%20Anda*%0A==========================%0A*ATAS%20NAMA*%0A*Nama%20%3A%20Queendzi*%0A*Alamat%20%3A%20Kp.%20Sawah%20Rt.%20002%20Rw.%20006%20Desa%20Gunung%20Menyan%20Kecamatan%20Pamijahan%20Kabupaten%20Bogor%20Kode%20POS%2016810*%0A==========================%0A*Keperluan%20Saya%20%3A*%0A(Tulis%20Keperluan%20Anda%20Dibawah%20ini)%0A%0A%0A%0A%0A===========================%0A*_Wassalamu%27alaikum%20Warahmatullahi%20Wabarakatuh_*%0A%0A*%E2%94%85%E2%95%90%E2%80%A2%E2%9D%83%E2%9C%BD%F0%BC%8A%C2%B0%C2%B0%F0%9F%8D%80%F0%9F%8C%BB%F0%9F%8D%80%C2%B0%C2%B0%F0%BC%8A%E2%9C%BD%E2%9D%83%E2%80%A2%E2%95%90%E2%94%85*" target="_blank" rel="noopener">
             <span class="quick-icon" style="background:#dff8e9">💬</span>
             <span><small>Chat</small><strong>WhatsApp Orang Tua</strong></span>
-          </a>
+          </a> 
         </div>
       </div>
     </section>
@@ -679,7 +679,32 @@
       </form>
     </div>
   </div>
+  <!-- Modal Data Pribadi (BARU) -->
+  <div class="modal-backdrop" id="personalModal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-head"><h2>🗂️ Data Pribadi</h2><button class="close-btn" type="button" data-close="personalModal" aria-label="Tutup">×</button></div>
+      <div id="personalContent" style="color:var(--muted); line-height:1.8;"></div>
+      <div class="modal-actions"><button class="btn btn-primary" data-close="personalModal" type="button">Tutup</button></div>
+    </div>
+  </div>
 
+  <!-- Modal Hobi (BARU) -->
+  <div class="modal-backdrop" id="hobiModal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-head"><h2>🎨 Hobi & Minat</h2><button class="close-btn" type="button" data-close="hobiModal" aria-label="Tutup">×</button></div>
+      <div id="hobiContent" style="color:var(--muted); line-height:1.8;"></div>
+      <div class="modal-actions"><button class="btn btn-primary" data-close="hobiModal" type="button">Tutup</button></div>
+    </div>
+  </div>
+
+  <!-- Modal Prestasi (BARU) -->
+  <div class="modal-backdrop" id="prestasiModal" role="dialog" aria-modal="true">
+    <div class="modal">
+      <div class="modal-head"><h2>🏆 Prestasi & Pengalaman</h2><button class="close-btn" type="button" data-close="prestasiModal" aria-label="Tutup">×</button></div>
+      <div id="prestasiContent" style="color:var(--muted); line-height:1.8;"></div>
+      <div class="modal-actions"><button class="btn btn-primary" data-close="prestasiModal" type="button">Tutup</button></div>
+    </div>
+  </div>
   <!-- Lightbox Modal -->
   <div class="modal-backdrop" id="lightboxModal" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
     <div class="modal">
@@ -737,7 +762,7 @@
     // PERBAIKAN: Menghapus karakter tersembunyi dan menyamakan tanda kutip
     const GOOGLE_SHEETS_ENDPOINT = "https://script.google.com/macros/s/AKfycby87RjAw2iUsK2jzPyzK5idblYG-Yt59cQquLih2CnzMivUa0yK2pfxTO2e2_iItlWXKQ/exec";
 
-    const DEFAULT_STUDENT = {
+        const DEFAULT_STUDENT = {
       name: "Queendzi Humairah Asmaul Husna",
       nickname: "Queendzi",
       school: "SD Negri Situ Udik",
@@ -756,13 +781,32 @@
       about: "Aku Queendzi Humairah Asmaul Husna, anak pertama yang senang belajar, mencoba hal baru, dan menghabiskan waktu dengan kegiatan yang kusukai. Aku suka bertanya, berkreasi, dan bermain bersama teman-teman.",
       extra: "Aku ingin terus belajar hal baru, menjadi lebih percaya diri, dan membuat karya yang bermanfaat.",
       motto: "Jangan takut mencoba, karena semua ahli pernah menjadi pemula! ✨",
+      
+      // DATA PRIBADI BARU (Untuk Modal)
+      profilLengkap: {
+        ttl: "Bogor, 01 Desember 2015",
+        teleponIbu: "0857-1546-6347",
+        email: "Belum Punya",
+        kewarganegaraan: "Indonesia",
+        agama: "Islam",
+        golonganDarah: "O"
+      },
+
       pendidikan: [
-        { jenjang: "PAUD/TK", sekolah: "TK Tunas Harapan", tahun: "2018 - 2020" },
-        { jenjang: "SD", sekolah: "SD Negri Situ Udik", tahun: "2020 - Sekarang" }
+        { jenjang: "PAUD Murah Hati", sekolah: "", tahun: "2020 - 2021" },
+        { jenjang: "RA Insan Bakti", sekolah: "", tahun: "2021 - 2022" },
+        { jenjang: "SDN Situ Udik", sekolah: "", tahun: "2023 - 2028" },
+        { jenjang: "SMP", sekolah: "", tahun: "0 - 0" },
+        { jenjang: "SMA", sekolah: "", tahun: "0 - 0" },
+        { jenjang: "Universitas", sekolah: "", tahun: "0 - 0" }
       ],
       keterampilan: [
-        { nama: "Menggambar & Mewarnai", deskripsi: "Mahir menggunakan krayon dan cat air." },
-        { nama: "Membaca Puisi", deskripsi: "Percaya diri tampil di depan kelas." }
+        { nama: "Konten Kreator", deskripsi: "" },
+        { nama: "Editor Video", deskripsi: "" },
+        { nama: "Membuat Mainan Slem", deskripsi: "" },
+        { nama: "Membuat Mainan BlindBox", deskripsi: "" },
+        { nama: "Mengerjakan Pekerjaan Rumah", deskripsi: "" },
+        { nama: "Publik Speaking", deskripsi: "" }
       ],
       pengalamanKerja: [
         { posisi: "Ketua Kelas", tempat: "SD Negri Situ Udik", tahun: "2023 - 2024" }
@@ -776,11 +820,20 @@
       {emoji:"🎨", title:"Menggambar", desc:"Menuangkan ide lewat warna dan bentuk.", color:"#ffe1ee"},
       {emoji:"📚", title:"Membaca", desc:"Menjelajahi dunia lewat buku.", color:"#dff3ff"},
       {emoji:"⚽", title:"Olahraga", desc:"Bergerak aktif dan bermain sportif.", color:"#dff8e9"},
-      {emoji:"🧩", title:"Puzzle", desc:"Melatih kesabaran dan berpikir kreatif.", color:"#fff0c6"}
+      {emoji:"🧩", title:"Puzzle", desc:"Melatih kesabaran dan berpikir kreatif.", color:"#fff0c6"},
+      {emoji:"📱", title:"Membuat Konten", desc:"Merekam dan mengedit video kreatif.", color:"#e1f8ec"},
+      {emoji:"🎮", title:"Avatar World", desc:"Bermain dan bereksplorasi di dunia virtual.", color:"#e9e2ff"},
+      {emoji:"🧸", title:"Baby Toys", desc:"Bermain dan mengoleksi mainan lucu.", color:"#ffe4ef"}
     ];
 
-    const ACHIEVEMENTS = []; 
-
+    const ACHIEVEMENTS = [
+      {emoji:"🏅", title:"Peringkat #3 PAUD Murah Hati", year:"2021 - 2022", description:"Meraih peringkat 3 di PAUD Murah Hati."},
+      {emoji:"🏆", title:"Peringkat #1 RA Insan Bakti", year:"2022 - 2023", description:"Meraih peringkat 1 di RA Insan Bakti."},
+      {emoji:"🥇", title:"Peringkat #1 SDN Situ Udik", year:"2023", description:"Meraih peringkat 1 di SDN Situ Udik."},
+      {emoji:"🥇", title:"Peringkat #1 SDN Situ Udik", year:"2024", description:"Meraih peringkat 1 di SDN Situ Udik."},
+      {emoji:"🥇", title:"Peringkat #1 SDN Situ Udik", year:"2025", description:"Meraih peringkat 1 di SDN Situ Udik."},
+      {emoji:"🥇", title:"Peringkat #1 SDN Situ Udik", year:"2026", description:"Meraih peringkat 1 di SDN Situ Udik."}
+    ];
     const WORKS = [
       {title:"Gambar Favoritku", category:"Gambar", emoji:"🖍️", description:"Tambahkan foto gambar atau karya seni siswa di sini.", image:"https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=600&auto=format&fit=crop"},
       {title:"Tugas Sekolah", category:"Sekolah", emoji:"📒", description:"Dokumentasikan tugas sekolah yang ingin dikenang.", image:"https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=600&auto=format&fit=crop"},
@@ -1216,7 +1269,41 @@
       html += "</ul>";
       openDynamicModal("🤝 Pengalaman Organisasi", html);
     });
+    
+    // FUNGSI MODAL BARU
+    document.getElementById("navDataPribadi").addEventListener("click", () => {
+      let html = `
+        <p><strong>Nama:</strong> ${student.name}</p>
+        <p><strong>Tempat, Tgl Lahir:</strong> ${student.profilLengkap.ttl}</p>
+        <p><strong>Alamat:</strong> ${student.address}</p>
+        <p><strong>Jenis Kelamin:</strong> ${student.gender}</p>
+        <p><strong>Telepon Ibu Kandung:</strong> ${student.profilLengkap.teleponIbu}</p>
+        <p><strong>Email:</strong> ${student.profilLengkap.email}</p>
+        <p><strong>Kewarganegaraan:</strong> ${student.profilLengkap.kewarganegaraan}</p>
+        <p><strong>Agama:</strong> ${student.profilLengkap.agama}</p>
+        <p><strong>Golongan Darah:</strong> ${student.profilLengkap.golonganDarah}</p>
+      `;
+      openDynamicModal("🗂️ Data Pribadi", html);
+    });
 
+    document.getElementById("navHobi").addEventListener("click", () => {
+      let html = "<ul style='padding-left: 20px;'>";
+      HOBBIES.forEach(h => { 
+        html += `<li style="margin-bottom:8px"><strong>${h.emoji} ${h.title}</strong>: ${h.desc}</li>`; 
+      });
+      html += "</ul>";
+      openDynamicModal("🎨 Hobi & Minat", html);
+    });
+
+    document.getElementById("navPrestasi").addEventListener("click", () => {
+      let html = "<ul style='padding-left: 20px;'>";
+      ACHIEVEMENTS.forEach(a => { 
+        html += `<li style="margin-bottom:8px"><strong>${a.emoji} ${a.title}</strong><br><small style="color:var(--blue-deep)">${a.year}</small></li>`; 
+      });
+      html += "</ul>";
+      openDynamicModal("🏆 Prestasi & Pengalaman", html);
+    });
+    
     document.getElementById("studentCard").addEventListener("click", toggleCard);
     document.getElementById("studentCard").addEventListener("keydown",event=>{
       if(event.key==="Enter"||event.key===" "){event.preventDefault();toggleCard();}
@@ -1253,17 +1340,6 @@
     document.getElementById("nextWork").addEventListener("click",()=>{
       activeWorkIndex = (activeWorkIndex + 1) % activeGalleryList.length;
       if (activeGalleryList[activeWorkIndex].youtube !== undefined) openVideoModal(activeGalleryList, activeWorkIndex); else updateLightbox();
-    });
-
-    document.querySelectorAll(".navbar-scroll .nav-chip").forEach(chip=>{
-      chip.addEventListener("click",()=>{
-        if(chip.id) return;
-        document.querySelectorAll(".navbar-scroll .nav-chip").forEach(c=>c.classList.remove("active"));
-        chip.classList.add("active");
-        const target = document.getElementById(chip.dataset.scroll);
-        if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
-        else showToast("Bagian " + chip.textContent.trim() + " akan segera hadir.","🚧");
-      });
     });
 
     document.getElementById("loginForm").addEventListener("submit",(e)=>{
