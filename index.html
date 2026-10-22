@@ -82,34 +82,80 @@
     .id-sub{font-size:clamp(10px,1.5vw,13px);opacity:.82}
     .id-details{display:flex;gap:7px;flex-wrap:wrap;margin-top:12px}
     .pill{padding:5px 9px;background:#ffffffb8;border:1px solid #fff;border-radius:99px;font-size:10px;font-weight:850}
+
+    /* Pastikan .id-back menggunakan display flex agar footer terdorong ke bawah */
+‎    .id-back {
+‎      background: linear-gradient(135deg,#dff8ec,#e6e1ff 55%,#fff0c9);
+‎      color:#263653;
+‎      transform:rotateY(180deg); 
+‎      display:flex; 
+‎      flex-direction:column;
+‎    }
+‎
+‎    .id-back h3 {
+‎      font-size:clamp(16px,2.2vw,22px);
+‎      margin:10px 0 6px;
+‎      position:relative;
+‎      z-index:1;
+‎    }
+‎
+‎    .id-back p {
+‎      font-size:clamp(10px,1.45vw,13px);
+‎      margin:0;
+‎      max-width:90%;
+‎      position:relative;
+‎      z-index:1;
+‎    }
     
-    .id-back h3{font-size:clamp(16px,2.2vw,22px);margin:10px 0 6px;position:relative;z-index:1;}
-    .id-back p{font-size:clamp(10px,1.45vw,13px);margin:0;max-width:90%;position:relative;z-index:1;}
-    
-    .back-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 9px;
-      margin-top: 15px;
-      position: relative;
-      z-index: 1;
-    }
-    .back-item{background:#ffffff9c;border:1px solid #fff;border-radius:13px;padding:8px 10px;min-width:0;display:flex;flex-direction:column;justify-content:center;}
-    .back-item small{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.7px;opacity:.7;margin-bottom:2px;}
-    .back-item strong{font-size:clamp(10px,1.4vw,13px);overflow-wrap:anywhere;display:block;line-height:1.2;}
-    
-    .id-footer {
-      position: relative; 
-      margin-top: auto; 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 10px;
-      font-weight: 850;
-      z-index: 1;
-      width: 100%;
-      padding-top: 10px;
-    }
+    /* --- CSS BARU UNTUK BACK-GRID --- */
+‎    .back-grid {
+‎      display: grid;
+‎      grid-template-columns: 1fr 1fr;
+‎      gap: 9px;
+‎      margin-top: 15px;
+‎      position: relative;
+‎      z-index: 1;
+‎    }
+‎
+‎    .back-item {
+‎      background:#ffffff9c;
+‎      border:1px solid #fff;
+‎      border-radius:13px;
+‎      padding:8px 10px;
+‎      min-width:0;
+‎      display:flex;
+‎      flex-direction:column;
+‎      justify-content:center;
+‎    }
+‎
+‎    .back-item small {
+‎      display:block;
+‎      font-size:9px;
+‎      text-transform:uppercase;
+‎      letter-spacing:.7px;
+‎      opacity:.7;
+‎      margin-bottom:2px;
+‎    }
+‎
+‎    .back-item strong {
+‎      font-size:clamp(10px,1.4vw,13px);
+‎      overflow-wrap:anywhere;
+‎      display:block;
+‎      line-height:1.2;
+‎    }
+     /* --- CSS BARU UNTUK ID-FOOTER --- */
+‎    .id-footer {
+‎      position: relative; 
+‎      margin-top: auto; /* Ini yang membuat footer otomatis ke bawah */
+‎      display: flex;
+‎      justify-content: space-between;
+‎      align-items: center;
+‎      font-size: 10px;
+‎      font-weight: 850;
+‎      z-index: 1;
+‎      width: 100%;
+‎      padding-top: 10px;
+‎    }
     
     .flip-hint{text-align:center;color:var(--muted);font-size:12px;margin:14px 0 0}
     .id-tools{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:14px;margin-bottom: 15px;}
@@ -353,21 +399,22 @@
                 </article>
                 
                 <article class="id-face id-back">
-                  <div class="id-head"><div class="school-mark"><span>🌈</span><span>KARTU CERITA DIRIKU</span></div><span class="id-tag">MY PROFILE</span></div>
-                  <h3 id="backMotto">“Jangan takut mencoba, karena semua ahli pernah menjadi pemula! ✨”</h3>
-                  <p id="backAbout">Aku Queendzi Humairah Asmaul Husna...</p>
-                  <div class="back-grid">
-                    <div class="back-item"><small>Hobi favorit</small><strong id="backHobby">Menggambar 🎨</strong></div>
-                    <div class="back-item"><small>Cita-cita</small><strong id="backDream">Guru</strong></div>
-                    <div class="back-item"><small>Pelajaran favorit</small><strong id="backSubject">Matematika</strong></div>
-                    <div class="back-item"><small>Status</small><strong id="backStatus">Anak Pertama 🌱</strong></div>
-                  </div>
-                  <div class="id-footer">
-                    <span>💖 TERUS BERSINAR</span>
-                    <span id="backYear">TA 2026/2027</span>
-                  </div>
-                </article>
-
+                <div class="id-head"><div class="school-mark"><span>🌈</span><span>KARTU CERITA DIRIKU</span></div><span class="id-tag">MY PROFILE</span></div>
+                    <h3 id="backMotto">“Jangan takut mencoba, karena semua ahli pernah menjadi pemula! ✨”</h3>
+                    <p id="backAbout">Aku Queendzi Humaira...</p>
+                <div class="back-grid">
+                <div class="back-item"><small>Hobi favorit</small><strong id="backHobby">Menggambar 🎨</strong></div>
+                <div class="back-item"><small>Cita-cita</small><strong id="backDream">Guru</strong></div>
+                <div class="back-item"><small>Pelajaran favorit</small><strong id="backSubject">Matematika</strong></div>
+                <div class="back-item"><small>Status</small><strong id="backStatus">Anak Pertama 🌱</strong></div>
+             </div>
+               <!-- Footer sekarang mengalir natural, tidak ditimpa -->
+               <div class="id-footer">
+               <span>💖 TERUS BERSINAR</span>
+               <span id="backYear">TA 2026/2027</span>
+               </div>
+               </article>
+                
               </div>
             </div>
             <p class="flip-hint">👆 Ketuk kartu untuk membaliknya</p>
