@@ -93,67 +93,90 @@
     
     /* PERBAIKAN: Batasi tinggi teks about agar tidak mendorong kotak hobi ke bawah */
     /* Teks About: beri jarak bawah agar tidak terlalu mepet ke kotak hobi */
-    .id-back p{
-      font-size:clamp(10px,1.45vw,13px);
-      margin: 0 0 20px 0; /* MENAMBAH JARAK BAWAH */
-      max-width: 95%;
-      max-height: 70px;
-      overflow-y: auto;
-      padding-right: 5px;
+        /* KARTU BELAKANG DIUBAH MENJADI FLEXBOX (BERSUSUN KE BAWAH) */
+    .id-back{
+      background:linear-gradient(135deg,#dff8ec,#e6e1ff 55%,#fff0c9);
+      color:#263653;
+      transform:rotateY(180deg);
+      display: flex; 
+      flex-direction: column; /* Menyusun elemen dari atas ke bawah */
     }
     
-    /* Kotak Grid Hobi: beri margin atas dan bawah */
+    .id-front:after,.id-back:after{
+      content:"";position:absolute;width:190px;height:190px;border-radius:50%;
+      background:#ffffff55;right:-55px;bottom:-95px;z-index:0;
+    }
+
+    /* Memberi ruang pada teks deskripsi dan memotong teks jika kepanjangan */
+    .id-back p{
+      font-size:clamp(10px,1.45vw,13px);
+      margin: 10px 0 15px 0; /* Jarak atas dan bawah */
+      max-width: 100%;
+      flex-grow: 1; /* Mengisi sisa ruang kosong */
+      overflow: hidden; /* Mencegah teks meluber ke bawah */
+      position: relative;
+      z-index: 1;
+    }
+
+    .id-back h3{
+      font-size:clamp(16px,2.2vw,22px);
+      margin:10px 0 0 0;
+      position:relative;
+      z-index:1;
+    }
+
+    /* Grid Hobi dan Cita-cita */
     .back-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:10px;
-      margin-top: 5px; /* JARAK DARI TEKS ABOUT */
-      margin-bottom: 35px; /* JARAK AGAR TIDAK MENABRAK FOOTER */
       position:relative;
       z-index:1;
+      margin-bottom: 10px; /* Jarak aman ke footer */
     }
-    
-    /* Isi Kotak Hobi */
+
     .back-item{
       background:#ffffff9c;
       border:1px solid #fff;
       border-radius:13px;
-      padding:10px 12px; /* Padding diperlebar agar tidak sesak */
+      padding:10px 12px;
       min-width:0;
       display: flex;
       flex-direction: column;
       justify-content: center;
     }
-    
+
     .back-item small{
       display:block;
       font-size:9px;
       text-transform:uppercase;
       letter-spacing:.7px;
       opacity:.7;
-      margin-bottom: 3px; /* Jarak antara judul kecil dan isi */
+      margin-bottom: 4px;
     }
-    
+
     .back-item strong{
       font-size:clamp(10px,1.4vw,13px);
       overflow-wrap:anywhere;
       display:block;
       line-height:1.3;
     }
-    
-    /* Footer (TERUS BERSINAR) tetap di bawah */
+
+    /* FOOTER KARTU BELAKANG (OTOMATIS DI PALING BAWAH) */
     .id-footer{
-      position:absolute;
-      bottom:12px; /* Posisi di ujung bawah */
-      left:clamp(15px,3vw,26px);
-      right:clamp(15px,3vw,26px);
+      position:relative; /* Tidak pakai absolute lagi */
+      margin-top: auto; /* Ini kunci agar selalu berada di dasar kartu */
       display:flex;
       justify-content:space-between;
       align-items:center;
       font-size:10px;
       font-weight:850;
       z-index:1;
+      padding-top: 10px;
     }
+
+    .flip-hint{text-align:center;color:var(--muted);font-size:12px;margin:14px 0 0}
+    .id-tools{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:14px;margin-bottom: 20px;}
     .flip-hint{text-align:center;color:var(--muted);font-size:12px;margin:14px 0 0}
     .id-tools{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-top:14px}
     .side-panel{padding:25px}
@@ -407,11 +430,17 @@
                 </article>
 
                 <!-- SISI BELAKANG -->
+                                <!-- SISI BELAKANG -->
                 <article class="id-face id-back">
-                  <div class="id-head"><div class="school-mark"><span>🌈</span><span>KARTU CERITA DIRIKU</span></div><span class="id-tag">MY PROFILE</span></div>  
-                  <h3 id="backMotto">“Jangan takut mencoba, karena semua ahli pernah menjadi pemula! ✨”</h3>       
-                  <!-- Teks About sekarang dibatasi tingginya -->
-                  <p id="backAbout">Aku Queendzi Humairah Asmaul Husna, anak pertama yang senang belajar...</p>       
+                  <div class="id-head">
+                    <div class="school-mark"><span>🌈</span><span>KARTU CERITA DIRIKU</span></div>
+                    <span class="id-tag">MY PROFILE</span>
+                  </div>
+                  
+                  <h3 id="backMotto">“Jangan takut mencoba, karena semua ahli pernah menjadi pemula! ✨”</h3>
+                  
+                  <p id="backAbout">Aku Queendzi Humairah Asmaul Husna, anak pertama yang senang belajar...</p>
+                  
                   <div class="back-grid">
                     <div class="back-item"><small>Hobi favorit</small><strong id="backHobby">Menggambar 🎨</strong></div>
                     <div class="back-item"><small>Cita-cita</small><strong id="backDream">Guru</strong></div>
