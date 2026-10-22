@@ -270,7 +270,17 @@
       toast.classList.add("show");
       // Tidak dihilangkan otomatis karena kita akan redirect
     }
-
+        // Cek URL parameter setelah redirect
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('login') === 'success') {
+      // Tampilkan alert toast di editor-profil
+      const toast = document.getElementById("toast");
+      if(toast){
+        toast.textContent = "🔓 Login Berhasil! Selamat datang di Editor.";
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+    }
     // Panggil load form saat halaman dimuat
     loadForm();
   </script>
