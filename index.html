@@ -1342,16 +1342,29 @@
       if (activeGalleryList[activeWorkIndex].youtube !== undefined) openVideoModal(activeGalleryList, activeWorkIndex); else updateLightbox();
     });
 
-    document.getElementById("loginForm").addEventListener("submit",(e)=>{
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
+      
       const user = document.getElementById("loginUser").value.trim();
       const pass = document.getElementById("loginPass").value;
-      if(user === "KK_Queendzi" && pass === "Anakjenius"){
-        try{sessionStorage.setItem("editorSession", JSON.stringify({user, ts:Date.now()}));}catch(_){}
-        showToast("Login berhasil! Mengarahkan ke editor…","🔓");
-        setTimeout(()=>{ window.location.href = "editor-profil.html"; }, 900);
+      
+      // Cek kredensial
+      if (user === "KK_Queendzi" && pass === "Anakjenius") {
+        try {
+          sessionStorage.setItem("editorSession", JSON.stringify({ user: user, ts: Date.now() }));
+        } catch (_) {}
+
+        // Tampilkan pesan sukses
+        showToast("Login berhasil! Mengalihkan...", "🔓");
+        
+        // Redirect INSTAN menggunakan replace()
+        // Kita tambahkan parameter ?login=success agar halaman editor bisa menampilkan notifikasi
+        setTimeout(function() {
+          window.location.replace("editor-profil.html?login=success");
+        }, 500); // Jeda 0.5 detik agar Toast sempat terlihat
+
       } else {
-        showToast("Nama pengguna atau kata sandi salah!","⚠️");
+        showToast("Nama pengguna atau kata sandi salah!", "⚠️");
       }
     });
 
